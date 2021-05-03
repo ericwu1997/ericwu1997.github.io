@@ -1,0 +1,75 @@
+extends template.pug
+
+block info
+    - var main_title = "Covert Channel Application"    
+    - var sub_title = "Implement a complete covert application that allow a user to access a port on a firewall, communicate with a \"disguised\" backdoor"
+    - var banner = "../assets/img/covert-channel-application/banner.jpg"
+    - var date = "December 7, 2020"
+
+block content
+    article
+        .container
+            .row
+                .col-lg-8.col-md-10.mx-auto
+                    h2.section-heading Objective
+                    p
+                        | Design and implement a complete covert application that 
+                        | will allow a user to access a port (that is otherwise closed)
+                        | on a firewall, communicate with a "disguised" backdoor application.
+                        | The backdoor application will accept commands and execute them; the
+                        | results of the command execution will be sent back to the remote client 
+                        | application
+                    
+                    h2.section-heading Constraints
+                    ul
+                        li 
+                            | the user must be able to select from a number of protocols (UDP,
+                            | TCP, etc) and ports to carry out the penetration and exfiltration
+                        li
+                            | A README that provides a detailed user guide as part of the project
+                            | submission
+                    
+                    h2.section-heading Approach
+                    p
+                        | The application consists of three components - backdoor, handler and 
+                        | keylogger. We will use the c library #[strong libpcap] to implement both backdoor
+                        | and handler. To issue a command to the backdoor, the handler will send
+                        | a UDP packet to the backdoor. The payload of that packet has a predefined
+                        | keyword followed by a ciphertext of the actual command to be executed on 
+                        | the backdoor. The key used to create the ciphertext is shared with the 
+                        | backdoor program.
+                    
+                    p
+                        | Network traffic capturing happens before the firewall, therefor, the 
+                        | backdoor will still be able to sniff the incoming packet even if there's 
+                        | a blocking rule in place. When the backdoor receives the UDP packet, it will
+                        | check the keyword in the payload to varify that the packet is indeed from
+                        | the remote client. Next, it will proceed to decrypt the encrypted command,
+                        | execute the command, and send the output of the command back to the handler
+                        | on the same udp port. The figures below show a high level overview of the 
+                        | communication process.
+                    
+                    img.img-fluid(src="../assets/img/covert-channel-application/covert-arch-overview.jpg", alt='...')
+                    span.caption.text-muted
+                        | overview of the backdoor communication process
+
+                    p
+                        | The file exfiltration process will be run on a separate TCP channel. Before
+                        | the process begins, the backdoor will first send a UDP packet with a predefined
+                        | flag to the handler. When the handler receives the packet and verifies the flag,
+                        | it will open up a firewall rule to allow the backdoor to connect back, and send
+                        | back the requested file. The following system diagram illustrates the file 
+                        | exfiltration process.
+                    
+                    img.img-fluid(src='../assets/img/covert-channel-application/covert-channel-file-exfilt-process.jpg', alt='...')
+                    span.caption.text-muted
+                        | file exfiltration process
+
+                    h2.section-heading Source code
+                    p
+                        | The project source code can be found 
+                        a(href='https://github.com/ericwu1997/covert-channel-application' style="color:blue;") here
+                        |.
+                    
+                    h2.section-heading Test cases
+                    img.img-fluid(src='../assets/img/covert-channel-application/covert-channel-test.jpg', alt='...')
