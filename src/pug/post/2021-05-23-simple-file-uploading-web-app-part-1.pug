@@ -1,0 +1,251 @@
+extends template.pug
+
+block info
+    - var main_title = "Simple file uploading web app (Part 1)"    
+    - var sub_title = "Implement a web app that uploads and display images from Google drive (App Script + Drive API)"
+    - var banner = "../assets/img/simple-file-uploading-web-app-part-1/banner.jpg"
+    - var date = "May 23, 2021"
+
+block content
+    article
+        .container
+            .row
+                .col-lg-8.col-md-10.mx-auto
+                    h2.section-heading Objective 
+                    p   
+                        | The goal of this project is to create a web service that allows
+                        | users to upload and display content stored on google drive. We will
+                        | create two webapp in this project - a client version that displays
+                        | the cotent of google drive, and a admin version that allows drive 
+                        | owner to upload files to drive. The admin webapp can only be accessed
+                        | by the drive owner, while the client webapp can be accessed by anyone
+                        | with the public url.
+
+                    h2.section-heading Apporach 
+                    p   
+                        | #[strong setup (client)] 
+                        br
+                        | First navigate to app script console
+                        a(href='https://script.google.com/home/start' style="color:blue;") (link)
+                        | then client "New Project" on the top left to create a new app script 
+                        | project. Next, on the top left, click "File" -> "New" -> "HTML file",
+                        | and name the file "Index". Create another one called "Display.html".
+                        | By the end of this step, you should have
+                        | Code.gs, Display.html and Index.html created and shown on the left panel, as
+                        | shown in figure below.
+                    img.img-fluid(src="../assets/img/simple-file-uploading-web-app-part-1/create-project.png", alt='...')
+                    
+                    p
+                        | #[strong Step 1.] 
+                        | Copy the following to your Display.html
+                        br
+                        | (Sorry for not having a button for copy to clipboard)
+                    pre.bg-dark.pre-scrollable(style="color:white;")
+                        code
+                            | #{'<!DOCTYPE html>'} 
+                            | #{'<html>'} 
+                            | #{' <head>'} 
+                            | #{'   <base target="_top">'} 
+                            | #{' </head>'} 
+                            | #{' <body>'} 
+                            | #{' <?for(var i = 0; i < image_list.length; i++) { ?>'} 
+                            | #{'   <tr><td><img src="https://drive.google.com/uc?export=view&id=<?= image_list[i] ?>"></td></tr>'} 
+                            | #{' <? } ?>  '} 
+                            | #{' </body>'} 
+                            | #{'</html>'} 
+                    p
+                        | Notice the weired #{'<? ... ?>'} syntax. When client
+                        | send a GET to our client webapp, appscript will first evaluate
+                        | the javascript in our html, and responde with a complete html file. 
+                        | In the case, this script black will turn into a list of image tag
+                        | with image url attached to it. You can refer to doc
+                        a(href='https://developers.google.com/apps-script/reference/html/html-template' style="color:blue;") here
+
+                    p
+                        | #[strong Step 2.] 
+                        | Copy the following code to your Code.gs
+                    pre.bg-dark.pre-scrollable(style="color:white;") 
+                        code.text-info
+                            |  function
+                        code 
+                            |doGet(e) {
+                            |       if(!e.parameter.folder_id) {
+                            |           var htmlOutput = HtmlService.createTemplateFromFile('Index')
+                            |           htmlOutput.list = getArchive()
+                            |           return htmlOutput.evaluate()
+                            |       }
+                            |       var htmlOutput = HtmlService.createTemplateFromFile('Display')
+                            |       htmlOutput.image_list = getImagesByFolderId(e.parameter.folder_id)
+                            |       return htmlOutput.evaluate()
+                            |   }
+                            |
+                            |
+                        code.text-info
+                            |   function 
+                        code
+                            |getArchive() {
+                            |       var list = []
+                            |       var root = DriveApp.getFolderById('[
+                        code(style="color:yellow;")
+                            | #[strong  FOLDER_ID]
+                        code 
+                            |]')
+                            br
+                        code
+                            |       var folders = root.getFolders()
+                            |       while (folders.hasNext()) {
+                            |           var category = folders.next()
+                            |           var event_list = []
+                            |           var events = category.getFolders()
+                            |           while (events.hasNext()) {
+                            |               var event = events.next()
+                            |               event_list.push({
+                            |                   name: event.getName(),
+                            |                   folder_id: event.getId()
+                            |               })
+                            |           }
+                            |           list.push({
+                            |               category: category.getName(),
+                            |               events: event_list
+                            |           })
+                            |       }
+                            |       return list;
+                            |   }
+                            |
+                            |
+                        code.text-info
+                            |   function 
+                        code
+                            |getImagesByFolderId(id) {
+                            |       var list = []
+                            |       var folder = DriveApp.getFolderById(id)
+                            |       var files = folder.getFiles()
+                            |       while (files.hasNext()) {
+                            |           list.push(files.next().getId())
+                            |       }
+                            |       return list;
+                            |   }
+
+                    p
+                        | You might have noticed there is a field with yellow highlight
+                        | #[strong FOLDER_ID]. We will comeback to this later once we 
+                        | have a folder id from google drive.
+
+                    p
+                        | #[strong Step 3.] 
+                        | Copy the following code to your Index.html
+                    pre.bg-dark.pre-scrollable(style="color:white;") 
+                        code
+                            | #{'<!DOCTYPE html>'}
+                            | #{' <html>'}
+                            | #{'   <head>'}
+                            | #{'   <base target="_top">'}
+                            | #{'   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">'}
+                            | #{'   <title>My Awesome Image Gallary</title>'}
+                            | #{'   <style>'}
+                            | #{'       .content{'}
+                            | #{'           margin: auto;'}
+                            | #{'       }'}
+                            | #{'   </style>'}
+                            | #{'   </head>'}
+                            | #{'   <body class="bg-dark content">'}
+                            | #{'       <div class="w-50 p-3 content">'}
+                            | #{'           <h1 style="text-align:center;color:white">My Awesome Image Gallary</h1>'}
+                            | #{'       </div>'}
+                            | #{'       <div class="w-50 p-3 border border-primary bg-white content">'}
+                            | #{'           <ul>'}
+                            | #{'               <? for(var i = 0; i < list.length; i++) { ?>'}
+                            | #{'                   <li> <?= list[i].category ?>'}
+                            | #{'                       <ul>'}
+                            | #{'                           <? for(var j = 0; j < list[i].events.length; j++) { ?>'}
+                            | #{'                               <li > '}
+                            | #{'                                   <a href="<?= ScriptApp.getService().getUrl() ?>?folder_id=<?= list[i].events[j].folder_id ?>"> <?= list[i].events[j].name ?> </a>'}
+                            | #{'                               </li>'}
+                            | #{'                           <? } ?>'}
+                            | #{'                       </ul>'}
+                            | #{'                   </li>'}
+                            | #{'               <? } ?>'}
+                            | #{'           </ul>'}
+                            | #{'      </div>'}
+                            | #{'       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>'}
+                            | #{'   </body>'}
+                            | #{' </html>'}
+                    p
+                        | No surprise here. The scripts are just boostrap CDN for smooth looking.
+                    
+                    p
+                        | #[strong Step 3.] 
+                        | Go to you google drive an create a folder (not file, a folder).
+                        | (I named mine "Gallery"). Right click the folder, click "Get link". 
+                        | Change the permission to "Anyone with the link". Copy the folder 
+                        | id from the url as shown in figure below
+                    img.img-fluid(src="../assets/img/simple-file-uploading-web-app-part-1/share-folder.png", alt='...')
+                    p
+                        | Remember the FOLDER_ID from step 2? Now replace it with the folder
+                        | id retrieved from url. (DriveApp.getFolderById('XXXXXXX'))
+
+                    p
+                        | #[strong Step 3.]
+                        | We dont have the admin webapp yet. To test if the client side work,
+                        | lets upload some content to the google drive. Go inside the folder 
+                        | you just created, and create two more folder named "Dog" and "Cats".
+                        | In each of these two folder, create few more folders, and upload some
+                        | images to these sub folders. (only jpg, jpeg or png)
+                        | the structure should be something like this
+                    pre
+                        | [Gallery]
+                        |       #{'|'}
+                        |       #{'|'}_[Cat]
+                        |       #{'|'}    #{'|'}_[Black Cat] (images...)
+                        |       #{'|'}    #{'|'}_[White Cat] (images...)
+                        |       #{'|'}_[Dog]
+                        |            #{'|'}_[Black Cat] (images...)
+                        |            #{'|'}_[Black Cat] (images...)
+                    p
+                        | You might notice these folders are created with public visibility.
+                        | This is because by default, child folders inherit parents visiblity
+                        | on creation.
+                        | You can create more or less folder. as long as the the 
+                        | you have 3 level of folders, and all images should be in
+                        | the last level.
+
+                    img.img-fluid(src="../assets/img/simple-file-uploading-web-app-part-1/create-folder.png", alt='...')
+
+                    p
+                        | #[strong Step 4.]
+                        | This is the last step. Go to the app script console. First save the
+                        | scripts. Next, click "Publish" #{'->'}' "Deploy as web app". Change the 
+                        | settings to 
+                    ul
+                        li
+                            | "Execute the app as" to "#[strong User accessing the web app]",
+                        li
+                            | "Who has access to the app" to "#[strong Anyone]"
+                    p
+                        | Finally, click "Deploy". Copy the url and on in a browser tab.
+                        | you might see a warnning prompting for authorization.
+                        | Because our webapp needs to view the content of the shared folder, 
+                        | it needs view and download permission. It is always a good habit
+                        | to review the permission we are giving to our app. Click "Reivew Permission"
+                        | and select the account to authorize the app, click "Advance" -> "Go to ...(unsafe)".
+                        | Carefully read the permission we are giving to the webapp. If everything
+                        | is ok, hit "Allow". You should see the web page display like this.
+                    
+                    img.img-fluid(src="../assets/img/simple-file-uploading-web-app-part-1/index-sample.png", alt='...')
+                    
+                    p
+                        | click the folde that have image in it. In my case, is the 
+                        | white cat folder. You should see the images you uploaded 
+                        | are shown on the webpage
+                    img.img-fluid(src="../assets/img/simple-file-uploading-web-app-part-1/sample-web.png", alt='...')
+                    
+                    p
+                        | Great! Thats it for this first half of project. For the second 
+                        | half, visit this 
+                        a(href="#" style="color:blue;") link
+                    
+                    h2.section-heading Source Code
+                    p
+                        | The project source code can be found 
+                        a(href='https://github.com/ericwu1997/drive-upload-webapp' style="color:blue;") here
+                        |.
