@@ -1,0 +1,454 @@
+extends template.pug
+
+block info
+    - var main_title = "Simple file uploading web app (Part 2)"    
+    - var sub_title = "Implement a web app that uploads and display images from Google drive (App Script + Drive API)"
+    - var banner = "../assets/img/simple-file-uploading-web-app-part-1/banner.jpg"
+    - var date = "May 29, 2021"
+
+block content
+    article
+        .container
+            .row
+                .col-lg-8.col-md-10.mx-auto
+                    h2.section-heading Objective 
+                    p   
+                        | This is the second part of the "Simple file
+                        | uploading web app". For the first part, refer
+                        | to the part 1 post
+                        a(href="/post/2021-05-23-simple-file-uploading-web-app-part-1.html" style="color:blue;") here
+                    p
+                        | Previously, we created a client webapp that displays
+                        | images stored on google drive. In this post, we will
+                        | learn about how to create a simple admin webapp that
+                        | uploads images to google drive.
+
+                    h2.section-heading Apporach 
+                    p   
+                        | #[strong setup (Admin)] 
+                        br
+                        | First navigate to app script console
+                        a(href='https://script.google.com/home/start' style="color:blue;") (link)
+                        | then client "New Project" on the top left to create a new app script 
+                        | project. Next, on the top left, click "File" -> "New" -> "HTML file",
+                        | and name the file "index". By the end of this step, you should have
+                        | Code.gs and index.html on the left panel, as shown in figure below.
+                    img.img-fluid(src="../assets/img/simple-file-uploading-web-app-part-2/setup.png", alt='...')
+
+                    p
+                        | #[strong Step 1.] 
+                        | Copy the following to your Code.gs
+                    pre.bg-dark.pre-scrollable(style="color:white;")
+                        code.text-info
+                            |  function
+                        code 
+                            | #{"doGet() {"}
+                            | #{"  var htmlOutput = HtmlService.createTemplateFromFile('index') "}
+                            | #{"  htmlOutput.category_list = getCategory()"}
+                            | #{"  return htmlOutput.evaluate();"}
+                            | #{" }"}
+                            | #{""}
+                            |
+                        code.text-info
+                            |  function
+                        code 
+                            |#{"getCategory() {"}
+                            | #{"  var list = []"}
+                            | #{"  var root = DriveApp.getFolderById('"}
+                        code(style="color:yellow;")
+                            | #[strong  FOLDER_ID]
+                        code
+                            |#{" ')"}
+                            | #{"  var folders = root.getFolders()"}
+                            | #{"  while (folders.hasNext()) {"}
+                            | #{"    var category = folders.next()"}
+                            | #{"    list.push({"}
+                            | #{"      name: category.getName(),"}
+                            | #{"      id: category.getId()"}
+                            | #{"    })"}
+                            | #{"  }"}
+                            | #{"  return list;"}
+                            | #{" }"}
+                            |
+                            |
+                        code.text-info
+                            |  function
+                        code 
+                            |#{"checkPassCode_(pass) {"}
+                            | #{"  return (pass == 'password')"}
+                            | #{" }"}
+                            |
+                            |
+                        code.text-info
+                            |  function
+                        code 
+                            |#{" getAt(pass) {"}
+                            | #{"  if(!checkPassCode_(pass))"}
+                            | #{"    throw new Error( 'Incorrect passowrd!!' );"}
+                            | #{"  else"}
+                            | #{"    return ScriptApp.getOAuthToken();"}
+                            | #{" }"}
+                            |
+                            |
+                        code.text-success
+                            | #{"// This commented line is used for enabling Drive API and adding a scope of 'https://www.googleapis.com/auth/drive'."}
+                            | #{"// So please don't remove this."}
+                            | #{"// DriveApp.createFile();"}
+                    p
+                        | Let's go through each of these functions.
+                        | The first one #[strong doGet()] is pretty straight
+                        | forward, we discuessed this one in the part 1
+                        | post. Next, the #[strong getCategory()] function. 
+                        | This function search through the root folder, then 
+                        | append a folder name and folder id pair to an empty list
+                        | for each sub folders it finds. Finally, it returns the list. 
+                        | If you can recall from the first post, we created
+                        | two folder - "Cat" and "Dog". In this case, the function
+                        | will return something like this
+                    pre.text-light.bg-dark
+                        code
+                            | [{
+                            |   name: cat,
+                            |   id: FOLDER_ID   
+                            | }, {
+                            |   name: dog,
+                            |   id: FOLDER_ID
+                            | }]
+                    p
+                        | We will use this list to generate a html selector.
+                        | It will make more sense once you see the UI of the admin page.
+                        | The next function is #[strong checkPassCode_]. This function
+                        | check the passcode send by user. If the passcode matches, the
+                        | webapp will upload the files send by user, otherwise, it will
+                        | block the upload operation. 
+                    p
+                        | If we host the admin webapp with public visibility (meaning
+                        | anyone with the url can access the admin web page), we need 
+                        | some security mechanism to filter out unintended users. The
+                        | passcode matching function provides that mechanism.
+                        | Do keep in mind that this is a very weak security measure. 
+                        | People with enoguh knowledge can easily bruteforce it with 
+                        | password cracking program. For now, I suggest you use a 
+                        | test google acocunt instead of your personal one in case
+                        | things goes south. You can implement a more proper 
+                        | identify checking mechasinim later.
+                    P
+                        | Another thing to mention is that function name with trailing
+                        | underscore are private function. These kind of function are
+                        | not visiable to client, and can only be invoke on sever side.
+                        | you can refer to the doc
+                        a(href="https://developers.google.com/apps-script/guides/html/communication#private_functions" style="color:blue;") here
+                        | for more detail.
+                    p
+                        | Next one is the #[strong getAt] function. This function allows
+                        | client to request an access token, which is needed when we send a 
+                        | POST request to the server. If the passcode does not match, the function
+                        | will throw an error message instead of returning an access token.
+           
+                    p
+                        | #[strong Step 2.] 
+                        | Copy the following to your index.html
+                    pre.bg-dark.pre-scrollable(style="color:white;")
+                        code
+                            |  #{'<!DOCTYPE html>'}
+                            |  #{'<html>'}
+                            |  #{'   <head>'}
+                            |  #{'      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">'}
+                            |  #{'      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>'}
+                            |  #{'      <title>Resumable upload for Web Apps</title>'}
+                            |  #{'      <style>'}
+                            |  #{'   .content {'}
+                            |  #{'   margin: auto;'}
+                            |  #{'   }'}
+                            |  #{'</style>'}
+                            |  #{'</head>'}
+                            |  #{'<body class="bg-dark">'}
+                            |  #{'<div class="w-50 p-3 content">'}
+                            |  #{'   <h1 style="text-align:center;color:white">Admin page</h1>'}
+                            |  #{'</div>'}
+                            |  #{'<div class="w-50 p-3 border border-primary bg-white content">'}
+                            |  #{'   <form>'}
+                            |  #{'      <div class="form-group row">'}
+                            |  #{'         <label for="passcode" class="col-sm-2 col-form-label">Passcode</label>'}
+                            |  #{'         <div class="col-sm-10">'}
+                            |  #{'            <input name="passcode" type="password" class="form-control" id="passcode">'}
+                            |  #{'         </div>'}
+                            |  #{'      </div>'}
+                            |  #{'      <div class="form-group row">'}
+                            |  #{'         <label for="category" class="col-sm-2 col-form-label">Category</label>'}
+                            |  #{'         <div class="col-sm-10">'}
+                            |  #{'            <select name="category" class="form-control" id="category">'}
+                            |  #{'               <? for(var i = 0; i < category_list.length; i++) { ?>'}
+                            |  #{'               <option value="<?= category_list[i].id ?>"><?= category_list[i].name ?></option>'}
+                            |  #{'               <? } ?>'}
+                            |  #{'            </select>'}
+                            |  #{'         </div>'}
+                            |  #{'      </div>'}
+                            |  #{'      <div class="form-group row">'}
+                            |  #{'         <label for="event" class="col-sm-2 col-form-label">File name</label>'}
+                            |  #{'         <div class="col-sm-10">'}
+                            |  #{'            <input name="event" type="text" class="form-control" id="event" placeholder="Untitle">'}
+                            |  #{'         </div>'}
+                            |  #{'      </div>'}
+                            |  #{'      <div class="form-group row">'}
+                            |  #{'         <label for="uploadfile" class="col-sm-2 col-form-label">Image</label>'}
+                            |  #{'         <div class="col-sm-10">'}
+                            |  #{'            <input name="file" type="file" class="form-control-file" id="uploadfile" multiple="multiple" accept="image/jpeg, image/png">'}
+                            |  #{'         </div>'}
+                            |  #{'      </div>'}
+                            |  #{'   </form>'}
+                            |  #{'   <button id="submit_btn" class="btn btn-primary" value="Upload">Upload</button>'}
+                            |  #{'   <button id="clear_btn" class="btn btn-danger" value="Upload">Clear</button>'}
+                            |  #{'</div>'}
+                            |  #{'<div id="progress" class="w-50 p-3 content" style="text-align:center;color:white"></div>'}
+                            |  #{'<script>'}
+                            |  #{'  const chunkSize = 5242880;'}
+                            |  #{'  var completed = 0;'}
+                            |  #{'  var folderId = "";'}
+                            |  #{'  var total = 0;'}
+                            |  #{'  var access_token;'}
+                            |  #{'  '}
+                            |  #{'  $("#clear_btn").on("click", function() {'}
+                            |  #{'      $("#event").val("");'}
+                            |  #{'      $("#uploadfile").val("");'}
+                            |  #{'      $("#progress").text("");'}
+                            |  #{'  });'}
+                            |  #{'  '}
+                            |  #{'  $("#submit_btn").on("click", function() {'}
+                            |  #{'      if (!$("#uploadfile").val()) {'}
+                            |  #{'          $("#progress").text("No file selected!");'}
+                            |  #{'      } else {'}
+                            |  #{'          createFolder($("#category").val(), $("#event").val())'}
+                            |  #{'      }'}
+                            |  #{'  });'}
+                            |  #{'  '}
+                            |  #{'  function createFolder(id, title) {'}
+                            |  #{'      completed = 0;'}
+                            |  #{'      total = 0;'}
+                            |  #{'      google.script.run'}
+                            |  #{'          .withSuccessHandler(function(at) {'}
+                            |  #{'              access_token = at;'}
+                            |  #{'              new Promise((resolve, reject) => {'}
+                            |  #{'                      var xhr = new XMLHttpRequest();'}
+                            |  #{'                      xhr = new XMLHttpRequest();'}
+                            |  #{'                      xhr.open("POST", "https://www.googleapis.com/drive/v3/files");'}
+                            |  #{'                      xhr.setRequestHeader("Authorization", "Bearer " + access_token);'}
+                            |  #{'                      xhr.setRequestHeader("Content-Type", "application/json");'}
+                            |  #{'  '}
+                            |  #{'                      xhr.onload = function() {'}
+                            |  #{'                          if (this.status >= 200 && this.status < 300) {'}
+                            |  #{'                              return resolve(xhr.response)'}
+                            |  #{'                          } else {'}
+                            |  #{'                              return reject({'}
+                            |  #{'                                  status: this.status,'}
+                            |  #{'                                  text: xhr.statusText'}
+                            |  #{'                              })'}
+                            |  #{'                          }'}
+                            |  #{'                      }'}
+                            |  #{'                      xhr.onerror = reject'}
+                            |  #{'                      xhr.send(JSON.stringify({'}
+                            |  #{'                          mimeType: "application/vnd.google-apps.folder",'}
+                            |  #{'                          name: title,'}
+                            |  #{'                          parents: [id]'}
+                            |  #{'                      }))'}
+                            |  #{'                  })'}
+                            |  #{'                   .then((response) => {'}
+                            |  #{'                      var obj = JSON.parse(response);'}
+                            |  #{'                      folderId = obj.id'}
+                            |  #{'                      uploadFile()'}
+                            |  #{'                  })'}
+                            |  #{'          })'}
+                            |  #{'          .withFailureHandler(function(err) {'}
+                            |  #{'               $("#progress").text("Passcode missmatch!!");'}
+                            |  #{'          })'}
+                            |  #{'          .getAt($("#passcode").val());'}
+                            |  #{'  }'}
+                            |  #{'  '}
+                            |  #{'  function uploadFile() {'}
+                            |  #{'      var files = $("#uploadfile")[0].files;'}
+                            |  #{'      total = files.length;'}
+                            |  #{'      if (total > 0) {'}
+                            |  #{'          $("#progress").text("Preping...");'}
+                            |  #{'          for (var i = 0; i < total; i++) {'}
+                            |  #{'              var file = files[i];'}
+                            |  #{'              if (file.name != "") {'}
+                            |  #{'                  var fr = new FileReader();'}
+                            |  #{'                  fr.fileName = file.name;'}
+                            |  #{'                  fr.fileSize = file.size;'}
+                            |  #{'                  fr.fileType = file.type;'}
+                            |  #{'                  fr.onload = initRequest;'}
+                            |  #{'                  fr.readAsArrayBuffer(file);'}
+                            |  #{'              }'}
+                            |  #{'          };'}
+                            |  #{'      }'}
+                            |  #{'  }'}
+                            |  #{'  '}
+                            |  #{'  function initRequest() {'}
+                            |  #{'      var fileName = this.fileName;'}
+                            |  #{'      var fileSize = this.fileSize;'}
+                            |  #{'      var fileType = this.fileType;'}
+                            |  #{'      console.log(folderId)'}
+                            |  #{'      console.log({'}
+                            |  #{'          fileName: fileName,'}
+                            |  #{'          fileSize: fileSize,'}
+                            |  #{'          fileType: fileType'}
+                            |  #{'      });'}
+                            |  #{'      var buf = this.result;'}
+                            |  #{'      var chunkpot = getChunkpot(chunkSize, fileSize);'}
+                            |  #{'      var uint8Array = new Uint8Array(buf);'}
+                            |  #{'      var chunks = chunkpot.chunks.map(function(e) {'}
+                            |  #{'          return {'}
+                            |  #{'              data: uint8Array.slice(e.startByte, e.endByte + 1),'}
+                            |  #{'              length: e.numByte,'}
+                            |  #{'              range: "bytes " + e.startByte + "-" + e.endByte + "/" + chunkpot.total,'}
+                            |  #{'          };'}
+                            |  #{'      });'}
+                            |  #{'  '}
+                            |  #{'      var xhr = new XMLHttpRequest();'}
+                            |  #{'      xhr = new XMLHttpRequest();'}
+                            |  #{'      xhr.open("POST", "https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable");'}
+                            |  #{'      xhr.setRequestHeader("Authorization", "Bearer " + access_token);'}
+                            |  #{'      xhr.setRequestHeader("Content-Type", "application/json");'}
+                            |  #{'      xhr.send(JSON.stringify({'}
+                            |  #{'          mimeType: fileType,'}
+                            |  #{'          name: fileName,'}
+                            |  #{'          parents: [folderId]'}
+                            |  #{'      }));'}
+                            |  #{'      xhr.onload = function() {'}
+                            |  #{'          doUpload({'}
+                            |  #{'              location: xhr.getResponseHeader("location"),'}
+                            |  #{'              chunks: chunks,'}
+                            |  #{'          });'}
+                            |  #{'      };'}
+                            |  #{'      xhr.onerror = function() {'}
+                            |  #{'          console.log(xhr.response);'}
+                            |  #{'      };'}
+                            |  #{'  '}
+                            |  #{'  }'}
+                            |  #{'  '}
+                            |  #{'  function doUpload(e) {'}
+                            |  #{'      var chunks = e.chunks;'}
+                            |  #{'      var location = e.location;'}
+                            |  #{'      var cnt = 0;'}
+                            |  #{'      var end = chunks.length;'}
+                            |  #{'      var temp = function callback(cnt) {'}
+                            |  #{'          var e = chunks[cnt];'}
+                            |  #{'          var xhr = new XMLHttpRequest();'}
+                            |  #{'            xhr.open("PUT", location, true);'}
+                            |  #{'            xhr.setRequestHeader("Content-Range", e.range);'}
+                            |  #{'            xhr.send(e.data);'}
+                            |  #{'            xhr.onloadend = function() {'}
+                            |  #{'                var status = xhr.status;'}
+                            |  #{'                cnt += 1;'}
+                            |  #{'                console.log("Uploaded: " + status + " (" + cnt + " / " + end + ")");'}
+                            |  #{'                //                     $("#progress").text("Uploading... " + Math.floor(100 * cnt / end ) + "%");'}
+                            |  #{'                if (status == 308) {'}
+                            |  #{'                    callback(cnt);'}
+                            |  #{'                } else if (status == 200) {'}
+                            |  #{'                    completed++;'}
+                            |  #{'                    if (completed == total)'}
+                            |  #{'                        $("#progress").text("Upload success");'}
+                            |  #{'                    else'}
+                            |  #{'                        $("#progress").text("Uploaded: " + completed + "/" + total);'}
+                            |  #{'                } else {'}
+                            |  #{'                    $("#progress").text("Error: " + xhr.response);'}
+                            |  #{'                }'}
+                            |  #{'            };'}
+                            |  #{'        }(cnt);'}
+                            |  #{'    }'}
+                            |  #{'    '}
+                            |  #{'    function getChunkpot(chunkSize, fileSize) {'}
+                            |  #{'        var chunkPot = {};'}
+                            |  #{'        chunkPot.total = fileSize;'}
+                            |  #{'        chunkPot.chunks = [];'}
+                            |  #{'        if (fileSize > chunkSize) {'}
+                            |  #{'            var numE = chunkSize;'}
+                            |  #{'            var endS = function(f, n) {'}
+                            |  #{'                var c = f % n;'}
+                            |  #{'                if (c == 0) {'}
+                            |  #{'                    return 0;'}
+                            |  #{'                } else {'}
+                            |  #{'                    return c;'}
+                            |  #{'                }'}
+                            |  #{'            }(fileSize, numE);'}
+                            |  #{'            var repeat = Math.floor(fileSize / numE);'}
+                            |  #{'            for (var i = 0; i <= repeat; i++) {'}
+                            |  #{'                var startAddress = i * numE;'}
+                            |  #{'                var c = {};'}
+                            |  #{'                c.startByte = startAddress;'}
+                            |  #{'                if (i < repeat) {'}
+                            |  #{'                    c.endByte = startAddress + numE - 1;'}
+                            |  #{'                    c.numByte = numE;'}
+                            |  #{'                    chunkPot.chunks.push(c);'}
+                            |  #{'                } else if (i == repeat && endS > 0) {'}
+                            |  #{'                    c.endByte = startAddress + endS - 1;'}
+                            |  #{'                    c.numByte = endS;'}
+                            |  #{'                    chunkPot.chunks.push(c);'}
+                            |  #{'                }'}
+                            |  #{'            }'}
+                            |  #{'        } else {'}
+                            |  #{'            var chunk = {'}
+                            |  #{'                startByte: 0,'}
+                            |  #{'                endByte: fileSize - 1,'}
+                            |  #{'                numByte: fileSize,'}
+                            |  #{'            };'}
+                            |  #{'            chunkPot.chunks.push(chunk);'}
+                            |  #{'        }'}
+                            |  #{'        return chunkPot;'}
+                            |  #{'    }'}
+                            |  #{'  </script>'}
+                            |  #{'  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>'}
+                            |  #{'<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>'}
+                            |  #{'<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>'}
+                            |  #{'</body>'}
+                            |  #{'</html>'}
+                    p
+                        | Most of the file uploading codes are referenced from 
+                        a(href="https://github.com/tanaikech/Resumable_Upload_For_WebApps" style="color:blue;") here.
+                        | I modified it a little to make it work with my code.
+                        | The two most important thing to learn from this code is perhpas the two post requests
+                    pre.bg-dark.pre-scrollable(style="color:white;")
+                        code
+                            | POST https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable
+                            | POST https://www.googleapis.com/drive/v3/files  mimeType: "application/vnd.google-apps.folder"
+                    p
+                        | The first one is the HTTP request for uploading files, the second one is 
+                        | for creating/deleting folder on google drive.
+                    
+                    p
+                        | #[strong Step 3.] Launch the webapp
+                        | Before we launch the webapp, make sure you replace the FOLDER_ID 
+                        | variable with the google drive folder ID. We did this in previous post
+                        | . Refer to previous post if you are not sure what to do. When that's 
+                        | done, simply deploy the webapp with setting as follow
+                    ul
+                        li
+                            | "Execute the app as" to "#[strong me]",
+                        li
+                            | "Who has access to the app" to "#[strong Anyone]"
+                    p
+                        | You might see a warning prompting for authorization. It is always a good habit
+                        | to review the permission we are giving to our app. Click "Reivew Permission"
+                        | and select the account to authorize the app, click "Advance" -> "Go to ...(unsafe)".
+                        | Carefully read the permission we are giving to the webapp. If everything
+                        | is ok, hit "Allow". You should see the web page display like this.
+                    img.img-fluid(src="../assets/img/simple-file-uploading-web-app-part-2/admin-page.png", alt='...')
+
+                    p
+                        | Try upload some picture with passcode "password". If everything goes well,
+                        | you should see the images get uploaded to google drive. If you wnat, you can change the 
+                        | default passcode hard coded in the checkPassCode_ function.
+                    p
+                        | If you want the admin page to be only accessible by the drive owner, you can 
+                        | change the deploy setting to "only myself" when setting "Who has access to the app:"
+                    p
+                        | Great! Thats concludes everything  
+                    h2.section-heading Source Code
+                    p
+                        | The project source code can be found 
+                        a(href='https://github.com/ericwu1997/drive-upload-webapp' style="color:blue;") here
+                        |.
+
+
+                    
+                
