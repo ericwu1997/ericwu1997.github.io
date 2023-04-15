@@ -2,8 +2,18 @@
 <html>
 
 <head>
+  <base target="_top">
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:image" content="/assets/img/og.png">
+  <meta property="og:title" content="詮中食品目錄">
+  <meta property="og:description" content="當前銷售品項">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="275">
+  <meta property="og:image:height" content="221">
+  <link rel="shortcut icon" href="/assets/img/favicon.ico" />
   <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/js/JavaScript.js">
   <title>{{ page.title }}</title>
 </head>
 
@@ -16,6 +26,33 @@
   <img src="{{ site.baseurl }}{{ image.path }}" alt="image" />
   {% endif %}
   {% endfor %}
+  <script>
+    var data = [], filename;
+    // {% capture gallery_path %}assets/img/{{ page.category }}{% endcapture %}
+    // {% for image in site.static_files %}
+    //   {% if image.path contains gallery_path %}
+    filename = "{{ image.name }}";
+    data.push(
+      {
+        product: {
+          name: filename.substr(0, filename.lastIndexOf('.')),
+          img: {
+            src: "{{ site.baseurl }}{{ image.path }}"
+          }
+        }
+      }
+    )
+    //   {% endif %}
+    // {% endfor %}
+    data.sort((a, b) => {
+        let a_num = parseInt(a.product.name.match(/\d{1,3}/));
+        let b_num = parseInt(b.product.name.match(/\d{1,3}/));
+        if (a_num < b_num) return -1;
+        if (a_num > b_num) return 1;
+        return 0;
+    })
+    console.log(data)
+  </script>
 </body>
 
 </html>
