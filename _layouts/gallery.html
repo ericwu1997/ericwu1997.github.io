@@ -13,26 +13,22 @@
   <meta property="og:image:height" content="221">
   <link rel="shortcut icon" href="/assets/img/favicon.ico" />
   <link rel="stylesheet" href="/assets/css/style.css">
-  <link rel="stylesheet" href="/assets/js/JavaScript.js">
   <title>{{ page.title }}</title>
 </head>
 
 <body>
-  {% capture gallery_path %}assets/img/{{ page.category }}{% endcapture %}
   {% include navbar.html %}
-  {{ content }}
-  {% for image in site.static_files %}
-  {% if image.path contains gallery_path %}
-  <img src="{{ site.baseurl }}{{ image.path }}" alt="image" />
-  {% endif %}
-  {% endfor %}
+
+  <div id="card-container">
+  </div>
+
   <script>
-    var data = [], filename;
+    var gallery_data = [], filename;
     // {% capture gallery_path %}assets/img/{{ page.category }}{% endcapture %}
     // {% for image in site.static_files %}
     //   {% if image.path contains gallery_path %}
     filename = "{{ image.name }}";
-    data.push(
+    gallery_data.push(
       {
         product: {
           name: filename.substr(0, filename.lastIndexOf('.')),
@@ -44,15 +40,8 @@
     )
     //   {% endif %}
     // {% endfor %}
-    data.sort((a, b) => {
-        let a_num = parseInt(a.product.name.match(/\d{1,3}/));
-        let b_num = parseInt(b.product.name.match(/\d{1,3}/));
-        if (a_num < b_num) return -1;
-        if (a_num > b_num) return 1;
-        return 0;
-    })
-    console.log(data)
   </script>
+  <script type="text/javascript" src="/assets/js/JavaScript.js"></script>
 </body>
 
 </html>
