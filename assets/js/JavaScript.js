@@ -1,5 +1,11 @@
 renderGalleryView(gallery_data)
 
+document.addEventListener("scroll", (event) => {
+    document.getElementById('menu-overlay').classList.remove('open');
+    document.getElementById('hamburger-menu').classList.remove('open')
+});
+
+
 function renderGalleryView(list) {
     list.sort((a, b) => {
         let a_num = parseInt(a.product.name.match(/\d{1,3}/));
@@ -17,6 +23,7 @@ function renderGalleryView(list) {
         let p = document.createElement('p');
         p.innerHTML = list[i].product.name;
         img.setAttribute("src", list[i].product.img.src);
+        div.classList.add("card");
         div.appendChild(p)
         div.appendChild(img);
         card_container.appendChild(div)
