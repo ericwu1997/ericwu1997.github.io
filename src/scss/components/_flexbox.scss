@@ -1,0 +1,47 @@
+// Width
+@function ww1w($n1, $n2) {
+  @return $n1 / $n2;
+}
+// Margin
+@function mm1m($m1, $m2) {
+  @return ($m1 - $m2);
+}
+#flexbox {
+  display: flex;
+  flex-wrap: wrap;
+}
+.card {
+  width: 30%;
+  @media screen and (max-width: 1080px) {
+    width: 30%;
+  }
+  @media screen and (max-width: 992px) {
+    width: 45%;
+  }
+  @media screen and (max-width: 678px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 478px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 320px) {
+    width: 100%;
+  }
+  // background: mix(#ddd, #eee, 75%);
+  margin: 0 10px 20px 10px;
+  box-shadow: 0 15px 15px 0 rgba(0,0,0,0.2);
+  border-width: thin;
+  border-style: solid;
+}
+
+.card-img-top > img {
+  width: 100%;
+  height: 100px;
+  object-position: left top;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.card-body > a {
+  color: blue;
+}

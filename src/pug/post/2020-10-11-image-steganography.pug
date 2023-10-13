@@ -1,0 +1,140 @@
+extends template.pug
+
+block info
+    - var main_title = "Image Steganography"    
+    - var sub_title = "Implement an application that allows users to encrypt a secret image, and embed it into a cover image"
+    - var banner = "../assets/img/image-steganography/banner.jpg"
+    - var date = "October 11, 2020"
+
+block content
+    article
+        .container
+            .row
+                .col-lg-8.col-md-10.mx-auto
+                    h2.section-heading Objective
+                    p
+                        | Design and implement an application that allows users to encrypt
+                        | a secret image, and embed it into a cover image. The output image
+                        | should visually look the same as the original ocver image. The
+                        | simple diagram below illustrates the coversion process.
+                    img.img-fluid(src="../assets/img/image-steganography/stego-diagram.jpg", alt='...')
+                    
+                    h2.section-heading Other specification
+                    ul
+                        li
+                            | Provide a help function that will display all of the switches
+                            | and command line arguments for the application
+                        li
+                            | Both pixels and filename of the secret image should be password
+                            | encrypted before embedding
+                        li
+                            | Use 9 pixels from cover image to hide a single pixel of secret image,
+                            | no more no less
+                        li
+                            | Only works if the cover image has enough pixels to hide the secret
+                            | image. No partial hiding
+                    
+                    h2.section-heading Approach
+                    p
+                        | The application will be developed in python. Therefore, it should
+                        | work on both Linux and Windows (since python is a corss-platform
+                        | language). The pixels hiding operations will be implemented using
+                        | a python library called "#[strong Pillow]". The library provides
+                        | APIs for reading pixels from images, editing the pixels, creating
+                        | images from faw pixels. Other python modules such as "#[strong argparse]"
+                        | and "#[strong ntpath]" are used for improving the utility of the application.
+                    
+                    p
+                        | Last but not least, the encryption functionality will be implemented with
+                        | the symmetric-key algorithm "DES". The user input password will be
+                        | factored into a key of length 8, 16, or 24 bytes, and used for encrypting
+                        | /decrypting the pixels and filename of the secret image.
+
+                    h2.section-heading Application Design
+                    p
+                        | [ Embedding mechanism ]
+                    p
+                        | #[strong Pixels hiding]
+                        br
+                        | Each pixel has the values R, G and B. Each value can be represented in
+                        | binary (For instance, 11111111 represents hex vlaue 255). The idea is to
+                        | hide a single bit in the last bit of a rgb value. Each pixel of the 
+                        | secret image can be splitted and hidden into 9 pixels of the cover image.
+                    p
+                        | #[strong Headers]
+                        br
+                        | To know the filename and size of the secret image, a header length
+                        | (integer value) and encrypted header is embedded before the pixel datas of
+                        | the secret image. Below figure shows the structure of header (before embed
+                        | into pixels of cover image)
+                    img.img-fluid(src="../assets/img/image-steganography/stego-field.jpg", alt='...')
+                    p
+                        | The application will first read the header length (stop when encounter space
+                        | character). Retrieve header length of bytes after, then decrypt it to acquire
+                        | header information. The header information includes the filename and dimension
+                        | of the secret image.
+                    
+                    p
+                        | [ Modules ]
+                    p
+                        | The application consists of three modules - dcstego.py, dcutils.py and
+                        | dcimage.py. Souce codes are separated into these modules based on type
+                        | of functionality.
+                    ul
+                        li
+                            | #[strong dcstego.py] - Application entry point, includes functionality 
+                            | such as parsing command line arguments, checking file size and file 
+                            | formats. Responsible for invoking methods for data encryption/extraction
+                            | and images loading provided in other modules.
+                        li 
+                            | #[strong dcutils.py] - Includes core functions for hiding and extracting 
+                            | data from cover images. This module also includes simple functions for data
+                            | type conversion (bits to ascii, int to bits... etc)
+                        li
+                            | #[strong dcimage.py] - Has a single class that acts as a wrapper of the python
+                            | Pillow module. Includes core functionality such as loading images, providing 
+                            | next pixels in line, editing pixels at a specific point or returning 
+                            | properties of an image.
+                    
+                    h2.section-heading Pseudo implementation
+                    p
+                        | Pseudo code of the three modules
+                    p
+                        | #[strong dcstego.py]
+                    img.img-fluid(src="../assets/img/image-steganography/stego-pseudo-1.jpg", alt='...')
+                    p
+                        | #[strong dcutils.py]
+                    img.img-fluid(src="../assets/img/image-steganography/stego-pseudo-2.jpg", alt='...')
+                    p
+                        | #[strong dcimage.py]
+                    img.img-fluid(src="../assets/img/image-steganography/stego-pseudo-3.jpg", alt='...')
+
+                    h2.section-heading State diagram
+                    p
+                        | #[strong Encryption process]
+                    img.img-fluid(src="../assets/img/image-steganography/stego-state-diagram-1.jpg", alt='...')
+                    p
+                        | #[strong Decryption process]
+                    img.img-fluid(src="../assets/img/image-steganography/stego-state-diagram-2.jpg", alt='...')
+                
+                    h2.section-heading How to run
+                    p
+                        | #[strong Prerequisites]
+                    ul
+                        li Python3 or above
+                        li Python PIL module (python3 -m pip install Pillow)
+                        li Python DES moduel (python3 -m pip install des)
+                    p
+                        | #[strong Usage]
+                        br
+                        | Arguments and options
+                    img.img-fluid(src="../assets/img/image-steganography/stego-usage.jpg", alt='...')
+                    p
+                        | Sample commands for stego image creation and extraction
+                    img.img-fluid(src="../assets/img/image-steganography/stego-cmd-sample.jpg", alt='...')
+
+                    h2.section-heading Source Code
+                    p
+                        | The project source code can be found 
+                        a(href='https://github.com/ericwu1997/image-steganography-python' style="color:blue;") here
+                        |.

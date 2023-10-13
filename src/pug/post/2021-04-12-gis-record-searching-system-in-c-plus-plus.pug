@@ -1,0 +1,53 @@
+extends template.pug
+
+block info
+    - var main_title = "GIS record searching system in C++"    
+    - var sub_title = "Implment a GIS record searching system with Hashtable + PR quadtree + bufferpool"
+    - var banner = "../assets/img/gis-record-searching-system-in-c-plus-plus/banner.jpg"
+    - var date = "April 12, 2021"
+
+block content
+    article
+        .container
+            .row
+                .col-lg-8.col-md-10.mx-auto
+                    p   
+                        | This is the final project I did for the COMP 8042 course in BCIT. 
+                        | The goal is to create a system that create and maintain a GIS database
+                        | file that contains all the records that are imported as the program runs.
+
+                    p
+                        | The GIS records are indexed by the Feature Name and State field. This name
+                        | index supports finding offsets of GIS records that match a given feature name
+                        | and state abbreviation. The GIS records will also be indexed by geographic 
+                        | coordinate. The coordinate index will support finding offsets of GIS records
+                        | that match a given primary latitude and primary longitude.
+                    
+                    p   
+                        | The three important components (classes) of this project are
+                    ul
+                        li NameIndex - maintain a list of entries that store a feature name + state abbreviation and the file offsets of the matching records record.
+                        li CoordinateIndex - stores a list of entries that store a geographic coordinate and a collection of the file offsets of the matching GIS records
+                        li BufferPool - a proxy for the main database.
+
+                    p
+                        | NameIndex implements hashtable, and uses quadratic probing ((n^2 + n) / 2) to resolve collision. 
+                        | CoordinateIndex implements PR quadtree. 
+                        | BuufferPool implments LRU Caching. The figure below shows the overall architecture of the system
+                    
+                    p
+                        img.img-fluid(src='../assets/img/gis-record-searching-system-in-c-plus-plus/gis-system-arch.jpg', alt='...')
+
+                    h2.section-heading Source code
+
+                    p
+                        a(href='https://github.com/ericwu1997/gis-record-searching' style="color:blue;") here
+                        | is the final source code. The program will take the names of the 
+                        | database file, script file and log file from the command line, like this 
+                    p
+                        | ./GIS #{'<'}database file name#{'>'} #{'<'}command script file name#{'>'} #{'<'}log file name#{'>'}
+                    
+                    p    
+                        | The script file and dataset are both included in the github repo
+
+                    
