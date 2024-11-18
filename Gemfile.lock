@@ -11,6 +11,7 @@ GEM
     eventmachine (1.2.7)
     eventmachine (1.2.7-x86-mingw32)
     ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x64-mingw-ucrt)
     ffi (1.17.0-x86-mingw32)
     ffi (1.17.0-x86_64-linux-gnu)
     forwardable-extended (2.6.0)
@@ -71,6 +72,7 @@ GEM
 
 PLATFORMS
   arm64-darwin
+  x64-mingw-ucrt
   x86-mingw32
   x86_64-linux-gnu
 
