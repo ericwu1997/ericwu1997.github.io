@@ -2,7 +2,6 @@
 title: Interoperable Systems Management Protocol
 parent: Interoperable Train Control Messaging
 nav_order: 1
-layout: default
 ---
 
 ## Table of contents

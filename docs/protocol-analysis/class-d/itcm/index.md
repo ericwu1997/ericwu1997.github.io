@@ -2,7 +2,6 @@
 title: Interoperable Train Control Messaging
 parent: Class D
 nav_order: 1
-layout: default
 has_toc: false
 ---
 
@@ -11,7 +10,6 @@ has_toc: false
 
 1. TOC
 {:toc}
-
 
 ---
 

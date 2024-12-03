@@ -2,7 +2,6 @@
 title: Host Radio Exchange Interface
 parent: Class D
 nav_order: 2
-layout: default
 ---
 
 ## Table of contents

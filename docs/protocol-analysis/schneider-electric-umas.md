@@ -1,8 +1,7 @@
 ---
 title: Schneider Electric UMAS
 parent: Protocol Analysis
-nav_order: 1
-layout: default
+nav_order: 3
 ---
 
 # Schneider Electric UMAS
