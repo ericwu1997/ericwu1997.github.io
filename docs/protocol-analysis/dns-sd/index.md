@@ -1,5 +1,5 @@
 ---
-title: DNS SD
+title: (UDP 5353) DNS SD
 parent: Protocol Analysis
 nav_order: 2
 ---
