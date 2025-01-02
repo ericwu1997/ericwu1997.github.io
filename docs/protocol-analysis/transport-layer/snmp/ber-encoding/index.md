@@ -1,6 +1,6 @@
 ---
 title: BER Encoding
-parent: SNMP
+parent: (UDP 161) SNMP
 nav_order: 1
 ---
 

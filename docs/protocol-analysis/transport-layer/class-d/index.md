@@ -1,6 +1,6 @@
 ---
 title: Class D
-parent: Protocol Analysis
+parent: Transport Layer
 nav_order: 4
 has_toc: false
 ---

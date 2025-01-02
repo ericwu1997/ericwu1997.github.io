@@ -1,6 +1,6 @@
 ---
 title: PROFINET DCP
-parent: Protocol Analysis
+parent: OT Layer 2
 nav_order: 2
 ---
 

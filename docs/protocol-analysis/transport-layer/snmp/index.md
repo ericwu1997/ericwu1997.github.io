@@ -1,8 +1,7 @@
 ---
 title: (UDP 161) SNMP
-parent: Protocol Analysis
+parent: Transport Layer
 nav_order: 1
-has_toc: false
 ---
 
 # SNMP

@@ -1,6 +1,6 @@
 ---
 title: (TCP 3260) iSCSI
-parent: Protocol Analysis
+parent: Transport Layer
 nav_order: 2
 ---
 

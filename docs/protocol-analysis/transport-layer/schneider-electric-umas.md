@@ -1,6 +1,6 @@
 ---
 title: Schneider Electric UMAS
-parent: Protocol Analysis
+parent: Transport Layer
 nav_order: 3
 ---
 
