@@ -1,0 +1,22 @@
+title: Work Notes
+description: notes and documentation for work
+theme: just-the-docs
+
+url: https://ericwu1997.github.io
+
+defaults:
+  - scope:
+      path: "docs" # an empty string here means all files in the project
+      type: "pages"
+    values:
+      layout: "default"
+
+# For copy button on code
+enable_copy_code_button: true
+
+nav_enabled: true
+
+# Aux links for the upper right navigation
+aux_links:
+  "Linkedin":
+    - "https://linkedin.com/in/ericwu1997"
