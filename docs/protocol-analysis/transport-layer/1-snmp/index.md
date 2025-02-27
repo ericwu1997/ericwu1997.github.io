@@ -1,7 +1,6 @@
 ---
 title: (UDP 161) SNMP
 parent: Transport Layer
-nav_order: 1
 ---
 
 # SNMP
