@@ -135,3 +135,167 @@ echo -n "44480101" | xxd -r -p | netcat -u -p 8601 XXX.XXX.XXX.XXX 8600
 01f0   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
 0200   00 00 00 00 44 48 01 08 31 39 32 2e               ....DH..192.
 ```
+
+## Dahua - UDP DHCPDiscover port 37810
+References:<br>
+[https://www.shadowserver.org/what-we-do/network-reporting/open-dvr-dhcpdiscover-report/](https://www.shadowserver.org/what-we-do/network-reporting/open-dvr-dhcpdiscover-report/)<br>
+```
+echo -ne '\xff'|nc -u 218.5.136.140 37810
+```
+```
+0000   20 00 00 00 44 48 49 50 00 00 00 00 00 00 00 00    ...DHIP........
+0010   b4 02 00 00 00 00 00 00 b4 02 00 00 00 00 00 00   ................
+0020   7b 22 6d 61 63 22 3a 22 XX XX 3a XX XX 3a XX XX   {"mac":"XX:XX:XX
+0030   3a XX XX 3a XX XX 3a XX XX 22 2c 22 6d 65 74 68   :XX:XX:XX","meth
+0040   6f 64 22 3a 22 63 6c 69 65 6e 74 2e 6e 6f 74 69   od":"client.noti
+0050   66 79 44 65 76 49 6e 66 6f 22 2c 22 70 61 72 61   fyDevInfo","para
+0060   6d 73 22 3a 7b 22 64 65 76 69 63 65 49 6e 66 6f   ms":{"deviceInfo
+0070   22 3a 7b 22 41 6c 61 72 6d 49 6e 70 75 74 43 68   ":{"AlarmInputCh
+0080   61 6e 6e 65 6c 73 22 3a 38 2c 22 41 6c 61 72 6d   annels":8,"Alarm
+0090   4f 75 74 70 75 74 43 68 61 6e 6e 65 6c 73 22 3a   OutputChannels":
+00a0   30 2c 22 44 65 76 69 63 65 43 6c 61 73 73 22 3a   0,"DeviceClass":
+00b0   22 56 54 4f 22 2c 22 44 65 76 69 63 65 54 79 70   "VTO","DeviceTyp
+00c0   65 22 3a 22 56 54 4f 32 30 30 30 41 2d 32 22 2c   e":"VTO2000A-2",
+00d0   22 46 69 6e 64 22 3a 22 42 43 22 2c 22 48 74 74   "Find":"BC","Htt
+00e0   70 50 6f 72 74 22 3a 38 30 2c 22 49 50 76 34 41   pPort":80,"IPv4A
+00f0   64 64 72 65 73 73 22 3a 7b 22 44 65 66 61 75 6c   ddress":{"Defaul
+0100   74 47 61 74 65 77 61 79 22 3a 22 31 39 32 2e 31   tGateway":"192.1
+0110   36 38 2e 31 2e 31 22 2c 22 44 68 63 70 45 6e 61   68.1.1","DhcpEna
+0120   62 6c 65 22 3a 66 61 6c 73 65 2c 22 49 50 41 64   ble":false,"IPAd
+0130   64 72 65 73 73 22 3a 22 31 39 32 2e 31 36 38 2e   dress":"192.168.
+0140   31 2e 32 30 32 22 2c 22 53 75 62 6e 65 74 4d 61   1.202","SubnetMa
+0150   73 6b 22 3a 22 32 35 35 2e 32 35 35 2e 32 35 35   sk":"255.255.255
+0160   2e 30 22 7d 2c 22 49 50 76 36 41 64 64 72 65 73   .0"},"IPv6Addres
+0170   73 22 3a 7b 22 44 65 66 61 75 6c 74 47 61 74 65   s":{"DefaultGate
+0180   77 61 79 22 3a 6e 75 6c 6c 2c 22 44 68 63 70 45   way":null,"DhcpE
+0190   6e 61 62 6c 65 22 3a 66 61 6c 73 65 2c 22 49 50   nable":false,"IP
+01a0   41 64 64 72 65 73 73 22 3a 22 5c 2f 30 22 2c 22   Address":"\/0","
+01b0   4c 69 6e 6b 4c 6f 63 61 6c 41 64 64 72 65 73 73   LinkLocalAddress
+01c0   22 3a 22 XX XX XX XX 3a 3a XX XX XX XX 3a XX XX   ":"XXXX::XXXX:XX
+01d0   XX XX 3a XX XX XX XX 3a 34 66 65 35 5c 2f 36 34   XX:XXXX:4fe5\/64
+01e0   22 7d 2c 22 49 6e 69 74 22 3a 33 32 32 32 2c 22   "},"Init":3222,"
+01f0   4d 61 63 68 69 6e 65 4e 61 6d 65 22 3a 22 35 46   MachineName":"5F
+0200   30 34 36 39 30 50 41 5a 46 30 39 33 34 22 2c 22   04690PAZF0934","
+0210   4d 61 6e 75 66 61 63 74 75 72 65 72 22 3a 22 47   Manufacturer":"G
+0220   65 6e 65 72 61 6c 22 2c 22 50 6f 72 74 22 3a 33   eneral","Port":3
+0230   37 37 37 37 2c 22 52 65 6d 6f 74 65 56 69 64 65   7777,"RemoteVide
+0240   6f 49 6e 70 75 74 43 68 61 6e 6e 65 6c 73 22 3a   oInputChannels":
+0250   30 2c 22 53 65 72 69 61 6c 4e 6f 22 3a 22 XX XX   0,"SerialNo":"5F
+0260   XX XX XX XX XX XX XX XX XX XX XX XX XX 22 2c 22   XXXXXXXXXXXXX","
+0270   56 65 6e 64 6f 72 22 3a 22 47 65 6e 65 72 61 6c   Vendor":"General
+0280   22 2c 22 56 65 72 73 69 6f 6e 22 3a 22 34 2e 33   ","Version":"4.3
+0290   30 30 2e 30 30 30 30 30 30 30 2e 31 2e 52 22 2c   00.0000000.1.R",
+02a0   22 56 69 64 65 6f 49 6e 70 75 74 43 68 61 6e 6e   "VideoInputChann
+02b0   65 6c 73 22 3a 31 2c 22 56 69 64 65 6f 4f 75 74   els":1,"VideoOut
+02c0   70 75 74 43 68 61 6e 6e 65 6c 73 22 3a 31 36 7d   putChannels":16}
+02d0   7d 7d 0a 00                                       }}..
+```
+
+## Advantech - UDP discovery port 5048
+References:<br>
+[https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Advantech.cs](https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Advantech.cs)
+```
+echo -n "4D41444100000083010050(print "%0*d 84)20000000000000" | xxd -r -p | netcat -u XXX.XXX.XXX.XXX 5048
+```
+```
+0000   4d 41 44 41 00 00 00 83 01 00 60 60 00 00 d0 c9   MADA......``....
+0010   00 f8 81 13 0f 0f 0f 0f 0f 0f 0f 0f 00 00 00 00   ................
+0020   00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0030   00 00 00 00 80 20 00 48 00 00 00 00 00 07 00 1e   ..... .H........
+0040   00 1f 00 07 00 01 00 e8 00 08 00 00 00 00 00 00   ................
+0050   00 01 0d 53 00 03 84 00 00 00 00 32 00 01 c2 00   ...S.......2....
+0060   31 30 32 30 00 00 00 18 41 44 41 4d 36 30 36 30   1020....ADAM6060
+0070   20 44 69 67 69 74 61 6c 20 49 2f 4f 20 4d 6f 64    Digital I/O Mod
+0080   75 6c 65 00 00                                    ule..
+```
+
+## Ubiquiti - UBNT Discovery UDP port 10001
+References:<br>
+[https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Ubiquiti.cs](https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Ubiquiti.cs)<br>
+[https://github.com/MatrixEditor/ubnt-discovery-tool/blob/master/ubnt.lua](https://github.com/MatrixEditor/ubnt-discovery-tool/blob/master/ubnt.lua)<br>
+[https://gist.github.com/sgrodzicki/265273ff0ede952d6fcd1a1eedb6aa60](https://gist.github.com/sgrodzicki/265273ff0ede952d6fcd1a1eedb6aa60)
+```
+echo -n "01000000" | xxd -r -p | netcat -u XXX.XXX.XXX.XXX 10001
+```
+```
+0000   01 00 00 7d 02 00 0a [      MAC      ] [ IPADDR   ...}....*.!}.g-.
+0010    ] 02 00 0a [      MAC      ] [  IPADDR ] 01 00   .....*. }.......
+0020   06 80 2a a8 20 7d a5 0a 00 04 00 1d 2a c9 0b 00   ..*. }......*...
+0030   0a 61 69 72 47 61 74 65 77 61 79 0c 00 03 41 47   .airGateway...AG
+0040   57 0d 00 0c 52 69 64 67 65 43 6f 74 74 61 67 65   W...RidgeCottage
+0050   0e 00 01 03 03 00 25 41 69 72 47 57 2e 61 72 39   ......%AirGW.ar9
+0060   33 33 78 2e 76 31 2e 31 2e 36 2e 32 38 30 36 32   33x.v1.1.6.28062
+0070   2e 31 35 30 37 33 31 2e 31 35 31 30 10 00 02 e4   .150731.1510....
+0080   c2                                                .
+```
+
+## Hikvision - SADP UDP port 37020
+References:<br>
+[https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Hikvision.cs](https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Hikvision.cs)
+```
+echo -n '<?xml version="1.0" encoding="utf-8"?><Probe><Uuid>{0}</Uuid><Types>inquiry</Types></Probe>' | netcat -u 10.0.0.1 37020
+```
+```
+0000   3c 3f 78 6d 6c 20 76 65 72 73 69 6f 6e 3d 22 31   <?xml version="1
+0010   2e 30 22 20 65 6e 63 6f 64 69 6e 67 3d 22 55 54   .0" encoding="UT
+0020   46 2d 38 22 3f 3e 0d 0a 3c 50 72 6f 62 65 4d 61   F-8"?>..<ProbeMa
+0030   74 63 68 3e 3c 55 75 69 64 3e XX XX XX XX XX XX   tch><Uuid>XXXXXX
+0040   XX XX 2d XX XX XX XX 2d XX XX XX XX 2d XX XX XX   XX-XXXX-XXXX-XXX
+0050   XX 2d XX XX XX XX XX XX XX XX XX XX XX XX 3c 2f   X-XXXXXXXXXXXX</
+0060   55 75 69 64 3e 0d 0a 3c 54 79 70 65 73 3e 69 6e   Uuid>..<Types>in
+0070   71 75 69 72 79 3c 2f 54 79 70 65 73 3e 0d 0a 3c   quiry</Types>..<
+0080   44 65 76 69 63 65 54 79 70 65 3e 31 33 39 37 38   DeviceType>13978
+0090   33 3c 2f 44 65 76 69 63 65 54 79 70 65 3e 0d 0a   3</DeviceType>..
+00a0   3c 44 65 76 69 63 65 44 65 73 63 72 69 70 74 69   <DeviceDescripti
+00b0   6f 6e 3e 44 53 2d 32 43 44 32 30 32 32 57 44 2d   on>DS-2CD2022WD-
+00c0   49 3c 2f 44 65 76 69 63 65 44 65 73 63 72 69 70   I</DeviceDescrip
+00d0   74 69 6f 6e 3e 0d 0a 3c 44 65 76 69 63 65 53 4e   tion>..<DeviceSN
+00e0   3e XX XX 2d XX XX XX XX XX XX XX XX XX 2d XX XX   >XX-XXXXXXXXX-XX
+00f0   XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX   XXXXXXXXXXXXXXXX
+0100   XX XX XX XX 3c 2f 44 65 76 69 63 65 53 4e 3e 0d   XXXX</DeviceSN>.
+0110   0a 3c 43 6f 6d 6d 61 6e 64 50 6f 72 74 3e 38 30   .<CommandPort>80
+0120   30 30 3c 2f 43 6f 6d 6d 61 6e 64 50 6f 72 74 3e   00</CommandPort>
+0130   0d 0a 3c 48 74 74 70 50 6f 72 74 3e 38 30 3c 2f   ..<HttpPort>80</
+0140   48 74 74 70 50 6f 72 74 3e 0d 0a 3c 4d 41 43 3e   HttpPort>..<MAC>
+0150   XX XX 2d XX XX 2d XX XX 2d XX XX 2d XX XX 2d XX   XX-XX-XX-XX-XX-X
+0160   XX 3c 2f 4d 41 43 3e 0d 0a 3c 49 50 76 34 41 64   X</MAC>..<IPv4Ad
+0170   64 72 65 73 73 3e XX XX 2e XX XX 2e XX XX XX 2e   dress>XX.XX.XXX.
+0180   XX XX 3c 2f 49 50 76 34 41 64 64 72 65 73 73 3e   XX</IPv4Address>
+0190   0d 0a 3c 49 50 76 34 53 75 62 6e 65 74 4d 61 73   ..<IPv4SubnetMas
+01a0   6b 3e 32 35 35 2e 32 35 35 2e 32 35 35 2e 30 3c   k>255.255.255.0<
+01b0   2f 49 50 76 34 53 75 62 6e 65 74 4d 61 73 6b 3e   /IPv4SubnetMask>
+01c0   0d 0a 3c 49 50 76 34 47 61 74 65 77 61 79 3e 31   ..<IPv4Gateway>1
+01d0   30 2e 39 39 2e 31 36 35 2e 31 3c 2f 49 50 76 34   0.99.165.1</IPv4
+01e0   47 61 74 65 77 61 79 3e 0d 0a 3c 49 50 76 36 41   Gateway>..<IPv6A
+01f0   64 64 72 65 73 73 3e 3a 3a 3c 2f 49 50 76 36 41   ddress>::</IPv6A
+0200   64 64 72 65 73 73 3e 0d 0a 3c 49 50 76 36 47 61   ddress>..<IPv6Ga
+0210   74 65 77 61 79 3e 3a 3a 3c 2f 49 50 76 36 47 61   teway>::</IPv6Ga
+0220   74 65 77 61 79 3e 0d 0a 3c 49 50 76 36 4d 61 73   teway>..<IPv6Mas
+0230   6b 4c 65 6e 3e 30 3c 2f 49 50 76 36 4d 61 73 6b   kLen>0</IPv6Mask
+0240   4c 65 6e 3e 0d 0a 3c 44 48 43 50 3e 66 61 6c 73   Len>..<DHCP>fals
+0250   65 3c 2f 44 48 43 50 3e 0d 0a 3c 41 6e 61 6c 6f   e</DHCP>..<Analo
+0260   67 43 68 61 6e 6e 65 6c 4e 75 6d 3e 30 3c 2f 41   gChannelNum>0</A
+0270   6e 61 6c 6f 67 43 68 61 6e 6e 65 6c 4e 75 6d 3e   nalogChannelNum>
+0280   0d 0a 3c 44 69 67 69 74 61 6c 43 68 61 6e 6e 65   ..<DigitalChanne
+0290   6c 4e 75 6d 3e 31 3c 2f 44 69 67 69 74 61 6c 43   lNum>1</DigitalC
+02a0   68 61 6e 6e 65 6c 4e 75 6d 3e 0d 0a 3c 53 6f 66   hannelNum>..<Sof
+02b0   74 77 61 72 65 56 65 72 73 69 6f 6e 3e 56 35 2e   twareVersion>V5.
+02c0   33 2e 33 62 75 69 6c 64 20 31 35 30 36 33 30 3c   3.3build 150630<
+02d0   2f 53 6f 66 74 77 61 72 65 56 65 72 73 69 6f 6e   /SoftwareVersion
+02e0   3e 0d 0a 3c 44 53 50 56 65 72 73 69 6f 6e 3e 56   >..<DSPVersion>V
+02f0   37 2e 30 20 62 75 69 6c 64 20 31 35 30 36 30 39   7.0 build 150609
+0300   3c 2f 44 53 50 56 65 72 73 69 6f 6e 3e 0d 0a 3c   </DSPVersion>..<
+0310   42 6f 6f 74 54 69 6d 65 3e 32 30 32 32 2d 30 39   BootTime>2022-09
+0320   2d 31 34 20 31 38 3a 30 34 3a 34 32 3c 2f 42 6f   -14 18:04:42</Bo
+0330   6f 74 54 69 6d 65 3e 0d 0a 3c 52 65 73 65 74 41   otTime>..<ResetA
+0340   62 69 6c 69 74 79 3e 66 61 6c 73 65 3c 2f 52 65   bility>false</Re
+0350   73 65 74 41 62 69 6c 69 74 79 3e 0d 0a 3c 44 69   setAbility>..<Di
+0360   73 6b 4e 75 6d 62 65 72 3e 30 3c 2f 44 69 73 6b   skNumber>0</Disk
+0370   4e 75 6d 62 65 72 3e 0d 0a 3c 41 63 74 69 76 61   Number>..<Activa
+0380   74 65 64 3e 74 72 75 65 3c 2f 41 63 74 69 76 61   ted>true</Activa
+0390   74 65 64 3e 0d 0a 3c 50 61 73 73 77 6f 72 64 52   ted>..<PasswordR
+03a0   65 73 65 74 41 62 69 6c 69 74 79 3e 74 72 75 65   esetAbility>true
+03b0   3c 2f 50 61 73 73 77 6f 72 64 52 65 73 65 74 41   </PasswordResetA
+03c0   62 69 6c 69 74 79 3e 0d 0a 3c 2f 50 72 6f 62 65   bility>..</Probe
+03d0   4d 61 74 63 68 3e 0d 0a                           Match>..
+```

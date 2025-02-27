@@ -133,6 +133,10 @@ _axis-video._tcp.local   # Axis Camera
 _qdiscover._tcp.local    # QNAP Camera
 _qsan-storage._tcp.local # QSAN NAS
 _ASUSTOR_ADM._tcp.local  # Asustor NAS
+_pdl-datastream._tcp.local # Printer Page description language (PDL)
+_googlecast._tcp.local # Google Cast
+_wd._tcp.local # Western Digital
+_hue._tcp.local # Philips Hue Bridge
 ```
 
 ## References
