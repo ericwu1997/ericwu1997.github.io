@@ -115,7 +115,7 @@ Based on the answer section in the reply, we can do additional inquery. "_device
 
 ;; ANSWER SECTION:
 _ASUSTOR_ADM._tcp.local. 10     IN      PTR     Fileservers._ASUSTOR_ADM._tcp.local.
-Fileservers._ASUSTOR_ADM._tcp.local. 10 IN TXT  "httpport=3000" "httpenabled=No" "httpsport=3001" "httpsenabled=Yes" "model=AS6404T" "version=3.2.1.RKU4" "hostid=aa-bb-cc-dd-ee-ff" "serialnumber=AL18036404TM0052" "wol=Yes" "canSuspend=Yes" "netif=[\010  {\010    \"name\":\"LAN1\",\010    \"mac\":\"aa:bb:cc:dd:ee:ff\"\010  },\010  {\010    \"name\":\"LAN2\",\010    \"mac\":\"aa:bb:cc:dd:ee:ff\"\010  }\010]"
+Fileservers._ASUSTOR_ADM._tcp.local. 10 IN TXT  "httpport=3000" "httpenabled=No" "httpsport=3001" "httpsenabled=Yes" "model=AS6404T" "version=3.2.1.RKU4" "hostid=aa-bb-cc-dd-ee-ff" "serialnumber=AL1234567TM0052" "wol=Yes" "canSuspend=Yes" "netif=[\010  {\010    \"name\":\"LAN1\",\010    \"mac\":\"aa:bb:cc:dd:ee:ff\"\010  },\010  {\010    \"name\":\"LAN2\",\010    \"mac\":\"aa:bb:cc:dd:ee:ff\"\010  }\010]"
 Fileservers._ASUSTOR_ADM._tcp.local. 10 IN SRV  0 0 3001 Fileservers.local.
 Fileservers.local.      10      IN      A       192.168.1.243
 
