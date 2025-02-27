@@ -1,7 +1,6 @@
 ---
 title: (UDP 5353) DNS SD
 parent: Transport Layer
-nav_order: 2
 ---
 
 # DNS-Based Service Discovery

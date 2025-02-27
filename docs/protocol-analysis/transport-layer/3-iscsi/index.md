@@ -1,7 +1,6 @@
 ---
 title: (TCP 3260) iSCSI
 parent: Transport Layer
-nav_order: 2
 ---
 
 # Internet Small Computer Systems Interface (iSCSI)

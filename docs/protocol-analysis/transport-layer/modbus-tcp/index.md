@@ -1,7 +1,6 @@
 ---
 title: Schneider Electric UMAS
 parent: Transport Layer
-nav_order: 3
 ---
 
 # Schneider Electric UMAS
