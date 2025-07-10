@@ -127,16 +127,26 @@ Fileservers.local.      10      IN      A       192.168.1.243
 
 ## Useful service name for IoT scanning
 ```
-_device-info._tcp.local  # General device info
-_axis-video._tcp.local   # Axis Camera
-_qdiscover._tcp.local    # QNAP Camera
+_device-info._tcp.local # General device info
+_axis-video._tcp.local # Axis Camera
+_qdiscover._tcp.local # QNAP Camera
 _qsan-storage._tcp.local # QSAN NAS
-_ASUSTOR_ADM._tcp.local  # Asustor NAS
+_ASUSTOR_ADM._tcp.local # Asustor NAS
 _pdl-datastream._tcp.local # Printer Page description language (PDL)
 _googlecast._tcp.local # Google Cast
 _wd._tcp.local # Western Digital
 _hue._tcp.local # Philips Hue Bridge
+_dvl-plcnetapi._tcp.local # Devolo
+_dvl-deviceapi._tcp.local
+_ble-gw._tcp.local # Ingics Beacon Gateway
+_shelly._tcp.local # Shelly
+_cube_futurehome._tcp.local # Futurehome Smarthub
+_readynas._tcp.local # Netgear ReadyNAS
+_wd-2go._tcp.local # Western Digital
+_wd._tcp.local
+_googlecast._tcp.local # Google Cast
 ```
 
 ## References
 [https://www.rfc-editor.org/rfc/rfc6763.html](https://www.rfc-editor.org/rfc/rfc6763.html)
+[Github - Sapito/mDNS-services.txt](https://github.com/eldraco/Sapito/blob/master/mDNS-services.txt)

@@ -20,6 +20,16 @@ nav_order: 4
 [cloudshark.org](https://www.cloudshark.org/captures)<br>
 ```
 ### google dork search query
-"DHCP" site:"cloudshark.org"
+"DHCP" "pcap|pcapng" inurl:"cloudshark.org"
 ```
+[Wireshark Gitlab test/captures](https://gitlab.com/wireshark/wireshark/-/tree/master/test/captures)<br>
 [Wireshark SampleCaptures](https://wiki.wireshark.org/samplecaptures)<br>
+[StopDDoS - packet-captures](https://github.com/StopDDoS/packet-captures/tree/main)<br>
+
+### Protocol Dissector/Lookup
+```
+Wireshark -> Analyze -> Display Filter Expression
+```
+[Wireshark Dissector Github repo](https://github.com/boundary/wireshark/tree/master/epan/dissectors)<br>
+[Wireshark Dissector Gitlab repo](https://gitlab.com/wireshark/wireshark/-/blob/master/epan/dissectors)<br>
+[Netify - Protocol Lookup Tool](https://www.netify.ai/resources/protocols)<br>

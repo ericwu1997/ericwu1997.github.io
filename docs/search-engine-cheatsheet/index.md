@@ -58,6 +58,9 @@ site:"nvd.nist.gov" intext:"CVE-" "Tenda" ("github.com" | "github.io")
 ```markdown
 inurl:"exploit-db.com/exploits" intext:"Tenda" "PoC"
 ```
+```markdown
+inurl:"https://www.zeroscience.mk" intext:"Tenda" "PoC"
+```
 </div>
 
 ## Censys

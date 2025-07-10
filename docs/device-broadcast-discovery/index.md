@@ -299,3 +299,61 @@ echo -n '<?xml version="1.0" encoding="utf-8"?><Probe><Uuid>{0}</Uuid><Types>inq
 03c0   62 69 6c 69 74 79 3e 0d 0a 3c 2f 50 72 6f 62 65   bility>..</Probe
 03d0   4d 61 74 63 68 3e 0d 0a                           Match>..
 ```
+
+## Devolo - UDP port 19375
+References:<br>
+[https://github.com/activecm/passer/blob/d59b1824b889a80e38235c17d7eb139cfeb76f36/passer.py#L1479](https://github.com/activecm/passer/blob/d59b1824b889a80e38235c17d7eb139cfeb76f36/passer.py#L1479)
+[https://github.com/2Fake/devolo_plc_api/issues/39](https://github.com/2Fake/devolo_plc_api/issues/39)
+```
+```
+# Censys Search Filter
+services.parsed.mdns.names=`_dvl-deviceapi._tcp.local.`
+```
+echo -n 'whoisthere\x0010.0.0.1\x00255.255.255.0\x00\x001\x00' | netcat -u 10.0.0.1 19375
+```
+0000   68 65 6c 6c 6f 00 64 4c 41 4e 20 35 35 30 20 57   hello.dLAN 550 W
+0010   69 46 69 00 XX XX XX XX XX XX XX XX XX XX XX XX   iFi.XXXXXXXXXXXX
+0020   XX XX XX XX 00 31 39 32 2e 31 36 38 2e 30 2e 31   XXXX.192.168.0.1
+0030   31 00 32 35 35 2e 32 35 35 2e 32 35 35 2e 30 00   1.255.255.255.0.
+0040   3c 3f 78 6d 6c 20 76 65 72 73 69 6f 6e 3d 22 31   <?xml version="1
+0050   2e 30 22 3f 3e 3c 73 74 61 74 75 73 3e 3c 64 65   .0"?><status><de
+0060   76 69 63 65 2d 74 79 70 65 3e 64 4c 41 4e 20 35   vice-type>dLAN 5
+0070   35 30 20 57 69 46 69 3c 2f 64 65 76 69 63 65 2d   50 WiFi</device-
+0080   74 79 70 65 3e 3c 68 6f 73 74 6e 61 6d 65 3e 64   type><hostname>d
+0090   65 76 6f 6c 6f 2d 31 32 33 3c 2f 68 6f 73 74 6e   evolo-123</hostn
+00a0   61 6d 65 3e 3c 6d 74 2d 6e 75 6d 62 65 72 3e 32   ame><mt-number>2
+00b0   37 33 33 3c 2f 6d 74 2d 6e 75 6d 62 65 72 3e 3c   733</mt-number><
+00c0   73 65 72 69 61 6c 2d 6e 75 6d 62 65 72 3e XX XX   serial-number>XX
+00d0   XX XX XX XX XX XX XX XX XX XX XX XX XX XX 3c 2f   XXXXXXXXXXXXXX</
+00e0   73 65 72 69 61 6c 2d 6e 75 6d 62 65 72 3e 3c 64   serial-number><d
+00f0   65 76 69 63 65 61 70 69 3e 3c 66 65 61 74 75 72   eviceapi><featur
+0100   65 73 3e 69 6e 74 6d 74 67 2c 6c 65 64 2c 6e 6f   es>intmtg,led,no
+0110   74 63 68 2c 72 65 73 65 74 2c 72 65 73 74 61 72   tch,reset,restar
+0120   74 2c 73 75 70 70 6f 72 74 2c 75 70 64 61 74 65   t,support,update
+0130   2c 77 69 66 69 31 3c 2f 66 65 61 74 75 72 65 73   ,wifi1</features
+0140   3e 3c 6d 69 6e 6f 72 56 65 72 73 69 6f 6e 3e 32   ><minorVersion>2
+0150   3c 2f 6d 69 6e 6f 72 56 65 72 73 69 6f 6e 3e 3c   </minorVersion><
+0160   70 61 74 68 3e XX XX XX XX XX XX XX XX XX XX XX   path>XXXXXXXXXXX
+0170   XX XX XX XX XX 2f 64 65 76 69 63 65 61 70 69 3c   XXXXX/deviceapi<
+0180   2f 70 61 74 68 3e 3c 70 6f 72 74 3e 31 34 37 39   /path><port>1479
+0190   31 3c 2f 70 6f 72 74 3e 3c 76 65 72 73 69 6f 6e   1</port><version
+01a0   3e 76 30 3c 2f 76 65 72 73 69 6f 6e 3e 3c 2f 64   >v0</version></d
+01b0   65 76 69 63 65 61 70 69 3e 3c 66 69 72 6d 77 61   eviceapi><firmwa
+01c0   72 65 3e 3c 64 61 74 65 3e 32 30 32 33 2d 30 39   re><date>2023-09
+01d0   2d 30 36 3c 2f 64 61 74 65 3e 3c 76 65 72 73 69   -06</date><versi
+01e0   6f 6e 3e 36 2e 30 2e 31 3c 2f 76 65 72 73 69 6f   on>6.0.1</versio
+01f0   6e 3e 3c 2f 66 69 72 6d 77 61 72 65 3e 3c 70 6c   n></firmware><pl
+0200   63 6e 65 74 61 70 69 3e 3c 70 61 74 68 3e XX XX   cnetapi><path>XX
+0210   XX XX XX XX XX XX XX XX XX XX XX XX XX XX 2f 70   XXXXXXXXXXXXXX/p
+0220   6c 63 6e 65 74 61 70 69 3c 2f 70 61 74 68 3e 3c   lcnetapi</path><
+0230   70 6f 72 74 3e 31 34 37 39 31 3c 2f 70 6f 72 74   port>14791</port
+0240   3e 3c 76 65 72 73 69 6f 6e 3e 76 30 3c 2f 76 65   ><version>v0</ve
+0250   72 73 69 6f 6e 3e 3c 2f 70 6c 63 6e 65 74 61 70   rsion></plcnetap
+0260   69 3e 3c 70 6f 77 65 72 6c 69 6e 65 3e 3c 6d 61   i><powerline><ma
+0270   63 2d 61 64 64 72 65 73 73 3e 42 38 3a 42 45 3a   c-address>B8:BE:
+0280   46 34 3a XX XX 3a XX XX 3a XX XX 3c 2f 6d 61 63   F4:XX:XX:XX</mac
+0290   2d 61 64 64 72 65 73 73 3e 3c 74 65 63 68 6e 6f   -address><techno
+02a0   6c 6f 67 79 3e 68 70 61 76 3c 2f 74 65 63 68 6e   logy>hpav</techn
+02b0   6f 6c 6f 67 79 3e 3c 2f 70 6f 77 65 72 6c 69 6e   ology></powerlin
+02c0   65 3e 3c 2f 73 74 61 74 75 73 3e 00 00            e></status>..
+```
