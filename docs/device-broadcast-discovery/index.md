@@ -14,7 +14,7 @@ nav_order: 2
 
 ---
 
-## HID Global - VertX Controller UDP Discovery
+### HID Global - VertX Controller UDP Discovery
 References:<br>
 [https://www.zerodayinitiative.com/advisories/ZDI-16-223/](https://www.zerodayinitiative.com/advisories/ZDI-16-223/)<br>
 [https://github.com/coldfusion39/VertXploit/tree/master](https://github.com/coldfusion39/VertXploit/tree/master)
@@ -30,7 +30,7 @@ echo -n "discover;013;" | netcat -u XXX.XXX.XXX.XXX 4070
 0050   2e 31 30 31 3b 30 37 2f 32 37 2f 32 30 31 37 3b   .101;07/27/2017;
 ```
 
-## Roku - External Control Protocol (ECP)
+### Roku - External Control Protocol (ECP)
 References:<br>
 [https://developer.roku.com/en-ca/docs/developer-program/dev-tools/external-control-api.md](https://developer.roku.com/en-ca/docs/developer-program/dev-tools/external-control-api.md)<br>
 ```
@@ -54,7 +54,7 @@ echo "M-SEARCH * HTTP/1.1\nHost:239.255.255.250:1900\nMan: \"ssdp:discover\"\nST
 00e0   0a                                                .
 ```
 
-## Axis - VAPIX mDNS
+### Axis - VAPIX mDNS
 References:<br>
 [https://developer.axis.com/vapix/network-video/mdns-sd-api#discover](https://developer.axis.com/vapix/network-video/mdns-sd-api#discover)<br>
 ```
@@ -76,7 +76,7 @@ dig _axis-nvr._tcp.local ptr @XXX.XXX.XXX.XXX -p 5353
 00b0   00 00 00 0a 00 04 a9 fe 6b a5                     ........k.
 ```
 
-## Vivotek - UDP port 10000
+### Vivotek - UDP port 10000
 References:<br>
 [https://www.vivotek.com/products/software/shepherd](https://www.vivotek.com/products/software/shepherd)<br>
 [https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Vivotek.cs](https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Vivotek.cs)<br>
@@ -93,7 +93,7 @@ echo -n "01ABCDEF03" | xxd -r -p | netcat -u -p 5678 XXX.XXX.XXX.XXX 10000
 0050   00 00                                             ..
 ```
 
-## Vstarcam - UDP port 8600
+### Vstarcam - UDP port 8600
 References:<br>
 [https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Vstarcam.cs](https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Vstarcam.cs)<br>
 [Eye4 for Windows](https://www.vstarcam.com/software-download)<br>
@@ -136,7 +136,7 @@ echo -n "44480101" | xxd -r -p | netcat -u -p 8601 XXX.XXX.XXX.XXX 8600
 0200   00 00 00 00 44 48 01 08 31 39 32 2e               ....DH..192.
 ```
 
-## Dahua - UDP DHCPDiscover port 37810
+### Dahua - UDP DHCPDiscover port 37810
 References:<br>
 [https://www.shadowserver.org/what-we-do/network-reporting/open-dvr-dhcpdiscover-report/](https://www.shadowserver.org/what-we-do/network-reporting/open-dvr-dhcpdiscover-report/)<br>
 ```
@@ -191,7 +191,7 @@ echo -ne '\xff'|nc -u 218.5.136.140 37810
 02d0   7d 7d 0a 00                                       }}..
 ```
 
-## Advantech - UDP discovery port 5048
+### Advantech - UDP discovery port 5048
 References:<br>
 [https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Advantech.cs](https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Advantech.cs)
 ```
@@ -209,7 +209,7 @@ echo -n "4D41444100000083010050(print "%0*d 84)20000000000000" | xxd -r -p | net
 0080   75 6c 65 00 00                                    ule..
 ```
 
-## Ubiquiti - UBNT Discovery UDP port 10001
+### Ubiquiti - UBNT Discovery UDP port 10001
 References:<br>
 [https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Ubiquiti.cs](https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Ubiquiti.cs)<br>
 [https://github.com/MatrixEditor/ubnt-discovery-tool/blob/master/ubnt.lua](https://github.com/MatrixEditor/ubnt-discovery-tool/blob/master/ubnt.lua)<br>
@@ -229,7 +229,7 @@ echo -n "01000000" | xxd -r -p | netcat -u XXX.XXX.XXX.XXX 10001
 0080   c2                                                .
 ```
 
-## Hikvision - SADP UDP port 37020
+### Hikvision - SADP UDP port 37020
 References:<br>
 [https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Hikvision.cs](https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Hikvision.cs)
 ```
@@ -300,16 +300,18 @@ echo -n '<?xml version="1.0" encoding="utf-8"?><Probe><Uuid>{0}</Uuid><Types>inq
 03d0   4d 61 74 63 68 3e 0d 0a                           Match>..
 ```
 
-## Devolo - UDP port 19375
+### Devolo - UDP port 19375
 References:<br>
 [https://github.com/activecm/passer/blob/d59b1824b889a80e38235c17d7eb139cfeb76f36/passer.py#L1479](https://github.com/activecm/passer/blob/d59b1824b889a80e38235c17d7eb139cfeb76f36/passer.py#L1479)
 [https://github.com/2Fake/devolo_plc_api/issues/39](https://github.com/2Fake/devolo_plc_api/issues/39)
 ```
-```
 # Censys Search Filter
 services.parsed.mdns.names=`_dvl-deviceapi._tcp.local.`
 ```
+second last byte set to 1 for unicast, 2 for broadcast
+```
 echo -n 'whoisthere\x0010.0.0.1\x00255.255.255.0\x00\x001\x00' | netcat -u 10.0.0.1 19375
+```
 ```
 0000   68 65 6c 6c 6f 00 64 4c 41 4e 20 35 35 30 20 57   hello.dLAN 550 W
 0010   69 46 69 00 XX XX XX XX XX XX XX XX XX XX XX XX   iFi.XXXXXXXXXXXX

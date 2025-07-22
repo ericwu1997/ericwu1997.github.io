@@ -19,7 +19,7 @@ DNS Service Discovery aka DNS-SD requests can also be sent using mDNS to yield z
 
 Service instance can be described using a <b>DNS SRV</b> [RFC 2782] and <b>DNS TXT</b> [RFC 1035] record. The SRV record has a name of the form "<Instance>.<Service>.<Domain>" and gives the target host and port where the service instance can be reached. The DNS TXT record of the same name gives additional information about this instance, in a structured form using key/value pairs.<br>
 
-## Common DNS Record
+### Common DNS Record
 While there are other DNS recrod type, this section only covers SRV, TXT and PTR type.<br>
 
 SRV record
@@ -57,12 +57,16 @@ dig _axis-video._tcp.local PTR @10.0.0.1 -p 5353 # SRV Record
 dig _axis-video._tcp.local TXT @10.0.0.1 -p 5353 # TXT Record
 ```
 
-## Device inquiry with DNS-SD
+### Device inquiry with DNS-SD
 
 1 - reuqest PTR record "_services._dns-sd._udp.local"<br>
-on port 5353 (service = _services._dns-sd, porto = _udp, domain = .local)
+on port 5353 (service = _services._dns-sd, porto = _udp, domain = .local).
 ```
 dig _services._dns-sd._udp.local PTR @10.0.0.1 -p 5353 
+```
+In some cases, service and name section might contains special character (e.g \032, [], ()). use quoted label. for instance, 
+```
+dig 'p30\x32[00:60:b5:XX:XX:XX]._workstation._tcp.local' TXT @XXX.XXX.XXX.XXX -p 5353
 ```
 
 Below snippet shows an example reply
@@ -125,7 +129,7 @@ Fileservers.local.      10      IN      A       192.168.1.243
 
 ```
 
-## Useful service name for IoT scanning
+### Useful service name for IoT scanning
 ```
 _device-info._tcp.local # General device info
 _axis-video._tcp.local # Axis Camera
@@ -145,8 +149,16 @@ _readynas._tcp.local # Netgear ReadyNAS
 _wd-2go._tcp.local # Western Digital
 _wd._tcp.local
 _googlecast._tcp.local # Google Cast
+_rest-P30-keba-wallbox._tcp.local # Keba Wallbox EV charging
+_ni-sysapi._tcp.local # National Instruments CompactRIO
+_dcamera._tcp.local # Dlink IP Camera
+_meshcop._udp.local # Thread Mesh Commissioning Border Agents
+_ajadevice._tcp.local # AJA Video Streaming device
+_vaddiodevice._tcp.local # Vaddio Device
 ```
 
-## References
-[https://www.rfc-editor.org/rfc/rfc6763.html](https://www.rfc-editor.org/rfc/rfc6763.html)
-[Github - Sapito/mDNS-services.txt](https://github.com/eldraco/Sapito/blob/master/mDNS-services.txt)
+### References
+[Service Name and Transport Protocol Port Number Registry](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml)<br>
+[DNS SRV (RFC 2782) Service Types](http://www.dns-sd.org/servicetypes.html)<br>
+[https://www.rfc-editor.org/rfc/rfc6763.html](https://www.rfc-editor.org/rfc/rfc6763.html)<br>
+[Github - Sapito/mDNS-services.txt](https://github.com/eldraco/Sapito/blob/master/mDNS-services.txt)<br>
