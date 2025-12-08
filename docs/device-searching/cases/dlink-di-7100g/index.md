@@ -1,6 +1,6 @@
 ---
-title: DLink DI-7100G
-parent: cases
+title: Dlink DI-7100g
+parent: Cases
 ---
 
 # DLink DI-7100G
