@@ -1,5 +1,5 @@
 ---
-title: Device Broadcast Discovery
+title: Device Searching Cases
 nav_order: 2
 ---
 
