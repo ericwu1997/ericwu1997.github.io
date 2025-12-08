@@ -1,7 +1,6 @@
 ---
 title: PROFINET PTCP
 parent: OT Layer 2
-nav_order: 2
 ---
 
 # PROFINET PTCP (Precision Time Control Protocol)

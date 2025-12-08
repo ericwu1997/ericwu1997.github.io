@@ -1,7 +1,6 @@
 ---
 title: CC-Link IE TSN
 parent: OT Layer 2
-nav_order: 2
 ---
 
 # CC-Link IE TSN

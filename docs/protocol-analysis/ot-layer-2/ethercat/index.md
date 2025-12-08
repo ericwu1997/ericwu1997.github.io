@@ -1,7 +1,6 @@
 ---
 title: EtherCAT
 parent: OT Layer 2
-nav_order: 2
 ---
 
 # EtherCAT

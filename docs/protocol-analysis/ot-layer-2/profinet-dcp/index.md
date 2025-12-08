@@ -1,7 +1,6 @@
 ---
 title: PROFINET DCP
 parent: OT Layer 2
-nav_order: 2
 ---
 
 # PROFINET DCP (Discovery and Configuration Protocol)
