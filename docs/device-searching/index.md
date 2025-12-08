@@ -1,4 +1,4 @@
 ---
 title: Device Searching
-nav_order: 2
+nav_order: 3
 ---

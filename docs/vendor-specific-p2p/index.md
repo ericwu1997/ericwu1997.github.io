@@ -1,6 +1,6 @@
 ---
 title: Vendor Specific P2P
-nav_order: 3
+nav_order: 2
 ---
 
 # Vendor Specific P2P
