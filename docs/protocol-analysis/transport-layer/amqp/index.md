@@ -1,5 +1,5 @@
 ---
-title: (TCP 5672:5671) AMQP - Advanced Message Queuing Protocol
+title: (TCP 5672:5671) AMQP
 parent: Transport Layer
 ---
 
