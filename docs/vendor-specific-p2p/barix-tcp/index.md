@@ -1,6 +1,6 @@
 ---
 title: (TCP 12302) Barix TCP
-parent: Transport Layer
+parent: Vendor Specific P2P
 ---
 
 # Barix TCP Command Interface
