@@ -38,32 +38,33 @@ CWMP supports a wide range of device management functions, including parameter c
 
 ### Baseline RPC Messages 
 tr-069-1-6-1.pdf#page=83&zoom=100,117,494
+
 | **Generic Methods**     | **Description**             |
 |-------------------------|-----------------------------|
 | GetRPCMethods           | discover the set of methods | 
 
-ACS -> CPE
-| **CPE Methods**         | **Description**             |
-|-------------------------|-----------------------------|
-| SetParameterValues      | modify the value of one or more CPE Parameters                          |
-| GetParameterValues      | obtain the value of one or more CPE Parameters                          |
-| GetParameterNames       | discover the Parameters accessible on a particular CPE                  |
-| SetParameterAttributes  | modify attributes associated with one or more CPE Parameter             |
-| GetParameterAttributes  | read the attributes associated with one or more CPE Parameter           |
-| AddObject               | create a new instance of a Multi-Instance Object                        |
-| DeleteObject            | remove a particular instance of an Object                               |
-| Download                | cause the CPE to download a specified file from the designated location |
-| Reboot                  | causes the CPE to reboot                                                |
+| **CPE Methods (ACS -> CPE)** | **Description**                                                         |
+|------------------------------|-------------------------------------------------------------------------|
+| SetParameterValues           | modify the value of one or more CPE Parameters                          |
+| GetParameterValues           | obtain the value of one or more CPE Parameters                          |
+| GetParameterNames            | discover the Parameters accessible on a particular CPE                  |
+| SetParameterAttributes       | modify attributes associated with one or more CPE Parameter             |
+| GetParameterAttributes       | read the attributes associated with one or more CPE Parameter           |
+| AddObject                    | create a new instance of a Multi-Instance Object                        |
+| DeleteObject                 | remove a particular instance of an Object                               |
+| Download                     | cause the CPE to download a specified file from the designated location |
+| Reboot                       | causes the CPE to reboot                                                |
 
-CPE - > ACS
-| **ACS Methods**            | **Description** |
-|----------------------------|-----------------------------|
-| Inform                     | CPE MUST call the Inform method to initiate a transaction sequence whenever a Session with an ACS is established
-| TransferComplete           | informs the ACS of the completion (either successful or unsuccessful) of a file transfer initiated by an earlier Download, ScheduleDownload or Upload method call |
-| AutonomousTransferComplete | informs the ACS of the completion (either successful or unsuccessful) of a file transfer that was not specifically requested by the ACS |
+
+| **ACS Methods (CPE - > ACS)** | **Description**                                                                                                                                                   |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Inform                        | CPE MUST call the Inform method to initiate a transaction sequence whenever a Session with an ACS is established                                                  |
+| TransferComplete              | informs the ACS of the completion (either successful or unsuccessful) of a file transfer initiated by an earlier Download, ScheduleDownload or Upload method call |
+| AutonomousTransferComplete    | informs the ACS of the completion (either successful or unsuccessful) of a file transfer that was not specifically requested by the ACS                           |
 
 ### Inform
 tr-069-1-6-1.pdf#page=107&zoom=100,117,406
+
 | **Arguemnts** | **Types**              | **Value**                                                       |
 |---------------|------------------------|-----------------------------------------------------------------|
 | DeviceId      | DeviceIdStruct         | uniquely identifies the CPE                                     |
@@ -75,8 +76,9 @@ tr-069-1-6-1.pdf#page=107&zoom=100,117,406
 
 ### DeviceIdStruct
 tr-069-1-6-1.pdf#page=109&zoom=100,117,96
-| **Name**     | **Types**  | **Description** |
-|--------------|------------|-----------------------------|
+
+| **Name**     | **Types**  | **Description**                                                                                                                 |
+|--------------|------------|---------------------------------------------------------------------------------------------------------------------------------|
 | Manufacturer | string(64) | Manufacturer of the device (for display only). The value MUST be the same as the value of the DeviceInfo,Manufacturer Parameter |
 | OUI          | string(6)  | same as the value of the DeviceInfo.ManufacturerOUI Parameter                                                                   |
 | ProductClass | string(64) | same as the value of the DeviceInfo.ProductClass Parameter. Often a strong indication for model name                            |
@@ -84,6 +86,7 @@ tr-069-1-6-1.pdf#page=109&zoom=100,117,96
 
 ### EventCode
 tr-069-1-6-1.pdf#page=65&zoom=100,117,433
+
 |||
 |-|-|
 | (0) BOOTSTRAP          | (8) DIAGNOSTICS COMPLETE                 |
