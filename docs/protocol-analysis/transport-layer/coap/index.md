@@ -15,9 +15,9 @@ parent: Transport Layer
 ---
 
 ### Overview
-The Constrained Application Protocol (CoAP) is a lightweight, RESTful protocol designed for resource-constrained devices and networks, such as those commonly found in the Internet of Things (IoT). It operates over UDP to reduce overhead and supports methods similar to HTTP (GET, POST, PUT, DELETE) for interacting with device resources via URI paths. CoAP includes features like confirmable and non-confirmable message types, multicast support for discovery, and a compact binary format that minimizes data transmission.
+The Constrained Application Protocol (CoAP) is a lightweight, RESTful protocol designed for resource-constrained devices and networks, such as those commonly found in the Internet of Things (IoT). It operates over UDP to reduce overhead and supports methods similar to HTTP (GET, POST, PUT, DELETE) for interacting with device resources via URI paths. CoAP includes features such as confirmable and non-confirmable message types, multicast support for discovery, and a compact binary format that minimizes data transmission.
 
-CoAP is designed for efficiency and reliability in low-power, lossy networks, making it ideal for use in smart homes, industrial sensors, and other M2M applications. It supports security through DTLS and OSCORE, and is often used as the transport layer for higher-level protocols like LwM2M. Despite its simplicity, it enables rich interactions between IoT devices in a scalable and standardized manner.
+CoAP is designed for efficiency and reliability in low-power, lossy networks, making it suitable for smart homes, industrial sensors, and other M2M applications. It supports security through DTLS and OSCORE, and is commonly used as a transport for higher-level management protocols such as LwM2M and TR-369 (USP), enabling scalable and standardized device management in modern broadband and IoT environments.
 
 ### CoAP header
 [Section 3 - Message Format](https://datatracker.ietf.org/doc/html/rfc7252#section-3)<br>
@@ -137,3 +137,4 @@ protocol="coap""query/qlink/queryGwExt"
 
 ## Reference
 [OMA-TS-LightweightM2M_Core-V1_2](https://www.openmobilealliance.org/release/LightweightM2M/V1_2-20201110-A/HTML-Version/OMA-TS-LightweightM2M_Core-V1_2-20201110-A.html)<br>
+[Broadband forum - TR-369 Technical Report](https://www.broadband-forum.org/technical-library/?number=TR-369)<br>
