@@ -109,60 +109,60 @@ Host: acs1.broadband-forum.org
 User-Agent: MikroTik
 
 <soapenv:Envelope
-	xmlns:soap='http://schemas.xmlsoap.org/soap/encoding/'
-	xmlns:xsd='http://www.w3.org/2001/XMLSchema'
-	xmlns:cwmp='urn:dslforum-org:cwmp-1-0'
-	xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/'
-	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
-	<soapenv:Body>
-		<cwmp:Inform>
-			<DeviceId>
-				<Manufacturer>MikroTik</Manufacturer>
-				<OUI>E48D8C</OUI>
-				<ProductClass>hAP lite</ProductClass>
-				<SerialNumber>XXXXXXXXXXXX</SerialNumber>
-			</DeviceId>
-			<Event soap:arrayType='cwmp:EventStruct[1]'>
-				<EventStruct>
-					<EventCode>8 DIAGNOSTICS COMPLETE</EventCode>
-					<CommandKey></CommandKey>
-				</EventStruct>
-			</Event>
-			<MaxEnvelopes>1</MaxEnvelopes>
-			<CurrentTime>2018-04-01T19:45:02-04:00</CurrentTime>
-			<RetryCount>0</RetryCount>
-			<ParameterList soap:arrayType='cwmp:ParameterValueStruct[7]'>
-				<ParameterValueStruct>
-					<Name>Device.RootDataModelVersion</Name>
-					<Value xsi:type='xsd:string'>2.11</Value>
-				</ParameterValueStruct>
-				<ParameterValueStruct>
-					<Name>Device.DeviceInfo.SoftwareVersion</Name>
-					<Value xsi:type='xsd:string'>6.42rc49</Value>
-				</ParameterValueStruct>
-				<ParameterValueStruct>
-					<Name>Device.DeviceInfo.ProvisioningCode</Name>
-					<Value xsi:type='xsd:string'></Value>
-				</ParameterValueStruct>
-				<ParameterValueStruct>
-					<Name>Device.DeviceInfo.HardwareVersion</Name>
-					<Value xsi:type='xsd:string'>v1.0</Value>
-				</ParameterValueStruct>
-				<ParameterValueStruct>
-					<Name>Device.ManagementServer.ParameterKey</Name>
-					<Value xsi:type='xsd:string'>cdrouter</Value>
-				</ParameterValueStruct>
-				<ParameterValueStruct>
-					<Name>Device.ManagementServer.ConnectionRequestURL</Name>
-					<Value xsi:type='xsd:string'>http://10.0.0.1:7547/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</Value>
-				</ParameterValueStruct>
-				<ParameterValueStruct>
-					<Name>Device.ManagementServer.AliasBasedAddressing</Name>
-					<Value xsi:type='xsd:boolean'>0</Value>
-				</ParameterValueStruct>
-			</ParameterList>
-		</cwmp:Inform>
-	</soapenv:Body>
+ xmlns:soap='http://schemas.xmlsoap.org/soap/encoding/'
+ xmlns:xsd='http://www.w3.org/2001/XMLSchema'
+ xmlns:cwmp='urn:dslforum-org:cwmp-1-0'
+ xmlns:soapenv='http://schemas.xmlsoap.org/soap/envelope/'
+ xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+ <soapenv:Body>
+  <cwmp:Inform>
+   <DeviceId>
+    <Manufacturer>MikroTik</Manufacturer>
+    <OUI>E48D8C</OUI>
+    <ProductClass>hAP lite</ProductClass>
+    <SerialNumber>XXXXXXXXXXXX</SerialNumber>
+   </DeviceId>
+   <Event soap:arrayType='cwmp:EventStruct[1]'>
+    <EventStruct>
+     <EventCode>8 DIAGNOSTICS COMPLETE</EventCode>
+     <CommandKey></CommandKey>
+    </EventStruct>
+   </Event>
+   <MaxEnvelopes>1</MaxEnvelopes>
+   <CurrentTime>2018-04-01T19:45:02-04:00</CurrentTime>
+   <RetryCount>0</RetryCount>
+   <ParameterList soap:arrayType='cwmp:ParameterValueStruct[7]'>
+    <ParameterValueStruct>
+     <Name>Device.RootDataModelVersion</Name>
+     <Value xsi:type='xsd:string'>2.11</Value>
+    </ParameterValueStruct>
+    <ParameterValueStruct>
+     <Name>Device.DeviceInfo.SoftwareVersion</Name>
+     <Value xsi:type='xsd:string'>6.42rc49</Value>
+    </ParameterValueStruct>
+    <ParameterValueStruct>
+     <Name>Device.DeviceInfo.ProvisioningCode</Name>
+     <Value xsi:type='xsd:string'></Value>
+    </ParameterValueStruct>
+    <ParameterValueStruct>
+     <Name>Device.DeviceInfo.HardwareVersion</Name>
+     <Value xsi:type='xsd:string'>v1.0</Value>
+    </ParameterValueStruct>
+    <ParameterValueStruct>
+     <Name>Device.ManagementServer.ParameterKey</Name>
+     <Value xsi:type='xsd:string'>cdrouter</Value>
+    </ParameterValueStruct>
+    <ParameterValueStruct>
+     <Name>Device.ManagementServer.ConnectionRequestURL</Name>
+     <Value xsi:type='xsd:string'>http://10.0.0.1:7547/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</Value>
+    </ParameterValueStruct>
+    <ParameterValueStruct>
+     <Name>Device.ManagementServer.AliasBasedAddressing</Name>
+     <Value xsi:type='xsd:boolean'>0</Value>
+    </ParameterValueStruct>
+   </ParameterList>
+  </cwmp:Inform>
+ </soapenv:Body>
 </soapenv:Envelope>
 ```
 
