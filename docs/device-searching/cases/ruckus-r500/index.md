@@ -14,7 +14,6 @@ parent: Cases
 
 ---
 
-### Overview
 Network devices such as router and access point often have snmp capability. search Private Enterprise Numbers (PENs) associate with Ruckus
 ![](./figure-1.png)
 

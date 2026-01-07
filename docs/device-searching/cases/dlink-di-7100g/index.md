@@ -14,7 +14,6 @@ parent: Cases
 
 ---
 
-### Overview
 First found the official site for firmware [download](https://www.dlink.com.cn/techsupport/ProductInfo.aspx?m=DI-8004W), the donwloaded file has <b>.trx</b> extension<br>
 ```
 eric@eric-VMware-Virtual-Platform:~/Desktop$ binwalk -Me DI_8004W-16.07.26A1.trx
