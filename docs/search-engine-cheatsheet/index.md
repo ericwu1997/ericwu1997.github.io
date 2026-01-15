@@ -63,6 +63,17 @@ services.telnet.banner:*E0\:E8\:E6*
 ```markdown
 https://search.censys.io/search/report?resource=hosts&q=[QUERY_SYNTAX]&virtual_hosts=EXCLUDE&field=[BREAKDOWN_FILTER]&num_buckets=1000
 ```
+```markdown
+https://search.censys.io/search/report?resource=hosts&q=+services.tls.certificates.leaf_data.subject_dn%3A*CN%5C%3D*&virtual_hosts=EXCLUDE&field=services.tls.certificates.leaf_data.subject_dn&num_buckets=1000
+```
+```markdown
+https://search.censys.io/search/report?resource=hosts&q=services.tls.certificates.leaf_data.issuer_dn%3A*CN%5C%3D*&virtual_hosts=EXCLUDE&field=services.tls.certificates.leaf_data.issuer_dn&num_buckets=1000
+```
+```markdown
+https://search.censys.io/search/report?resource=hosts&q=services.tls.certificates.leaf_data.issuer_dn%3A*PID*+and+not+services.tls.certificates.leaf_data.issuer_dn%3A*RAPID*&virtual_hosts=EXCLUDE&field=services.tls.certificates.leaf_data.issuer_dn&num_buckets=1000
+```
+
+[Censys Certificates Definition](https://search.censys.io/data/certificates/definitions)
 </div>
 
 ### Shodan
