@@ -132,3 +132,4 @@ Skinny Client Control Protocol
 [VoIP - Excerpt (SCCP).pdf](https://www.technologeeks.com/Courses/VoIP%20-%20Excerpt%20(SCCP).pdf)<br>
 [Wireshark Github SCCP Dissector - packet-skinny.c](https://github.com/boundary/wireshark/blob/master/epan/dissectors/packet-skinny.c)<br>
 [Grokipedia - Skinny Client Control Protocol](https://grokipedia.com/page/Skinny_Client_Control_Protocol)<br>
+[Github staskobzar - Provisioning files for Cisco phones SCCP firmware](https://github.com/staskobzar/cisco_prov/tree/master/sccp)<br>
