@@ -46,7 +46,7 @@ checksum = XOR all bytes 9 to 13
 ### Cola-A Dataframe
 
 [telegram_listing_nav210_en_im0084703.pdf#page=5&zoom=100,97,700](telegram_listing_nav210_en_im0084703.pdf#page=5&zoom=100,97,700)<br>
-![](./figure-4.png)
+![](./figure-4.png)<br>
 There has to be a space in between the command and the parameters and also in between each parameter.<br>
 In HEX the command start with 02 and ends with 03. The spaces are marked as 20. Single numbers that are converted to ASCII always get a 3 in front.
 
