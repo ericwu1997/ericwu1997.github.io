@@ -80,3 +80,7 @@ Tables below are examples of MIB file and OID commonly used for device identific
 |         | upsIdentModel                | 1.3.6.1.2.1.33.1.1.2 | UPS model                     |
 |         | upsIdentUPSSoftwareVersion   | 1.3.6.1.2.1.33.1.1.3 | UPS firmware/software version |
 |         | upsIdentAgentSoftwareVersion | 1.3.6.1.2.1.33.1.1.4 | UPS agent software version    |
+
+| MIB                      | OID                          | Value                          | Description                                                        |
+|:-------------------------|:-----------------------------|:-------------------------------|:-------------------------------------------------------------------|
+| PRINTER-PORT-MONITOR-MIB | ppmPrinterIEEE1284DeviceId   | 1.3.6.1.4.1.2699.1.2.1.2.1.1.3 | device ID for printer. MANUFACTURER, MODEL (abbreviation MFG, MDL) |
