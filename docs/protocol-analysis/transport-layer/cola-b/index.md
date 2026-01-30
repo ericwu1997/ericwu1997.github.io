@@ -34,11 +34,11 @@ The main variants are CoLa-A (ASCII/text-based, human-readable for easy manual i
 
 ### Cola-B Dataframe
 
-technical_information_ml20_en_im0059796.pdf#page=8&zoom=100</br>
+technical_information_ml20_en_im0059796.pdf#page=8&zoom=100<br>
 ![](./figure-1.png)
-Request Frame</br>
+#### Request Frame<br>
 ![](./figure-2.png)
-Response Frame</br>
+#### Response Frame<br>
 ![](./figure-3.png)
 
 checksum = XOR all bytes 9 to 13
