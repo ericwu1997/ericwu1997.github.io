@@ -51,6 +51,11 @@ Refer to [BER Encoding](./ber-encoding/) for more details
 |                |            | snmpV2-trap        | 0x07       |
 |                |            | report             | 0x08       |
 
+### script for snmp walk
+```
+snmpget -v2c -c public 10.0.0.1 1.3.6.1.2.1.1.5.0
+```
+
 ### Common MIB & OID for device identification
 
 MIBs describe the structure of the management data of a device subsystem; they use a hierarchical namespace containing object identifiers (OID). Each OID identifies a variable that can be read or set via SNMP. Two of the commonly seen node are "1.3.6.1.2.1" and "1.3.6.1.4.1". The first one is used in MIB-II, while the later one is "enterprise" specific node.<br>
