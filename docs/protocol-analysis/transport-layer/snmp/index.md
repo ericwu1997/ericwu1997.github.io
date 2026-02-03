@@ -51,9 +51,11 @@ Refer to [BER Encoding](./ber-encoding/) for more details
 |                |            | snmpV2-trap        | 0x07       |
 |                |            | report             | 0x08       |
 
-### script for snmp walk
+### script for snmp subtree walk
+
+<enterprise-number> = a number uniquely assigned to a company
 ```
-snmpget -v2c -c public 10.0.0.1 1.3.6.1.2.1.1.5.0
+snmpget -v2c -c public 10.0.0.1 1.3.6.1.4.1.<enterprise-number>
 ```
 
 ### Common MIB & OID for device identification
