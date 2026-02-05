@@ -68,8 +68,9 @@ below two are the hex and ascii format equivalent
 
 ### Telegram Example
 
-DeviceIdent
 ![](./figure-5.png)
+
+CoLa-B (DeviceIdent)
 
 ```
 Read Variable:          02 02 02 02 00 00 00 05 73 52 49 00 00 68         ········sRI··h
@@ -77,6 +78,48 @@ Read Variable:          02 02 02 02 00 00 00 05 73 52 49 00 00 68         ···
 Read Variable Response: 02 02 02 02 00 00 00 12 73 52 41 00 00 00 04 4D   ········sRA····M
                         4C 32 30 00 05 31 2E 31 31 30 4D                  L20··1.110M
 ```
+
+CoLa-A (DeviceIdent)
+
+```
+Read Variable:          02 02 02 02 00 00 00 0f 73 52 4E 20 44 65 76 69   .......-sRN Devi
+                        63 65 49 64 65 6E 25 
+
+Read Variable Response: 02 02 02 02 00 00 00 2d 73 52 41 20 44 65 76 69   .......-sRA Devi
+                        63 65 49 64 65 6e 74 20 00 0f 54 72 69 53 70 65   ceIdent ..TriSpe
+                        63 74 6f 72 20 31 30 36 30 00 0a 34 2e 33 2e 31   ctor 1060..4.3.1
+                        2e 32 34 32 52 55                                 .242RU
+```
+
+### Client / Server Script
+
+Reconstruct from TCP payload. For instance 
+
+```
+0000   02 02 02 02 00 00 00 2d 73 52 41 20 44 65 76 69   .......-sRA Devi
+0010   63 65 49 64 65 6e 74 20 00 0f 54 72 69 53 70 65   ceIdent ..TriSpe
+0020   63 74 6f 72 20 31 30 36 30 00 0a 34 2e 33 2e 31   ctor 1060..4.3.1
+0030   2e 32 34 32 52 55                                 .242RU
+```
+
+The scripts below extract TCP payload, save to "payloads.hex", iterate through to next line on each every responde. 
+
+```
+tshark -r sick_cola-b_evaluated.pcap -Y "tcp.srcport == 2112" -T fields -e tcp.payload > payloads.hex
+
+PORT=2112
+FILE=payloads.hex
+
+while read line; do
+  echo "Serving: $line"
+  echo -n "$line" | xxd -r -p | nc -l $PORT
+done < "$FILE"
+```
+
+```
+while echo -n "0202020200000005735249000068" | xxd -r -p | nc -w 2 10.119.24.84 2112 | xxd -p; do :; done
+```
+
 
 ## Reference
 [SOPAS Communication Interface Description.zip](http://ericwu1997.github.io/docs/protocol-analysis/transport-layer/cola-b/SOPAS_Communication_Interface_Description.zip)<br>
