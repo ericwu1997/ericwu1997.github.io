@@ -19,6 +19,7 @@ SiO-X Ethernet Communication Protocol is a simple ASCII-based TCP protocol used 
 
 ## Commands
 For additional payload formats, refer to the insturction manual
+
 | **#** | **#** | **#** |
 |--------------------------------|--------------------------------|--------------------------------|
 | R01 IO State Readout | R02 Flag State Readout | R03 IO State Readout |
