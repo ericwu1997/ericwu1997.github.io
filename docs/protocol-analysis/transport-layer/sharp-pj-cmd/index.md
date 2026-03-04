@@ -25,7 +25,7 @@ commands and responses are expressed as follows
 20h 88h <ID1> <ID2> 0Ch <DATA01> - <DATA12> <CKS>
 ```
 
-| **#** | **#** |
+| | |
 |------------------|--------------------------------|
 | Command/response | A series of strings enclosed in a frame represents a command or response (inhexadecimal notation). |
 | Parameter        | A character string in italic enclosed in brackets represents a parameter. For information about the parameters that are common to the control commands (ID1, ID2, CKS, LEN, ERR1, and ERR2), see "2.2 Parameters" (page 10). For information about those parameters whose content varies from command to command (DATA), see the description of the relevant command. |
