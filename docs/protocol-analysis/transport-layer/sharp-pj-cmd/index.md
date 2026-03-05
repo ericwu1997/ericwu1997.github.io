@@ -39,12 +39,11 @@ commands and responses are expressed as follows
 | DATA??           | This varies depending on the character string stored. |
 | ERR1/2           | The cause of an error is represented by a combination of error codes. |
 
-## Base Model Type Request
+## Base Model Type Response
 
-Response
-
-| 20h BFh \<ID1> \<ID2> 10h 00h \<DATA01> - \<DATA15> \<CKS> |
-|-|
+```
+20h BFh <ID1> <ID2> 10h 00h <DATA01> - <DATA15> <CKS>
+```
 
 | Item        | Description                                    |
 |-------------|------------------------------------------------|
