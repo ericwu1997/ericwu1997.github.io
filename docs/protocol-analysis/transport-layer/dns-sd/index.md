@@ -155,6 +155,7 @@ _dcamera._tcp.local # Dlink IP Camera
 _meshcop._udp.local # Thread Mesh Commissioning Border Agents
 _ajadevice._tcp.local # AJA Video Streaming device
 _vaddiodevice._tcp.local # Vaddio Device
+_csco-sb_tcplocal # Cisco Small Business
 ```
 
 ### References
