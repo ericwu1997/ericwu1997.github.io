@@ -90,3 +90,33 @@ http.html:"resource.php?a=r&m=eg_pub" http.favicon.hash:-69294755
 ```
 "DHCP" site:"cloudshark.org"
 ```
+
+### MISC
+Cisco MDFID
+
+```
+routerA1BA7F._csco-sb._tcp.local: type TXT, class IN
+    Name: routerA1BA7F._csco-sb._tcp.local
+    Type: TXT (16) (Text strings)
+    .000 0000 0000 0001 = Class: IN (0x0001)
+    0... .... .... .... = Cache flush: False
+    Time to live: 10 (10 seconds)
+    Data length: 299
+    TXT Length: 11
+    TXT: version=1.2
+    TXT Length: 11
+    TXT: model=RV260
+    TXT Length: 17
+    TXT: deviceType=Router
+    TXT Length: 46
+    TXT: deviceDescr=RV260 Series Configuration Utility
+    TXT Length: 19
+    TXT: fmVersion=1.0.01.07
+    TXT Length: 19
+    TXT: PIDVID=RV260-K9 V01
+    ...
+    TXT: MDFID=286316476
+    ...
+
+https://software.cisco.com/download/home/286325439/type
+```

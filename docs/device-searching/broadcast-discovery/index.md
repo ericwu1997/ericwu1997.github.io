@@ -360,3 +360,7 @@ echo -n 'whoisthere\x0010.0.0.1\x00255.255.255.0\x00\x001\x00' | netcat -u 10.0.
 02b0   6f 6c 6f 67 79 3e 3c 2f 70 6f 77 65 72 6c 69 6e   ology></powerlin
 02c0   65 3e 3c 2f 73 74 61 74 75 73 3e 00 00            e></status>..
 ```
+
+
+### References
+[https://github.com/julienblitte/UniversalScanner/tree/master/UniversalScanner](https://github.com/julienblitte/UniversalScanner/tree/master/UniversalScanner)

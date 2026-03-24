@@ -53,7 +53,7 @@ Refer to [BER Encoding](./ber-encoding/) for more details
 
 ### script for snmp subtree walk
 
-<enterprise-number> = a number uniquely assigned to a company
+\<enterprise-number\> = a number uniquely assigned to a company
 ```
 snmpget -v2c -c public 10.0.0.1 1.3.6.1.4.1.<enterprise-number>
 ```
