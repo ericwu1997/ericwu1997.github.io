@@ -17,6 +17,57 @@ parent: Transport Layer
 ### Overview
 DNP3 (Distributed Network Protocol) is a vendor-neutral protocol used in SCADA and electric utility systems for communication between control centers (masters) and field devices (outstations). It typically runs over serial links or TCP/IP (commonly port 20000) and supports reading data, reporting events, and issuing control commands. DNP3 is designed for reliability in noisy environments and includes features like event-based reporting, time-stamping, and optional secure authentication for improved security and integrity.
 
+### Protocol Strucutre
+
+[reference](https://cdn.chipkin.com/assets/uploads/imports/resources/DNP3Introduction-Draft_G.pdf#page=28&zoom=100)<br>
+![](./figure-1.png)
+![](./figure-2.png)
+
+### DNP3 SA
+
+#### Security Function Code
+
+| Function Code | Name                               | Descirption          |
+|---------------|------------------------------------|----------------------|
+| 0x20          | Authentication Request             | Master -> Outstation |
+| 0x21          | Autheitication Requestion - No Ack | Master -> Outstation |
+| 0x83          | Authenticaiton Response            | Outstation > Master  |
+
+#### Basic Authentication Object
+
+| Group | Var | Hex    | Name                       | Transmitted by |
+|-------|-----|--------|----------------------------|----------------|
+| 120   | 1   | 0x7801 | Challenge                  | Either         |
+| 120   | 2   | 0x7802 | Reply                      | Either         |
+| 120   | 3   | 0x7803 | Aggressive Mode Request    | Either         |
+| 120   | 4   | 0x7804 | Session Key Status Request | Master         |
+| 120   | 5   | 0x7805 | Session Key Status         | Outstation     |
+| 120   | 6   | 0x7806 | Session Key Change         | Master         |
+| 120   | 7   | 0x7807 | Error                      | Either         |
+| 120   | 9   | 0x7809 | MAC                        | Either         |
+
+#### Update Key Change Objects
+
+| Group | Var | Hex    | Name                            | Transmitted by |
+|-------|-----|--------|---------------------------------|----------------|
+| 120   | 8   | 0x7808 | User Certificate **             | Master         |
+| 120   | 10  | 0x780A | User Status Change              | Master         |
+| 120   | 11  | 0x780B | Update Key Change Request       | Master         |
+| 120   | 12  | 0x780C | Update Key Change Reply         | Outstation     |
+| 120   | 13  | 0x780D | Update Key Change               | Master         |
+| 120   | 14  | 0x780E | Update Key Change Signature **  | Master         |
+| 120   | 15  | 0x780F | Update Key Change Confirmation  | Either         |
+
+### Device Attributes Group 0 - Device Identification
+
+| Group | Var | Hex    | Name                            | Transmitted by |
+|-------|-----|--------|---------------------------------|----------------|
+| 0     | 250 | 0x00FA | Device Product name & Model     | Outstation     |
+| 0     | 252 | 0x00FC | Manufacturers Name              | Outstation     |
+| 0     | 242 | 0x00F2 | Manufacturers Software Version  | Outstation     |
+| 0     | 243 | 0x00F3 | Manufacturers Serial Number     | Outstation     |
+| 0     | 248 | 0x00F8 | Manufacturers Hardware Version  | Outstation     |
+
 ## Wireshark dissector tree view & Hex dump
 
 Function Code: Authentication Request (0x20)<br>
@@ -53,3 +104,5 @@ Distributed Network Protocol 3.0
 ## Reference 
 [DNP3 Specification Volumn 1](https://cdn.chipkin.com/assets/uploads/imports/resources/DNP3Introduction-Draft_G.pdf)<br>
 [Wireshark DNP3 Dissector](https://fossies.org/linux/wireshark/epan/dissectors/packet-dnp.c)<br>
+[Youtube - DNP3 SA 3 Intermediate](https://www.youtube.com/watch?v=RfHsrDwzpS0&list=RD6ca_YHZvzls&index=29)<br>
+[Siemens - DNP3 Specificiaton](https://cache.industry.siemens.com/dl/files/310/109759310/att_989900/v1/SIMATIC_RTU3031C_DNP3_Device_Profile_V3.1.pdf)<br>
