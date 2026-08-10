@@ -9,4 +9,4 @@ nav_order: 6
 ## Table of contents
 {: .no_toc .text-delta }
 
-[PCAP Builder](https://github.com/ericwu1997/ericwu1997.github.io/blob/main/docs/tools/pcap_builder.zip)
+[PCAP Builder](https://github.com/ericwu1997/ericwu1997.github.io/raw/refs/heads/main/docs/tools/pcap_builder.zip)
