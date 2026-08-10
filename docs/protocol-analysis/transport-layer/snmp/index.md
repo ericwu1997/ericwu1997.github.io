@@ -56,6 +56,7 @@ Refer to [BER Encoding](./ber-encoding/) for more details
 \<enterprise-number\> = a number uniquely assigned to a company
 ```
 snmpget -v2c -c public 10.0.0.1 1.3.6.1.4.1.<enterprise-number>
+snmpwalk -v2c -c public 10.0.0.1 1.3.6.1.4.1.<enterprise-number>
 ```
 
 ### Common MIB & OID for device identification

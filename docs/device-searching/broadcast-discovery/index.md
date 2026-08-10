@@ -214,7 +214,8 @@ echo -n "4D41444100000083010050(print "%0*d 84)20000000000000" | xxd -r -p | net
 References:<br>
 [https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Ubiquiti.cs](https://github.com/julienblitte/UniversalScanner/blob/master/UniversalScanner/Ubiquiti.cs)<br>
 [https://github.com/MatrixEditor/ubnt-discovery-tool/blob/master/ubnt.lua](https://github.com/MatrixEditor/ubnt-discovery-tool/blob/master/ubnt.lua)<br>
-[https://gist.github.com/sgrodzicki/265273ff0ede952d6fcd1a1eedb6aa60](https://gist.github.com/sgrodzicki/265273ff0ede952d6fcd1a1eedb6aa60)
+[https://gist.github.com/sgrodzicki/265273ff0ede952d6fcd1a1eedb6aa60](https://gist.github.com/sgrodzicki/265273ff0ede952d6fcd1a1eedb6aa60)<br>
+[https://ui.com/download](https://ui.com/download)
 ```
 echo -n "01000000" | xxd -r -p | netcat -u XXX.XXX.XXX.XXX 10001
 ```

@@ -36,5 +36,8 @@ Wireshark -> Analyze -> Display Filter Expression
 [Netify - Protocol Lookup Tool](https://www.netify.ai/resources/protocols)<br>
 [IPESOFT - Communication Protocols](https://doc.ipesoft.com/display/D2DOCV26EN/Communication+Protocols)<br>
 
+### Wi-Fi Alliance 
+[https://www.wi-fi.org/product-finder](https://www.wi-fi.org/product-finder)<br>
+
 ### PDF
 [https://oceanofpdf.com/](https://oceanofpdf.com/)<br>
