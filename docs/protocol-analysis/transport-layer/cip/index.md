@@ -80,6 +80,8 @@ file:///C:/Users/Eric/Desktop/CIP/ilide.info-cip-vol1-3-3-pdf-pr_922db433048f593
 
 https://www.odva.org/wp-content/uploads/2020/06/PUB00123R1_Common-Industrial_Protocol_and_Family_of_CIP_Networks.pdf#page=15
 
+https://marketplace.odva.org/technologies/1-ethernet-ip/products/#?vendors=171&productTypes=all&deviceTypes=6&docYears=all&categories=all&services=none&page=1&lang=en&view=search&productDisplay=all
+
 ### Device Identification
 
 ![](./figure-6.jpeg)

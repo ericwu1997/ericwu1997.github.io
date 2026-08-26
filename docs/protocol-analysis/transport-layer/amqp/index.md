@@ -133,4 +133,4 @@ Advanced Message Queuing Protocol
 
 
 ### Reference
-[amqp-specification.zip](http://ericwu1997.github.io/docs/protocol-analysis/transport-layer/amqp/amqp-specification.zip)<br>
+[amqp-specification.zip](https://github.com/ericwu1997/ericwu1997.github.io/raw/refs/heads/main/docs/protocol-analysis/transport-layer/amqp/amqp-specification.zip)
