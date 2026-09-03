@@ -23,6 +23,7 @@ Port 8600 is registered with IANA for ASTERIX, although the ASTERIX specificatio
 ![](./figure-1.png)
 
 IPv4 Multicast Address Space ([more](https://www.iana.org/assignments/multicast-addresses))
+
 | Address Space  | Name                        | Description                                                                                                          |
 | -------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `224.0.0.0/24` | Local Network Control Block | Used for local network control traffic. Multicast traffic in this range is generally restricted to the local subnet. |
