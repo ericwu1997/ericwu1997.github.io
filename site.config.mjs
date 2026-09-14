@@ -33,7 +33,7 @@ export const siteConfig = defineSiteConfig({
 
   // 外观模式：true 允许浅色/深色/跟随系统；false 固定浅色；
   // 'dark' 默认深色但允许切换；'force-dark' 固定深色并隐藏开关。
-  appearance: true,
+  appearance: 'dark',
 
   // 浏览器存储键和互动事件的命名空间。同一域名部署多个站点时必须保持唯一。
   namespace: 'ermaozi',
