@@ -70,8 +70,8 @@ export const siteConfig = defineSiteConfig({
     // avatar 也兼容旧字段名 url；站内图片建议放在 public/ 下并以 / 开头引用。
     avatar: '/img/logo.svg',
     circle: true,
-    location: 'Internet',
-    organization: 'Open source community',
+    location: 'Earth',
+    organization: 'Home',
     // 桌面资料卡位于文章列表左侧或右侧。
     layout: 'right',
   },
@@ -186,119 +186,14 @@ export const siteConfig = defineSiteConfig({
   // 即使 multilingual 为 false，也应保留已有内容对应的 locale，确保这些文件仍能正确构建。
   // 新增语言时应增加完整语言块、对应 content/<语言目录>/，并使用独立的 home 前缀。
   locales: {
-    'zh-CN': {
-      // 当前语言的站点名称和各内容区域名称。
-      siteName: "My Astro Site",
-      blogName: '示例博客',
-      docsName: '文档中心',
-
-      // SEO 与作者资料。description 用于页面缺少独立描述时的默认值。
-      description: '一个支持全文搜索、深色模式和增强 Markdown 的 Astro 静态博客主题。',
-      authorName: '站点作者',
-      authorDescription: '使用 ermaozi 发布文章、文档和项目记录。',
-      profileTagline: '记录、整理与分享',
-      keywords: 'Astro,静态博客,Markdown,博客主题',
-
-      // 当前语言的首页链接。默认也作为语言路径；根语言通常使用 '/zh/'。
-      // 若首页不是语言路径根目录，可另设 path，例如 path: '/zh/', home: '/zh/blog/'。
-      home: '/zh/',
-
-      // 界面文案。未填写的字段会使用主题内置的简体中文预设。
-      homeText: '首页',
-      postsText: '博客',
-
-      // 页面 Markdown 复制、纯文本查看和“询问 AI”菜单文案。
-      copyPageText: '复制页面',
-      copiedPageText: '复制成功',
-      copingPageText: '复制中..',
-      copyTagline: '将页面以 Markdown 格式复制供 LLMs 使用',
-      viewMarkdown: '以 Markdown 格式查看',
-      viewMarkdownTagline: '以纯文本查看此页面',
-      askAIText: '在 {name} 中打开',
-      askAITagline: '向 {name} 提问有关此页面',
-      askAIMessage: '阅读 {link} 并回答内容相关的问题。',
-      notFound: { linkLabel: '返回站点首页' },
-
-      // 内容集合决定哪些目录是博客或文档，以及它们如何生成列表、侧边栏和前后页。
-      // 迁移旧 Plume 配置时，blog/article/notes 会自动转换；新项目请直接使用 collections。
-      collections: [
-        // content/blog/ 下的 Markdown 作为博客文章，并生成 /blog/ 及其分类、标签、归档页。
-        { type: 'post', dir: 'blog', title: '博客' },
-        {
-          // content/docs/ 下的 Markdown 作为文档，访问前缀默认为 /docs/。
-          type: 'doc',
-          dir: 'docs',
-          title: '文档中心',
-
-          // 文档侧边栏。可改为 'auto' 自动发现文件，也可像下面这样手动编排。
-          sidebar: [
-            {
-              text: '指南',
-              // prefix 会自动拼接到组内的相对 link 或字符串条目。
-              prefix: 'guide',
-              icon: 'icon-park-outline:guide-board',
-              collapsed: false,
-              items: [
-                // items 支持继续嵌套；字符串会读取对应 Markdown 的标题。
-                { text: '基础', icon: 'construction', collapsed: false, items: ['getting-started', 'configuration', 'deployment', { text: '公共 API 与样式定制', link: 'api', badge: { text: 'New', type: 'warning' } }] },
-                { text: '内容能力', link: 'content', icon: 'simple-icons:astro' },
-              ],
-            },
-            // link: '---' 是纯分隔项，不会跳转。
-            { text: '参考', link: '---', icon: 'more-circle' },
-            // 完整 URL 会自动作为外部链接处理。
-            { text: 'Astro', link: 'https://astro.build/', icon: 'simple-icons:astro' },
-          ],
-        },
-      ],
-
-      // 顶部导航。navbar 是 Plume 的标准字段；也兼容旧字段 navigation。
-      // 支持 text/link 和 label/href；items 创建下拉菜单。省略时会生成首页、博客、标签、归档入口。
-      navbar: [
-        // activeMatch 是匹配当前路径的正则字符串，用于高亮导航项。
-        { label: '<span>博客</span>', href: '/zh/blog/', icon: 'home', activeMatch: '^/zh/(blog|article)/' },
-        {
-          label: '文档',
-          icon: 'material-symbols:docs-outline',
-          activeMatch: '^/zh/docs/',
-          items: [
-            '/zh/docs/',
-            {
-              text: '指南',
-              icon: 'icon-park-outline:guide-board',
-              // prefix 与组内相对 link 拼接为 /docs/guide/<link>。
-              prefix: '/zh/docs/guide/',
-              items: [
-                { text: '快速开始', link: 'getting-started/', icon: 'rocket' },
-                { text: '站点配置', link: 'configuration/', icon: 'construction' },
-                { text: '部署站点', link: 'deployment/', icon: 'material-symbols:cloud-upload-outline' },
-                { text: '内容能力', link: 'content/', icon: 'simple-icons:astro', badge: { text: 'New', type: 'warning' } },
-                { text: 'Astro', link: 'https://astro.build/', icon: 'simple-icons:astro' },
-              ],
-            },
-          ],
-        },
-        {
-          label: '更多',
-          icon: 'more-circle',
-          items: [
-            // icon 可使用图片、Iconify 名称或 { svg } 自定义图标。
-            { label: '分类', href: '/zh/blog/categories/', icon: '/img/logo.svg' },
-            { label: '标签', href: '/zh/blog/tags/', icon: { svg: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 4h8l10 10-7 7L4 11V4Zm4 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/></svg>' } },
-            { label: '归档', href: '/zh/blog/archives/', icon: 'archive' },
-            { label: '关于', href: '/zh/about/', icon: 'verified' },
-          ],
-        },
-      ],
-    },
     // 英文 locale 是当前根语言，对应 content/；中文示例位于 content/zh/。
     // multilingual: false 时不会显示语言入口或输出 hreflang，改为 true 即可完整启用。
     'en-US': {
-      siteName: "My Astro Site",
+      siteName: "IPS Work Notes",
       blogName: 'Example Blog',
       docsName: 'Documentation',
       description: "My Astro Site Description",
-      authorName: 'Site Author',
+      authorName: 'Eric Wu',
       authorDescription: 'Publish articles, documentation, and project notes with ermaozi.',
       profileTagline: 'Write, organize, and share',
       keywords: 'Astro,static blog,Markdown,bilingual site,theme',
@@ -333,10 +228,21 @@ export const siteConfig = defineSiteConfig({
                 { text: 'Content features', link: 'content', icon: 'simple-icons:astro' },
               ],
             },
+            {
+              text: 'APP layer protocols',
+              prefix: 'app-layer-protocols',
+              icon: 'icon-park-outline:guide-board',
+              collapsed: true,
+              items: [
+                { text: 'ASTERIX', link: 'asterix', icon: 'simple-icons:astro' },
+                { text: 'BJNP', link: 'bjnp', icon: 'simple-icons:astro' }
+              ],
+            },
+            { text: 'Broadcast Discovery', link: 'docs/broadcast-discovery'},
             { text: 'Reference', link: '---', icon: 'more-circle' },
             { text: 'Astro', link: 'https://astro.build/', icon: 'simple-icons:astro' },
           ],
-        },
+        }
       ],
       navbar: [
         { label: '<span>Blog</span>', href: '/blog/', icon: 'home', activeMatch: '^/(blog|article)/' },
