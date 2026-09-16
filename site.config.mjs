@@ -228,16 +228,7 @@ export const siteConfig = defineSiteConfig({
                 { text: 'Content features', link: 'content', icon: 'simple-icons:astro' },
               ],
             },
-            {
-              text: 'APP layer protocols',
-              prefix: 'app-layer-protocols',
-              icon: 'icon-park-outline:guide-board',
-              collapsed: true,
-              items: [
-                { text: 'ASTERIX', link: 'asterix', icon: 'simple-icons:astro' },
-                { text: 'BJNP', link: 'bjnp', icon: 'simple-icons:astro' }
-              ],
-            },
+            { text: 'APP layer protocols', link: 'docs/app-layer-protocols'},
             { text: 'Broadcast Discovery', link: 'docs/broadcast-discovery'},
             { text: 'Reference', link: '---', icon: 'more-circle' },
             { text: 'Astro', link: 'https://astro.build/', icon: 'simple-icons:astro' },
