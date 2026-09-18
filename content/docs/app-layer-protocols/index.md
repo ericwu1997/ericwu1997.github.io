@@ -12,6 +12,10 @@ tags: [Markdown, Writing]
 
 ### TCP
 
+| Port   | Protocol Name         |
+| ------ | --------------------- |
+| 2000   | [SCCP](./sccp/)       |
+
 ### UDP
 
 | Port   | Protocol Name         |
