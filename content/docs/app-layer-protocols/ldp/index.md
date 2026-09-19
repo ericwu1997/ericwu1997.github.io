@@ -12,7 +12,9 @@ tags: [Markdown, Writing]
 
 ### Overview
 
-LDP (Lantronix Discovery Protocol) is a UDP-based protocol used by Lantronix tools, such as DeviceInstaller, to discover and identify Lantronix devices on a network. It commonly uses UDP port 30718 for discovery communication.
+**LDP** (Lantronix Discovery Protocol) is a vendor-specific discovery protocol used by Lantronix management tools, such as DeviceInstaller, to locate and identify Lantronix serial-to-Ethernet devices on a local network. It runs over **UDP port 30718** (`0x77FE`) — a de facto Lantronix-assigned port with no corresponding IANA registration — via broadcast queries that devices answer in cleartext.
+
+The discovery response carries a 2-byte numeric **device ID** at a fixed payload offset (e.g. `58 39` = "X9", identifying an XPort-05), resolved to a product family via Lantronix's Product Information Base (PIB), alongside the device's **MAC address** embedded at another fixed offset. A separate query/response exchange (opcode `0x000000f4`/`0x000000f6`) returns the device's **extended firmware version** string in cleartext at a fixed offset — exposing vendor, product family, and firmware version directly from unauthenticated wire fields.
 
 ### Device Identification
 
