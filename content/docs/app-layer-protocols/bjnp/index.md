@@ -19,6 +19,25 @@ Every BJNP packet opens with the fixed 4-byte ASCII magic **`BJNP`** (`42 4a 4e 
 ![](/img/bjnp/figure-1.png)
 ![](/img/bjnpfigure-2.png)
 
+## DISCOVERY_CMD
+
+<table style="width:100%; text-align:center; table-layout:fixed; border-collapse:collapse;">
+  <colgroup>
+    <col style="width:25%"><col style="width:25%"><col style="width:25%"><col style="width:25%">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td>0x42 (1 byte)</td>
+      <td>flag (1 byte)</td>
+      <td colspan="2">command (2 bytes)</td>
+    </tr>
+    <tr>
+      <td colspan="2">length (2 bytes)</td>
+      <td colspan="2">req_id (2 bytes)</td>
+    </tr>
+  </tbody>
+</table>
+
 <!--
 | Field   | Size    |
 | ------- | ------- |
@@ -28,23 +47,6 @@ Every BJNP packet opens with the fixed 4-byte ASCII magic **`BJNP`** (`42 4a 4e 
 | length  | 2 bytes |
 | req_id  | 2 bytes |
 -->
-
-<table style="width:100%; text-align:center; table-layout:fixed; border-collapse:collapse;">
-  <colgroup>
-    <col style="width:25%"><col style="width:25%"><col style="width:25%"><col style="width:25%">
-  </colgroup>
-  <tbody>
-    <tr>
-      <td>0x42 <sub>(1 byte)</sub></td>
-      <td>flag <sub>(1 byte)</sub></td>
-      <td colspan="2">command <sub>(2 bytes)</sub></td>
-    </tr>
-    <tr>
-      <td colspan="2">length <sub>(2 bytes)</sub></td>
-      <td colspan="2">req_id <sub>(2 bytes)</sub></td>
-    </tr>
-  </tbody>
-</table>
 
 # Discovery Request / Response
 ```
