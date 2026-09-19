@@ -25,13 +25,13 @@ Every BJNP packet opens with the fixed 4-byte ASCII magic **`BJNP`** (`42 4a 4e 
   </colgroup>
   <tbody>
     <tr>
-      <td>0x42<br><sub>8 bits</sub></td>
-      <td>flag<br><sub>8 bits</sub></td>
-      <td colspan="2">command<br><sub>16 bits</sub></td>
+      <td>0x42 <sub>(1 byte)</sub></td>
+      <td>flag <sub>(1 byte)</sub></td>
+      <td colspan="2">command <sub>(2 bytes)</sub></td>
     </tr>
     <tr>
-      <td colspan="2">length<br><sub>16 bits</sub></td>
-      <td colspan="2">req_id<br><sub>16 bits</sub></td>
+      <td colspan="2">length <sub>(2 bytes)</sub></td>
+      <td colspan="2">req_id <sub>(2 bytes)</sub></td>
     </tr>
   </tbody>
 </table>
