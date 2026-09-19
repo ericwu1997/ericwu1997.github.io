@@ -19,6 +19,16 @@ Every BJNP packet opens with the fixed 4-byte ASCII magic **`BJNP`** (`42 4a 4e 
 ![](/img/bjnp/figure-1.png)
 ![](/img/bjnpfigure-2.png)
 
+<!--
+| Field   | Size    |
+| ------- | ------- |
+| 0x42    | 1 byte  |
+| flag    | 1 byte  |
+| command | 2 bytes |
+| length  | 2 bytes |
+| req_id  | 2 bytes |
+-->
+
 <table style="width:100%; text-align:center; table-layout:fixed; border-collapse:collapse;">
   <colgroup>
     <col style="width:25%"><col style="width:25%"><col style="width:25%"><col style="width:25%">
