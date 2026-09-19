@@ -11,7 +11,9 @@ tags: [Markdown, Writing]
 ---
 
 # Overview
-Canon BJNP is a proprietary network printing protocol developed by Canon for communication between Canon printers and computers or mobile devices over a network. It operates over TCP and UDP, typically using port 8611 for scanning, 8612 for printing, and 8613 for device discovery. BJNP facilitates discovery, printing, and scanning functions, enabling Canon printers to work seamlessly over LAN or wireless connections without standard IPP or LPD protocols. It's primarily used in consumer-grade Canon multifunction printers.
+**BJNP** is a proprietary, cleartext network-printing protocol used by Canon inkjet and multifunction printers to communicate with drivers and companion apps over a LAN, in place of standard IPP/LPD. It runs over both **TCP** and **UDP**, split across three fixed ports by function: **8611** (scan), **8612** (print), and **8613** (device discovery), with Wireshark's dissector also tolerating traffic up to port 8614.
+
+Every BJNP packet opens with the fixed 4-byte ASCII magic **`BJNP`** (`42 4a 4e 50`), followed by a 1-byte packet-type/opcode field whose high bit distinguishes request (`0x01`) from response (`0x81`). A discovery response on port 8611/8613 carries a semicolon-delimited, plaintext key–value banner — `MFG` (manufacturer), `MDL` (model), `DES` (description), `VER` (firmware version), `CLS` (device class), and `CID` — e.g. `MFG:Canon;MDL:MG5500 series;VER:3.090;CLS:PRINTER`, giving vendor, exact model, and firmware version directly off the wire with no authentication or encryption.
 
 # Protocol Strucutre / Field Type
 ![](/img/bjnp/figure-1.png)
