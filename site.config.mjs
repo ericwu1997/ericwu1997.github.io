@@ -61,8 +61,8 @@ export const siteConfig = defineSiteConfig({
 
   // 页脚。设为 false 可完全关闭；message 支持可信 HTML。
   footer: {
-    message: 'Powered by <a target="_blank" rel="noopener" href="https://astro.build/">Astro</a> &amp; <a target="_blank" rel="noopener" href="https://github.com/ermaozi/astro-theme-ermaozi">ermaozi</a>',
-    copyright: `Copyright © ${new Date().getFullYear()} ermaozi`,
+    // message: 'Powered by <a target="_blank" rel="noopener" href="https://astro.build/">Astro</a> &amp; <a target="_blank" rel="noopener" href="https://github.com/ermaozi/astro-theme-ermaozi">ermaozi</a>',
+    // copyright: `Copyright © ${new Date().getFullYear()} ermaozi`,
   },
 
   // 博客作者资料卡。设为 false 后隐藏桌面资料卡，并改用文章列表顶部的分类导航。
@@ -302,7 +302,7 @@ export const siteConfig = defineSiteConfig({
 
   // 文章版权声明。设为 false 或 enabled: false 可关闭。
   copyright: {
-    enabled: true,
+    enabled: false,
     // 默认作者；文章 frontmatter 可单独覆盖。
     author: 'Site Author',
     // original、translate、reprint 分别表示原创、翻译和转载。

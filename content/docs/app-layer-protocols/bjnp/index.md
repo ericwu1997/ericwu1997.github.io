@@ -10,16 +10,56 @@ updateTime: 2026-08-05
 tags: [Markdown, Writing]
 ---
 
-# Overview
+## Overview
 **BJNP** is a proprietary, cleartext network-printing protocol used by Canon inkjet and multifunction printers to communicate with drivers and companion apps over a LAN, in place of standard IPP/LPD. It runs over both **TCP** and **UDP**, split across three fixed ports by function: **8611** (scan), **8612** (print), and **8613** (device discovery), with Wireshark's dissector also tolerating traffic up to port 8614.
 
 Every BJNP packet opens with the fixed 4-byte ASCII magic **`BJNP`** (`42 4a 4e 50`), followed by a 1-byte packet-type/opcode field whose high bit distinguishes request (`0x01`) from response (`0x81`). A discovery response on port 8611/8613 carries a semicolon-delimited, plaintext key–value banner — `MFG` (manufacturer), `MDL` (model), `DES` (description), `VER` (firmware version), `CLS` (device class), and `CID` — e.g. `MFG:Canon;MDL:MG5500 series;VER:3.090;CLS:PRINTER`, giving vendor, exact model, and firmware version directly off the wire with no authentication or encryption.
 
-# Protocol Strucutre / Field Type
-![](/img/bjnp/figure-1.png)
-![](/img/bjnpfigure-2.png)
+## Protocol Strucutre / Field Type
 
-# Discovery Request / Response
+<table style="width:100%; text-align:center; table-layout:fixed; border-collapse:collapse; border:1px solid #333;">
+  <colgroup>
+    <col style="width:25%"><col style="width:6.25%"><col style="width:6.25%"><col style="width:25%"><col style="width:12.5%"><col style="width:25%">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #333; padding:2px 8px;">
+        <div style="display:flex; justify-content:space-between;"><span>0</span><span>3</span></div>
+      </td>
+      <td style="border:1px solid #333; padding:2px 8px;">4</td>
+      <td style="border:1px solid #333; padding:2px 8px;">5</td>
+      <td style="border:1px solid #333; padding:2px 8px;">
+        <div style="display:flex; justify-content:space-between;"><span>6</span><span>9</span></div>
+      </td>
+      <td style="border:1px solid #333; padding:2px 8px;">
+        <div style="display:flex; justify-content:space-between;"><span>10</span><span>11</span></div>
+      </td>
+      <td style="border:1px solid #333; padding:2px 8px;">
+        <div style="display:flex; justify-content:space-between;"><span>12</span><span>15</span></div>
+      </td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:6px;">ID: BJNP</td>
+      <td style="border:1px solid #333; padding:6px;"><i>Device Type</i></td>
+      <td style="border:1px solid #333; padding:6px;"><i>Cmd Code</i></td>
+      <td style="border:1px solid #333; padding:6px;"><i>Seq Number</i></td>
+      <td style="border:1px solid #333; padding:6px;"><i>Session ID</i></td>
+      <td style="border:1px solid #333; padding:6px;"><i>Payload Len</i></td>
+    </tr>
+  </tbody>
+</table>
+
+| Device Type       | Value | Cmd Code             | Value |
+|--------------------|-------|-----------------------|-------|
+| Printer Command    | \x01  | Discover              | \x01  |
+| Scanner Command    | \x02  | Print Job Details     | \x10  |
+| Printer Response   | \x81  | Request Closure       | \x11  |
+| Scanner Response   | \x82  | Get Printer Status    | \x20  |
+|                    |       | Print                 | \x21  |
+|                    |       | Get Printer Identity  | \x30  |
+|                    |       | Scan Job Details      | \x32  |
+
+## Discovery Request / Response
 ```
 echo -n 'BJNP\x01\x30\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00' | netcat -u XXX.XXX.XXX.XXX 8611
 ```
@@ -48,7 +88,7 @@ echo -n 'BJNP\x01\x30\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00' | netcat -u XXX.X
 0100   50 3b                                             P;
 ```
 
-# Reference 
+## Reference 
 [BJNP Wireshark Dissector Github](https://github.com/wireshark/wireshark/blob/master/epan/dissectors/packet-bjnp.c)<br>
 [IANA search=bjnp](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml?search=bjnp)<br>
 [NMAP bjnp-discover](https://nmap.org/nsedoc/scripts/bjnp-discover.html)<br>

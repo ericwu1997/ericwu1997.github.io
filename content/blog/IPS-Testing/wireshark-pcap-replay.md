@@ -1,6 +1,6 @@
 ---
 title: Wireshark Packet Replay
-description: Preview marks, callouts, collapses, tabs, task lists, and Mermaid diagrams.
+description: wireshark packet replay for IPS testing
 permalink: /blog/ips-testing/
 lang: en-US
 createTime: 2026-09-16

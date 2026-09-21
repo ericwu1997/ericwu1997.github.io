@@ -9,28 +9,6 @@ createTime: 2026-09-18
 updateTime: 2026-09-18
 tags: [Markdown, Writing]
 ---
-<!-- Frontmatter (title, parent, and other page metadata) is out of scope for
-     this skill - handled by a separate metadata skill. Insert its output
-     above this line before publishing. -->
-
-# SKINNY Client Control Protocol
-{: .no_toc }
-
-## Table of contents
-{: .no_toc .text-delta }
-
-1. [Overview](#overview)
-2. [Protocol Stacks](#protocol-stacks)
-3. [Protocol Structure](#protocol-structure)
-4. [RegisterReq Payload — Identification fields](#registerreq-payload--identification-fields)
-5. [RegisterReq Payload — Network fields](#registerreq-payload--network-fields)
-6. [RegisterReq Payload — Capability/capacity fields](#registerreq-payload--capabilitycapacity-fields)
-7. [RegisterReq Payload — Protocol/feature fields](#registerreq-payload--protocolfeature-fields)
-8. [Common Message ID](#common-message-id)
-9. [Sample Hex Dump + Dissector View (RegisterReq)](#sample-hex-dump--dissector-view-registerreq)
-10. [Reference](#reference)
-
----
 
 ## Overview
 The **Skinny Client Control Protocol** (SCCP), also known as Skinny, is a
@@ -62,7 +40,21 @@ featuring a fixed 12-byte header consisting of three 32-bit fields: data
 length, header version, and message ID, followed by message-specific
 parameters.
 
-```
+<table style="display:table; width:100%; text-align:center; table-layout:fixed; border-collapse:collapse; border:1px solid #333; background:transparent;">
+  <colgroup>
+    <col style="width:20%"><col style="width:20%"><col style="width:20%"><col style="width:40%">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #333; padding:6px; background:transparent;"><i>Data Length</i><br>(4 byte)</td>
+      <td style="border:1px solid #333; padding:6px; background:transparent;"><i>Header Version</i><br>(4 byte)</td>
+      <td style="border:1px solid #333; padding:6px; background:transparent;"><i>Message ID</i><br>(4 byte)</td>
+      <td style="border:1px solid #333; padding:6px; background:transparent;"><i>payload</i> ....</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ```
  --------------------------
 |   Data Length  (32 bit)  |
 |--------------------------|
@@ -72,7 +64,8 @@ parameters.
 |--------------------------|
 |       payload  ....      |
  --------------------------
-```
+``` -->
+
 The 32-bit header field after the message length was historically reserved
 and set to zero, but starting with SCCP version 18 Cisco repurposed it to
 carry the protocol version number. As a result, older phones and CUCM
@@ -116,19 +109,19 @@ value, which legacy receivers typically ignore for compatibility.
 ## Common Message ID
 Station → CallManager (Client → CUCM)
 
-| **#** | **#** | **#** | **#** |
-|---|---|---|---|
-| (1) KeepAlive (0x0000) | (2) RegisterMessage (0x0001) | (3) IpPortMessage (0x0002) | (4) StimulusMessage (0x0005) |
-| (5) OffHookMessage (0x0006) | (6) OnHookMessage (0x0007) | (7) HookFlashMessage (0x0008) | (8) SoftKeyEventMessage (0x0026) |
-| (9) UnregisterMessage (0x0027) | (10) DeviceToUserDataMessage (0x002E) | (11) MediaTransmissionFailure (0x002A) | (12) RegisterTokenReq (0x0029) |
+|                                  |                                         |                                          |                                   |
+|----------------------------------|-----------------------------------------|--------------------------------------------|-----------------------------------|
+| (1) KeepAlive (0x0000)          | (2) RegisterMessage (0x0001)           | (3) IpPortMessage (0x0002)              | (4) StimulusMessage (0x0005)   |
+| (5) OffHookMessage (0x0006)     | (6) OnHookMessage (0x0007)             | (7) HookFlashMessage (0x0008)           | (8) SoftKeyEventMessage (0x0026) |
+| (9) UnregisterMessage (0x0027)  | (10) DeviceToUserDataMessage (0x002E)  | (11) MediaTransmissionFailure (0x002A)  | (12) RegisterTokenReq (0x0029) |
 
 CallManager → Station (CUCM → Client)
 
-| **#** | **#** | **#** | **#** |
-|---|---|---|---|
-| (1) RegisterAckMessage (0x0081) | (2) KeepAliveAckMessage (0x0100) | (3) StartToneMessage (0x0082) | (4) StopToneMessage (0x0083) |
-| (5) SetRingerMessage (0x0085) | (6) StartMediaTransmission (0x008A) | (7) StopMediaTransmission (0x008B) | (8) OpenReceiveChannel (0x0105) |
-| (9) OpenReceiveChannelAck (0x0022) | (10) CallInfoMessage (0x008F) | (11) DisplayTextMessage (0x0099) | (12) VersionMessage (0x0098) |
+|                                      |                                        |                                     |                                    |
+|---------------------------------------|------------------------------------------|---------------------------------------|--------------------------------------|
+| (1) RegisterAckMessage (0x0081)      | (2) KeepAliveAckMessage (0x0100)         | (3) StartToneMessage (0x0082)         | (4) StopToneMessage (0x0083)        |
+| (5) SetRingerMessage (0x0085)        | (6) StartMediaTransmission (0x008A)      | (7) StopMediaTransmission (0x008B)    | (8) OpenReceiveChannel (0x0105)     |
+| (9) OpenReceiveChannelAck (0x0022)   | (10) CallInfoMessage (0x008F)            | (11) DisplayTextMessage (0x0099)      | (12) VersionMessage (0x0098)        |
 
 ## Sample Hex Dump + Dissector View (RegisterReq)
 ```
