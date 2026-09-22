@@ -365,4 +365,4 @@ Advanced Message Queuing Protocol
 [AMQP Wireshark Wiki](https://wiki.wireshark.org/AMQP)<br>
 [IANA search=amqp](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml?search=amqp)<br>
 [RabbitMQ: Inspecting AMQP 0-9-1 Traffic using Wireshark](https://www.rabbitmq.com/amqp-wireshark)<br>
-[amqp-specification.zip](https://github.com/ericwu1997/ericwu1997.github.io/raw/refs/heads/content/docs/app-layer-protocols/amqpamqp-specification.zip)
+[amqp-specification.zip](https://github.com/ericwu1997/ericwu1997.github.io/raw/refs/heads/main/content/docs/app-layer-protocols/amqp/amqp-specification.zip)
