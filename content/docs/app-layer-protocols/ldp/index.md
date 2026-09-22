@@ -54,3 +54,4 @@ echo -n "000000f4" | xxd -r -p | netcat -u XXX.XXX.XXX.XXX 30718
 ### Reference 
 [Product Information Base (PIB) Viewer](https://ts.lantronix.com/ftp/cpr/Generic/4.3/4.3.1.1/Help/Web/PIB_Viewer.htm)<br>
 [Lantronix deviceinstaller](https://ts.lantronix.com/ftp/deviceinstaller/lantronix/4.4/4.4.0.7/Installers/Download_Web/)
+[resource.zip](https://github.com/ericwu1997/ericwu1997.github.io/raw/refs/heads/main/content/docs/app-layer-protocols/ldp/resource.zip)
