@@ -9,26 +9,8 @@ createTime: 2026-09-18
 updateTime: 2026-09-18
 tags: [Markdown, Writing]
 ---
-<!-- Frontmatter (title, parent, and other page metadata) is out of scope for
-     this skill - handled by a separate metadata skill. Insert its output
-     above this line before publishing. -->
 
-# Simple Service Discovery Protocol
-{: .no_toc }
-
-## Table of contents
-{: .no_toc .text-delta }
-
-1. [Overview](#overview)
-2. [M-SEARCH Request Headers](#m-search-request-headers)
-3. [Response Headers](#response-headers)
-4. [Nmap Script / Search Filter](#nmap-script--search-filter)
-5. [Sample Request and Response](#sample-request-and-response)
-6. [Reference](#reference)
-
----
-
-## Overview
+### Overview
 SSDP is a text-based, HTTP-style protocol over **UDP port 1900** for
 advertisement and discovery of network services and presence information.
 It is the basis of the discovery mechanism in Universal Plug and Play
@@ -41,24 +23,96 @@ method **M-SEARCH**. Responses to such search requests are sent via unicast
 addressing to the originating address and port number of the multicast
 request.
 
-## M-SEARCH Request Headers
-| **Field** | **Example** | **Note** |
-|---|---|---|
-| Host | `239.255.255.250:1900` | SSDP multicast address:port |
-| Man | `"ssdp:discover"` | Identifies the request as a discovery search |
-| ST | `roku:ecp` | Search target — service/device type being searched for |
 
-## Response Headers
-| **Field** | **Example** | **Note** |
-|---|---|---|
-| Cache-Control | `max-age=3600` | Advertisement lifetime |
-| ST | `roku:ecp` | Search target that matched |
-| USN | `uuid:roku:ecp:XXXXXXXXXXXX` | Unique service name — masked device UUID |
-| Ext | *(empty)* | Present for backward compatibility only, carries no value |
-| Server | `Roku/14.0.4 UPnP/1.0 Roku/14.0.4` | OS/UPnP-stack/product version — the primary device-identification field in an SSDP response |
-| Location | `http://192.168.0.4:8060/` | URL of the device description document |
+### M-SEARCH Request
 
-## Nmap Script / Search Filter
+<table style="display:table; width:100%; border-collapse:collapse; background:transparent;">
+  <colgroup>
+    <col style="width:25%"><col style="width:75%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Field</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">M-SEARCH * HTTP/1.1</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Literal request line. No colon, unlike the headers below.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">HOST</td>
+      <td style="border:1px solid #333; padding:8px 12px;">SSDP multicast address/port, always <code>239.255.255.250:1900</code>.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">MAN</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Discovery indicator, always the quoted literal <code>"ssdp:discover"</code>.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">MX</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Max wait (seconds) before a device sends its response, e.g. <code>MX: 2</code>. Devices randomize their reply delay within this window.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">ST</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Search target (what to look for), e.g. <code>ssdp:all</code>, <code>upnp:rootdevice</code>, or a specific <code>urn:schemas-upnp-org:device:...</code> type/version.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">Terminator</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Blank line ending the header block, per HTTP-style message framing. Value is <code>CRLF CRLF</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Response
+
+<table style="display:table; width:100%; border-collapse:collapse; background:transparent;">
+  <colgroup>
+    <col style="width:25%"><col style="width:75%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Field</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">HTTP/1.1 200 OK</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Literal status line. No colon, unlike the headers below.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">CACHE-CONTROL</td>
+      <td style="border:1px solid #333; padding:8px 12px;">How long this advertisement is valid, e.g. <code>CACHE-CONTROL: max-age=1800</code>.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">EXT</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Empty header confirming compliance with the UPnP base standard. Present with no value.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">LOCATION</td>
+      <td style="border:1px solid #333; padding:8px 12px;">URL of the device/service description document, e.g. <code>LOCATION: http://192.168.1.5:1900/desc.xml</code>.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">SERVER</td>
+      <td style="border:1px solid #333; padding:8px 12px;">OS/version, UPnP/version, and product/version of the responding device, e.g. <code>SERVER: Linux/5.4 UPnP/1.1 MyDevice/1.0</code>.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">ST</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Search target that was matched, echoing the value from the request, e.g. <code>upnp:rootdevice</code>.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">USN</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Unique service name identifying this exact device/service instance, e.g. <code>uuid:abc123::upnp:rootdevice</code>.</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">Terminator</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Blank line ending the header block, per HTTP-style message framing. Value is <code>CRLF CRLF</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Nmap Script / Search Filter
 ```
 nmap -sU -p 1900 --script=upnp-info 10.0.0.1
 ```
@@ -66,7 +120,7 @@ nmap -sU -p 1900 --script=upnp-info 10.0.0.1
 services.service_name: SSDP
 ```
 
-## Sample Request and Response
+### Sample Request and Response
 Request
 ```
 0000   4d 2d 53 45 41 52 43 48 20 2a 20 48 54 54 50 2f   M-SEARCH * HTTP/

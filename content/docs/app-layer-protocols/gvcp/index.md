@@ -55,6 +55,8 @@ struct gvcp_cmd_header{
 
 ### DISCOVERY_ACK
 
+#### GVCP ACK Header
+
 <table style="width:100%; text-align:center; table-layout:fixed; border-collapse:collapse;">
   <colgroup>
     <col style="width:25%"><col style="width:25%"><col style="width:25%"><col style="width:25%">
@@ -87,6 +89,7 @@ struct gvcp_ack_header{
 	uint16 wReqID;
 };
 ```
+#### GVCP ACK Payload
 
 <table style="width:100%; text-align:center; table-layout:fixed; border-collapse:collapse;">
   <colgroup>
