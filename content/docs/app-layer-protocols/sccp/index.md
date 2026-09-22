@@ -10,7 +10,7 @@ updateTime: 2026-09-18
 tags: [Markdown, Writing]
 ---
 
-## Overview
+### Overview
 The **Skinny Client Control Protocol** (SCCP), also known as Skinny, is a
 proprietary, application-layer signaling protocol developed by Cisco for
 VoIP call control and device management. It operates in a client–server
@@ -21,7 +21,7 @@ registration, call setup/teardown, feature control (hold, transfer,
 conferencing), and media session negotiation — voice/video transport itself
 is carried separately over RTP.
 
-## Protocol Stacks
+### Protocol Stacks
 ```
  ------------------------------------     IP Telephony Endpoint
 |      Call Control Application      | <= CUCM / SCCP Call Agent
@@ -34,96 +34,235 @@ is carried separately over RTP.
  ------------------------------------
 ```
 
-## Protocol Structure
+### Protocol Structure
 The Skinny Client Control Protocol (SCCP) uses a binary protocol design
 featuring a fixed 12-byte header consisting of three 32-bit fields: data
 length, header version, and message ID, followed by message-specific
-parameters.
+parameters. Below example structure is for RegisterReq
 
-<table style="display:table; width:100%; text-align:center; table-layout:fixed; border-collapse:collapse; border:1px solid #333; background:transparent;">
+#### RegisterReq
+<table style="display:table; width:100%; text-align:center; table-layout:fixed; border-collapse:collapse;">
   <colgroup>
-    <col style="width:20%"><col style="width:20%"><col style="width:20%"><col style="width:40%">
+    <col style="width:6%">
+    <col style="width:5.875%"><col style="width:5.875%"><col style="width:5.875%"><col style="width:5.875%">
+    <col style="width:5.875%"><col style="width:5.875%"><col style="width:5.875%"><col style="width:5.875%">
+    <col style="width:5.875%"><col style="width:5.875%"><col style="width:5.875%"><col style="width:5.875%">
+    <col style="width:5.875%"><col style="width:5.875%"><col style="width:5.875%"><col style="width:5.875%">
   </colgroup>
   <tbody>
+    <!-- Ruler: top row only -->
     <tr>
-      <td style="border:1px solid #333; padding:6px; background:transparent;"><i>Data Length</i><br>(4 byte)</td>
-      <td style="border:1px solid #333; padding:6px; background:transparent;"><i>Header Version</i><br>(4 byte)</td>
-      <td style="border:1px solid #333; padding:6px; background:transparent;"><i>Message ID</i><br>(4 byte)</td>
-      <td style="border:1px solid #333; padding:6px; background:transparent;"><i>payload</i> ....</td>
+      <td style="border:1px solid #333; padding:2px 4px;"></td>
+      <td colspan="16" style="border:1px solid #333; padding:2px 8px;">
+        <div style="display:flex; justify-content:space-between;"><span>0</span><span>7</span><span>15</span></div>
+      </td>
+    </tr>
+    <!-- Offset 0 -->
+    <tr>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">0</td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>Data Length</i></td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>Header Version</i></td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>Message ID</i></td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>Device Name</i></td>
+    </tr>
+    <!-- Offset 16 -->
+    <tr>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">16</td>
+      <td colspan="12" style="border:1px solid #333; padding:6px;"><i>Device Name</i></td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>Reserved</i></td>
+    </tr>
+    <!-- Offset 32 -->
+    <tr>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">32</td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>Instance</i></td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>Station IPv4 Address</i></td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>Device Type</i></td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>Max Concurrent RTP Streams</i></td>
+    </tr>
+    <!-- Offset 48 -->
+    <tr>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">48</td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>Active RTP Streams</i></td>
+      <td colspan="1" style="border:1px solid #333; padding:6px;"><i>Proto Ver</i></td>
+      <td colspan="1" style="border:1px solid #333; padding:6px;"><i>Reserved</i></td>
+      <td colspan="2" style="border:1px solid #333; padding:6px;"><i>Phone Features</i></td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>Max Concurrent Conferences</i></td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>Active Conferences</i></td>
+    </tr>
+    <!-- Offset 64 -->
+    <tr>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">64</td>
+      <td colspan="6" style="border:1px solid #333; padding:6px;"><i>MAC Address</i></td>
+      <td colspan="6" style="border:1px solid #333; padding:6px;"><i>Reserved / Padding</i></td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>IPv4 Address Scope</i></td>
+    </tr>
+    <!-- Offset 80 -->
+    <tr>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">80</td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>Max Number of Lines</i></td>
+      <td colspan="12" style="border:1px solid #333; padding:6px;"><i>Station IPv6 Address</i></td>
+    </tr>
+    <!-- Offset 96 -->
+    <tr>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">96</td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>Station IPv6 Address</i></td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>IPv6 Address Scope</i></td>
+      <td colspan="8" style="border:1px solid #333; padding:6px;"><i>Firmware Load Name</i></td>
+    </tr>
+    <!-- Offset 112 -->
+    <tr>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">112</td>
+      <td colspan="16" style="border:1px solid #333; padding:6px;"><i>Firmware Load Name</i></td>
+    </tr>
+    <!-- Offset 128 (partial row, only 8 of 16 bytes remain) -->
+    <tr>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">128</td>
+      <td colspan="8" style="border:1px solid #333; padding:6px;"><i>Firmware Load Name</i></td>
+      <td colspan="8" style="border:1px solid #333; padding:6px; opacity:0.4;"></td>
     </tr>
   </tbody>
 </table>
 
-<!-- ```
- --------------------------
-|   Data Length  (32 bit)  |
-|--------------------------|
-| Header Version (32 bit)  |
-|--------------------------|
-|    Message ID  (32 bit)  |
-|--------------------------|
-|       payload  ....      |
- --------------------------
-``` -->
-
-The 32-bit header field after the message length was historically reserved
-and set to zero, but starting with SCCP version 18 Cisco repurposed it to
-carry the protocol version number. As a result, older phones and CUCM
-versions always use 0, while newer implementations may send a non-zero
-value, which legacy receivers typically ignore for compatibility.
-
-## RegisterReq Payload — Identification fields
-| **Field** | **Size (bytes)** | **Example** |
-|---|---|---|
-| Device Name | 16 | `SEP00192FXXXXXX` |
-| Reserved for future use | 4 | |
-| Instance | 4 | |
-| Device Type | 4 | `0x00000073` (7941G) |
-| MAC Address | 6 | `00:19:2f:XX:XX:XX` |
-| Firmware Load Name | 32 | `SCCP41.9-0-3S` |
-
-## RegisterReq Payload — Network fields
-| **Field** | **Size (bytes)** | **Example** |
-|---|---|---|
-| Station IPv4 Address | 4 | |
-| IPv4 Address Scope | 4 | |
-| Station IPv6 Address | 16 | Empty for IPv4-only phones |
-| IPv6 Address Scope | 4 | |
-
-## RegisterReq Payload — Capability/capacity fields
-| **Field** | **Size (bytes)** | **Example** |
-|---|---|---|
-| Max Concurrent RTP Streams | 4 | |
-| Active RTP Streams | 4 | |
-| Max Concurrent Conferences | 4 | |
-| Active Conferences | 4 | |
-| Max Number of Lines | 4 | |
-
-## RegisterReq Payload — Protocol/feature fields
-| **Field** | **Size (bytes)** | **Example** |
-|---|---|---|
-| Protocol Version | 1 | |
-| Unknown / Reserved | 1 | 0 |
-| Phone Features | 2 | |
-
-## Common Message ID
+### Common Message ID
 Station → CallManager (Client → CUCM)
 
-|                                  |                                         |                                          |                                   |
-|----------------------------------|-----------------------------------------|--------------------------------------------|-----------------------------------|
-| (1) KeepAlive (0x0000)          | (2) RegisterMessage (0x0001)           | (3) IpPortMessage (0x0002)              | (4) StimulusMessage (0x0005)   |
-| (5) OffHookMessage (0x0006)     | (6) OnHookMessage (0x0007)             | (7) HookFlashMessage (0x0008)           | (8) SoftKeyEventMessage (0x0026) |
-| (9) UnregisterMessage (0x0027)  | (10) DeviceToUserDataMessage (0x002E)  | (11) MediaTransmissionFailure (0x002A)  | (12) RegisterTokenReq (0x0029) |
+<table style="display:table; width:100%; border-collapse:collapse; background:transparent;">
+  <colgroup>
+    <col style="width:8%"><col style="width:29%"><col style="width:13%">
+    <col style="width:8%"><col style="width:29%"><col style="width:13%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">No.</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Message Name</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Value</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">No.</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Message Name</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">1</td>
+      <td style="border:1px solid #333; padding:8px 12px;">KeepAlive</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0000</code></td>
+      <td style="border:1px solid #333; padding:8px 12px;">7</td>
+      <td style="border:1px solid #333; padding:8px 12px;">HookFlashMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0008</code></td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">2</td>
+      <td style="border:1px solid #333; padding:8px 12px;">RegisterMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0001</code></td>
+      <td style="border:1px solid #333; padding:8px 12px;">8</td>
+      <td style="border:1px solid #333; padding:8px 12px;">SoftKeyEventMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0026</code></td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">3</td>
+      <td style="border:1px solid #333; padding:8px 12px;">IpPortMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0002</code></td>
+      <td style="border:1px solid #333; padding:8px 12px;">9</td>
+      <td style="border:1px solid #333; padding:8px 12px;">UnregisterMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0027</code></td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">4</td>
+      <td style="border:1px solid #333; padding:8px 12px;">StimulusMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0005</code></td>
+      <td style="border:1px solid #333; padding:8px 12px;">10</td>
+      <td style="border:1px solid #333; padding:8px 12px;">DeviceToUserDataMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x002E</code></td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">5</td>
+      <td style="border:1px solid #333; padding:8px 12px;">OffHookMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0006</code></td>
+      <td style="border:1px solid #333; padding:8px 12px;">11</td>
+      <td style="border:1px solid #333; padding:8px 12px;">MediaTransmissionFailure</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x002A</code></td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">6</td>
+      <td style="border:1px solid #333; padding:8px 12px;">OnHookMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0007</code></td>
+      <td style="border:1px solid #333; padding:8px 12px;">12</td>
+      <td style="border:1px solid #333; padding:8px 12px;">RegisterTokenReq</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0029</code></td>
+    </tr>
+  </tbody>
+</table>
 
 CallManager → Station (CUCM → Client)
 
-|                                      |                                        |                                     |                                    |
-|---------------------------------------|------------------------------------------|---------------------------------------|--------------------------------------|
-| (1) RegisterAckMessage (0x0081)      | (2) KeepAliveAckMessage (0x0100)         | (3) StartToneMessage (0x0082)         | (4) StopToneMessage (0x0083)        |
-| (5) SetRingerMessage (0x0085)        | (6) StartMediaTransmission (0x008A)      | (7) StopMediaTransmission (0x008B)    | (8) OpenReceiveChannel (0x0105)     |
-| (9) OpenReceiveChannelAck (0x0022)   | (10) CallInfoMessage (0x008F)            | (11) DisplayTextMessage (0x0099)      | (12) VersionMessage (0x0098)        |
+<table style="display:table; width:100%; border-collapse:collapse; background:transparent;">
+  <colgroup>
+    <col style="width:8%"><col style="width:29%"><col style="width:13%">
+    <col style="width:8%"><col style="width:29%"><col style="width:13%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">No.</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Message Name</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Value</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">No.</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Message Name</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">1</td>
+      <td style="border:1px solid #333; padding:8px 12px;">RegisterAckMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0081</code></td>
+      <td style="border:1px solid #333; padding:8px 12px;">7</td>
+      <td style="border:1px solid #333; padding:8px 12px;">StopMediaTransmission</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x008B</code></td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">2</td>
+      <td style="border:1px solid #333; padding:8px 12px;">KeepAliveAckMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0100</code></td>
+      <td style="border:1px solid #333; padding:8px 12px;">8</td>
+      <td style="border:1px solid #333; padding:8px 12px;">OpenReceiveChannel</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0105</code></td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">3</td>
+      <td style="border:1px solid #333; padding:8px 12px;">StartToneMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0082</code></td>
+      <td style="border:1px solid #333; padding:8px 12px;">9</td>
+      <td style="border:1px solid #333; padding:8px 12px;">OpenReceiveChannelAck</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0022</code></td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">4</td>
+      <td style="border:1px solid #333; padding:8px 12px;">StopToneMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0083</code></td>
+      <td style="border:1px solid #333; padding:8px 12px;">10</td>
+      <td style="border:1px solid #333; padding:8px 12px;">CallInfoMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x008F</code></td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">5</td>
+      <td style="border:1px solid #333; padding:8px 12px;">SetRingerMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0085</code></td>
+      <td style="border:1px solid #333; padding:8px 12px;">11</td>
+      <td style="border:1px solid #333; padding:8px 12px;">DisplayTextMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0099</code></td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">6</td>
+      <td style="border:1px solid #333; padding:8px 12px;">StartMediaTransmission</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x008A</code></td>
+      <td style="border:1px solid #333; padding:8px 12px;">12</td>
+      <td style="border:1px solid #333; padding:8px 12px;">VersionMessage</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0x0098</code></td>
+    </tr>
+  </tbody>
+</table>
 
-## Sample Hex Dump + Dissector View (RegisterReq)
+### Sample Hex Dump + Dissector View (RegisterReq)
 ```
 Skinny Client Control Protocol
     Data length: 128

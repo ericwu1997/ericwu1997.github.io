@@ -64,7 +64,7 @@ request.
   </tbody>
 </table>
 
-### Response
+### Search Response
 
 <table style="display:table; width:100%; border-collapse:collapse; background:transparent;">
   <colgroup>
