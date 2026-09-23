@@ -10,12 +10,12 @@ updateTime: 2026-09-23
 tags: [Markdown, Writing]
 ---
 
-#### Overview
+### Overview
 **ISAKMP** (Internet Security Association and Key Management Protocol), defined in **RFC 2408**, is a framework for establishing, negotiating, modifying, and deleting Security Associations (SAs) and cryptographic keying material, most commonly as the base protocol underlying **IKE** (Internet Key Exchange) for IPsec. It runs over **UDP**, on the IANA-assigned port **500**; when NAT is detected between peers, NAT-Traversal (NAT-T) switches the exchange to UDP port **4500**, encapsulating the IKE/IPsec traffic to survive NAT rewriting. ISAKMP is peer-to-peer (either side can initiate) and defines its own message/payload framework independent of the specific key-exchange algorithm in use.
 
 Every ISAKMP message opens with a fixed 28-byte header carrying a pair of 8-byte **Initiator/Responder Cookies** (an anti-clogging/session identifier), a **Next Payload** chain type, protocol **version**, **Exchange Type**, and **Flags** — none of it encrypted at this layer, since ISAKMP negotiates the security association before any payload encryption applies. The most identification-relevant payload is the **Vendor ID** (payload type 13): implementations advertise an MD5 (or similar) hash of a vendor-specific string, often with extra bytes appended encoding the exact product, version, or OS build, making it a direct and widely-used fingerprint for VPN gateway/OS identification (e.g. differentiating Windows releases, Check Point versions, or Cisco/Fortinet/SonicWall/NetScreen implementations) from a single cleartext payload.
 
-#### ISAKMP Header Format
+### ISAKMP Header Format
 <table style="display:table; width:100%; text-align:center; table-layout:fixed; border-collapse:collapse;">
   <colgroup>
     <col style="width:6%">
