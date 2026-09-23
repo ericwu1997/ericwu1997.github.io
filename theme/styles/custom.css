@@ -1,18 +1,25 @@
 /* Add site-specific CSS variables and overrides here. */
 
-/* Alphabetical protocol index (docs/app-layer-protocols/) */
+/* Protocol index (docs/app-layer-protocols/): one grid per transport, 4 entries per row */
 .vp-doc .proto-index {
-  columns: 4 200px;
-  column-gap: 32px;
   margin-top: 16px;
 }
 
 .vp-doc .proto-group {
-  break-inside: avoid-column;
-  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 32px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 767px) {
+  .vp-doc .proto-group {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .vp-doc .proto-group-title {
+  grid-column: 1 / -1;
   margin-bottom: 8px;
   font-size: 28px;
   font-weight: 600;
@@ -21,13 +28,11 @@
 }
 
 .vp-doc .proto-index a.proto-item {
-  display: block;
   padding: 2px 0;
   font-weight: 400;
   line-height: 1.6;
   color: var(--vp-c-text-1);
   text-decoration: none;
-  break-inside: avoid;
 }
 
 .vp-doc .proto-index a.proto-item:hover {
