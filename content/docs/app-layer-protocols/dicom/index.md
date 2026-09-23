@@ -44,10 +44,9 @@ def handle_find(event):
     ds.QueryRetrieveLevel = 'PATIENT'
     ds.Manufacturer = "Carestream Health "         # (0008,0070)
     ds.ManufacturerModelName = "5950"              # (0008,1090)
-    ds.OtherPatientIDs = "12345678"                # (0010,0018)
+    ds.OtherPatientIDs = "12345678"                # (0010,1000)
     ds.PatientID = "4.3.1.p1"                       # (0010,0020)
 
-    # Private tags
     ds.add_new((0x2110, 0x0010), 'CS', 'NORMAL')    # (2110,0010)
     ds.add_new((0x2110, 0x0020), 'CS', 'NORMAL')    # (2110,0020)
     ds.add_new((0x2110, 0x0030), 'LO', '5950')      # (2110,0030)
