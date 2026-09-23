@@ -10,7 +10,7 @@ updateTime: 2026-09-23
 tags: [Markdown, Writing]
 ---
 
-## Overview
+### Overview
 **CWMP** (CPE WAN Management Protocol), commonly known by its Broadband Forum specification number **TR-069**, is a bidirectional **SOAP-over-HTTP** application-layer protocol for remote management of customer-premises equipment (CPE). It runs over **TCP**, on the IANA-assigned port **7547**, and follows a client-server model between the managed CPE (routers, cable/DSL modems, VoIP ATAs, and increasingly cameras and other IoT devices) and an ISP-operated Auto Configuration Server (ACS), which uses it to provision configuration, push firmware updates, and run remote diagnostics without a truck roll.
 
 The CPE-initiated `Inform` RPC — sent in a SOAP envelope under the XML namespace `urn:dslforum-org:cwmp-1-x` (version-dependent) — carries a `DeviceId` structure with **Manufacturer**, **OUI**, **ProductClass**, and **SerialNumber** fields in cleartext XML, making it a direct device fingerprint whenever the exchange isn't wrapped in TLS. The ACS can also issue an unsolicited **Connection Request** back to the CPE on port 7547 (typically HTTP Basic/Digest authenticated) to trigger an immediate session. CWMP traffic is plaintext HTTP by default unless the HTTPS variant is negotiated, and internet-exposed port 7547 endpoints have been a recurring target for CPE-hijacking botnets (e.g., the 2016 Mirai/Annie attacks).
@@ -349,7 +349,7 @@ User-Agent: MikroTik
 </soapenv:Envelope>
 ```
 
-## Reference
+### Reference
 [Huawei - eSight Third-Party Device Management Specifications (Communication Terminals)](https://support.huawei.com/enterprise/en/doc/EDOC1100266815/f18f44a/inform-message-format)<br>
 [Broadband forum - CWMP Technical Report](https://www.broadband-forum.org/technical-library/?search=cwmp)<br>
 [Broadband forum - TR-069 Technical Report](https://www.broadband-forum.org/technical-library/?number=TR-069)<br>
