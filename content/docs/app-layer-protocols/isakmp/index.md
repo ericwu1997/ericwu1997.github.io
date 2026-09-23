@@ -10,49 +10,142 @@ updateTime: 2026-09-23
 tags: [Markdown, Writing]
 ---
 
-## Overview
+#### Overview
 **ISAKMP** (Internet Security Association and Key Management Protocol), defined in **RFC 2408**, is a framework for establishing, negotiating, modifying, and deleting Security Associations (SAs) and cryptographic keying material, most commonly as the base protocol underlying **IKE** (Internet Key Exchange) for IPsec. It runs over **UDP**, on the IANA-assigned port **500**; when NAT is detected between peers, NAT-Traversal (NAT-T) switches the exchange to UDP port **4500**, encapsulating the IKE/IPsec traffic to survive NAT rewriting. ISAKMP is peer-to-peer (either side can initiate) and defines its own message/payload framework independent of the specific key-exchange algorithm in use.
 
 Every ISAKMP message opens with a fixed 28-byte header carrying a pair of 8-byte **Initiator/Responder Cookies** (an anti-clogging/session identifier), a **Next Payload** chain type, protocol **version**, **Exchange Type**, and **Flags** — none of it encrypted at this layer, since ISAKMP negotiates the security association before any payload encryption applies. The most identification-relevant payload is the **Vendor ID** (payload type 13): implementations advertise an MD5 (or similar) hash of a vendor-specific string, often with extra bytes appended encoding the exact product, version, or OS build, making it a direct and widely-used fingerprint for VPN gateway/OS identification (e.g. differentiating Windows releases, Check Point versions, or Cisco/Fortinet/SonicWall/NetScreen implementations) from a single cleartext payload.
 
-## ISAKMP Header Format
-<table style="display:table; width:100%; text-align:center; table-layout:fixed; border-collapse:collapse; border:1px solid #333;">
+#### ISAKMP Header Format
+<table style="display:table; width:100%; text-align:center; table-layout:fixed; border-collapse:collapse;">
   <colgroup>
-    <col style="width:20%"><col style="width:20%"><col style="width:9%"><col style="width:9%"><col style="width:9%"><col style="width:9%"><col style="width:12%"><col style="width:12%">
+    <col style="width:6%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
   </colgroup>
   <tbody>
+    <!-- Ruler -->
     <tr>
-      <td style="border:1px solid #333; padding:2px 8px;">
-        <div style="display:flex; justify-content:space-between;"><span>0</span><span>7</span></div>
-      </td>
-      <td style="border:1px solid #333; padding:2px 8px;">
-        <div style="display:flex; justify-content:space-between;"><span>8</span><span>15</span></div>
-      </td>
-      <td style="border:1px solid #333; padding:2px 8px;">16</td>
-      <td style="border:1px solid #333; padding:2px 8px;">17</td>
-      <td style="border:1px solid #333; padding:2px 8px;">18</td>
-      <td style="border:1px solid #333; padding:2px 8px;">19</td>
-      <td style="border:1px solid #333; padding:2px 8px;">
-        <div style="display:flex; justify-content:space-between;"><span>20</span><span>23</span></div>
-      </td>
-      <td style="border:1px solid #333; padding:2px 8px;">
-        <div style="display:flex; justify-content:space-between;"><span>24</span><span>27</span></div>
+      <td style="border:1px solid #333; padding:2px 4px; font-size:0.7em; opacity:0.7; line-height:1.2;">Bit&rarr;<br>Byte&darr;</td>
+      <td colspan="32" style="border:1px solid #333; padding:2px 8px;">
+        <div style="display:flex; justify-content:space-between;"><span>0</span><span>7</span><span>15</span><span>23</span><span>31</span></div>
       </td>
     </tr>
+    <!-- Offset 0-7: Initiator Cookie (merged, 8 bytes) -->
     <tr>
-      <td style="border:1px solid #333; padding:6px;"><i>Initiator Cookie</i></td>
-      <td style="border:1px solid #333; padding:6px;"><i>Responder Cookie</i></td>
-      <td style="border:1px solid #333; padding:6px;"><i>Next Payload</i></td>
-      <td style="border:1px solid #333; padding:6px;"><i>MjVer</i><span style="font-size:0.8em; opacity:0.7;"><br>/MnVer</span></td>
-      <td style="border:1px solid #333; padding:6px;"><i>Exchange Type</i></td>
-      <td style="border:1px solid #333; padding:6px;"><i>Flags</i></td>
-      <td style="border:1px solid #333; padding:6px;"><i>Message ID</i></td>
-      <td style="border:1px solid #333; padding:6px;"><i>Length</i></td>
+      <td rowspan="2" style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">0</td>
+      <td rowspan="2" colspan="32" style="border:1px solid #333; padding:6px;"><i>Initiator Cookie<br><span style="font-size:0.8em; opacity:0.7;">(8 bytes)</span></i></td>
+    </tr>
+    <tr></tr>
+    <!-- Offset 8-15: Responder Cookie (merged, 8 bytes) -->
+    <tr>
+      <td rowspan="2" style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">8</td>
+      <td rowspan="2" colspan="32" style="border:1px solid #333; padding:6px;"><i>Responder Cookie<br><span style="font-size:0.8em; opacity:0.7;">(8 bytes)</span></i></td>
+    </tr>
+    <tr></tr>
+    <!-- Offset 16: Next Payload | MjVer | MnVer | Exchange Type | Flags -->
+    <tr>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">16</td>
+      <td colspan="8" style="border:1px solid #333; padding:6px;"><i>Next Payload<br><span style="font-size:0.8em; opacity:0.7;">(1 byte)</span></i></td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>MjVer<br><span style="font-size:0.8em; opacity:0.7;">(4 bits)</span></i></td>
+      <td colspan="4" style="border:1px solid #333; padding:6px;"><i>MnVer<br><span style="font-size:0.8em; opacity:0.7;">(4 bits)</span></i></td>
+      <td colspan="8" style="border:1px solid #333; padding:6px;"><i>Exchange Type<br><span style="font-size:0.8em; opacity:0.7;">(1 byte)</span></i></td>
+      <td colspan="8" style="border:1px solid #333; padding:6px;"><i>Flags<br><span style="font-size:0.8em; opacity:0.7;">(1 byte)</span></i></td>
+    </tr>
+    <!-- Offset 20: Message ID -->
+    <tr>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">20</td>
+      <td colspan="32" style="border:1px solid #333; padding:6px;"><i>Message ID<br><span style="font-size:0.8em; opacity:0.7;">(4 bytes)</span></i></td>
+    </tr>
+    <!-- Offset 24: Length -->
+    <tr>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">24</td>
+      <td colspan="32" style="border:1px solid #333; padding:6px;"><i>Length<br><span style="font-size:0.8em; opacity:0.7;">(4 bytes)</span></i></td>
     </tr>
   </tbody>
 </table>
 
-| Next Payload Type   | Value | Next Payload Type   | Value  |
+<div style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap;">
+
+<table style="display:table; flex:2 1 420px; border-collapse:collapse; background:transparent;">
+  <colgroup>
+    <col style="width:30%"><col style="width:20%"><col style="width:30%"><col style="width:20%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Next Payload Type</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:center; background:rgba(128,128,128,0.1);">Value</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Next Payload Type</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:center; background:rgba(128,128,128,0.1);">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">None</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">0</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Hash</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">8</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">Security Association</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">1</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Signature</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">9</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">Proposal</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">2</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Nonce</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">10</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">Transform</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">3</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Notification</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">11</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">Key Exchange</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">4</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Delete</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">12</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">Identification</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">5</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Vendor ID</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">13</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">Certificate</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">6</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Reserved</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">14-127</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;">Certificate Request</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">7</td>
+      <td style="border:1px solid #333; padding:8px 12px;">Private Use</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">128-255</td>
+    </tr>
+  </tbody>
+</table>
+
+<table style="display:table; flex:1 1 260px; border-collapse:collapse; background:transparent;">
+  <colgroup>
+    <col style="width:65%"><col style="width:35%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Exchange Type</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:center; background:rgba(128,128,128,0.1);">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style="border:1px solid #333; padding:8px 12px;">None</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">0</td></tr>
+    <tr><td style="border:1px solid #333; padding:8px 12px;">Base</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">1</td></tr>
+    <tr><td style="border:1px solid #333; padding:8px 12px;">Identity Protection</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">2</td></tr>
+    <tr><td style="border:1px solid #333; padding:8px 12px;">Authentication Only</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">3</td></tr>
+    <tr><td style="border:1px solid #333; padding:8px 12px;">Aggressive</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">4</td></tr>
+    <tr><td style="border:1px solid #333; padding:8px 12px;">Informational</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">5</td></tr>
+    <tr><td style="border:1px solid #333; padding:8px 12px;">ISAKMP Future Use</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">6-31</td></tr>
+    <tr><td style="border:1px solid #333; padding:8px 12px;">DOI Specific Use</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">32-239</td></tr>
+    <tr><td style="border:1px solid #333; padding:8px 12px;">Private Use</td><td style="border:1px solid #333; padding:8px 12px; text-align:center;">240-255</td></tr>
+  </tbody>
+</table>
+
+</div>
+
+<!-- | Next Payload Type   | Value | Next Payload Type   | Value  |
 |----------------------|-------|----------------------|--------|
 | None                  | 0     | Hash                 | 8      |
 | Security Association  | 1     | Signature            | 9      |
@@ -73,44 +166,46 @@ Every ISAKMP message opens with a fixed 28-byte header carrying a pair of 8-byte
 | Informational            | 5      |
 | ISAKMP Future Use        | 6-31   |
 | DOI Specific Use         | 32-239 |
-| Private Use              | 240-255|
+| Private Use              | 240-255| -->
 
-## Identification Payload
-<table style="display:table; width:100%; text-align:center; table-layout:fixed; border-collapse:collapse; border:1px solid #333;">
+### Identification Payload
+<table style="display:table; width:100%; text-align:center; table-layout:fixed; border-collapse:collapse;">
   <colgroup>
-    <col style="width:25%"><col style="width:25%"><col style="width:25%"><col style="width:25%">
+    <col style="width:6%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
   </colgroup>
   <tbody>
+    <!-- Ruler -->
     <tr>
-      <td style="border:1px solid #333; padding:2px 8px;">0</td>
-      <td style="border:1px solid #333; padding:2px 8px;">1</td>
-      <td style="border:1px solid #333; padding:2px 8px;">
-        <div style="display:flex; justify-content:space-between;"><span>2</span><span>3</span></div>
+      <td style="border:1px solid #333; padding:2px 4px; font-size:0.7em; opacity:0.7; line-height:1.2;">Bit&rarr;<br>Byte&darr;</td>
+      <td colspan="32" style="border:1px solid #333; padding:2px 8px;">
+        <div style="display:flex; justify-content:space-between;"><span>0</span><span>7</span><span>15</span><span>23</span><span>31</span></div>
       </td>
-      <td style="border:1px solid #333; padding:2px 8px;">4</td>
     </tr>
+    <!-- Offset 0: Next Payload | RESERVED | Payload Length -->
     <tr>
-      <td style="border:1px solid #333; padding:6px;"><i>Next Payload</i></td>
-      <td style="border:1px solid #333; padding:6px;"><i>RESERVED</i></td>
-      <td style="border:1px solid #333; padding:6px;"><i>Payload Length</i></td>
-      <td style="border:1px solid #333; padding:6px;"><i>ID Type</i></td>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">0</td>
+      <td colspan="8" style="border:1px solid #333; padding:6px;"><i>Next Payload<br><span style="font-size:0.8em; opacity:0.7;">(1 byte)</span></i></td>
+      <td colspan="8" style="border:1px solid #333; padding:6px;"><i>RESERVED<br><span style="font-size:0.8em; opacity:0.7;">(1 byte)</span></i></td>
+      <td colspan="16" style="border:1px solid #333; padding:6px;"><i>Payload Length<br><span style="font-size:0.8em; opacity:0.7;">(2 bytes)</span></i></td>
     </tr>
-  </tbody>
-</table>
-<table style="display:table; width:100%; text-align:center; table-layout:fixed; border-collapse:collapse; border:1px solid #333;">
-  <colgroup>
-    <col style="width:25%"><col style="width:75%">
-  </colgroup>
-  <tbody>
+    <!-- Offset 4: ID Type | DOI Specific ID Data -->
     <tr>
-      <td style="border:1px solid #333; padding:2px 8px;">
-        <div style="display:flex; justify-content:space-between;"><span>5</span><span>7</span></div>
-      </td>
-      <td style="border:1px solid #333; padding:2px 8px;">8+ (variable)</td>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">4</td>
+      <td colspan="8" style="border:1px solid #333; padding:6px;"><i>ID Type<br><span style="font-size:0.8em; opacity:0.7;">(1 byte)</span></i></td>
+      <td colspan="24" style="border:1px solid #333; padding:6px;"><i>DOI Specific ID Data<br><span style="font-size:0.8em; opacity:0.7;">(3 bytes)</span></i></td>
     </tr>
+    <!-- Offset 8: Identification Data (variable) -->
     <tr>
-      <td style="border:1px solid #333; padding:6px;"><i>DOI Specific ID Data</i></td>
-      <td style="border:1px solid #333; padding:6px;"><i>Identification Data</i></td>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">8</td>
+      <td colspan="32" style="border:1px solid #333; padding:6px;"><i>Identification Data<br><span style="font-size:0.8em; opacity:0.7;">(variable length)</span></i></td>
     </tr>
   </tbody>
 </table>
@@ -130,32 +225,45 @@ Every ISAKMP message opens with a fixed 28-byte header carrying a pair of 8-byte
 | ID_DER_ASN1_GN           | 10    | binary DER encoding of an ASN.1 X.500 GeneralName |
 | ID_KEY_ID                | 11    | opaque byte stream which may be used to pass vendor-specific information necessary to identify which pre-shared key should be used to authenticate Aggressive mode negotiations |
 
-## Vendor ID Payload
-<table style="display:table; width:100%; text-align:center; table-layout:fixed; border-collapse:collapse; border:1px solid #333;">
+### Vendor ID Payload
+<table style="display:table; width:100%; text-align:center; table-layout:fixed; border-collapse:collapse;">
   <colgroup>
-    <col style="width:25%"><col style="width:25%"><col style="width:25%"><col style="width:25%">
+    <col style="width:6%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
+    <col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%"><col style="width:2.9375%">
   </colgroup>
   <tbody>
+    <!-- Ruler -->
     <tr>
-      <td style="border:1px solid #333; padding:2px 8px;">0</td>
-      <td style="border:1px solid #333; padding:2px 8px;">1</td>
-      <td style="border:1px solid #333; padding:2px 8px;">
-        <div style="display:flex; justify-content:space-between;"><span>2</span><span>3</span></div>
+      <td style="border:1px solid #333; padding:2px 4px; font-size:0.7em; opacity:0.7; line-height:1.2;">Bit&rarr;<br>Byte&darr;</td>
+      <td colspan="32" style="border:1px solid #333; padding:2px 8px;">
+        <div style="display:flex; justify-content:space-between;"><span>0</span><span>7</span><span>15</span><span>23</span><span>31</span></div>
       </td>
-      <td style="border:1px solid #333; padding:2px 8px;">4+ (variable)</td>
     </tr>
+    <!-- Offset 0: Next Payload | RESERVED | Payload Length -->
     <tr>
-      <td style="border:1px solid #333; padding:6px;"><i>Next Payload</i></td>
-      <td style="border:1px solid #333; padding:6px;"><i>RESERVED</i></td>
-      <td style="border:1px solid #333; padding:6px;"><i>Payload Length</i></td>
-      <td style="border:1px solid #333; padding:6px;"><i>Vendor ID (VID)</i></td>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">0</td>
+      <td colspan="8" style="border:1px solid #333; padding:6px;"><i>Next Payload<br><span style="font-size:0.8em; opacity:0.7;">(1 byte)</span></i></td>
+      <td colspan="8" style="border:1px solid #333; padding:6px;"><i>RESERVED<br><span style="font-size:0.8em; opacity:0.7;">(1 byte)</span></i></td>
+      <td colspan="16" style="border:1px solid #333; padding:6px;"><i>Payload Length<br><span style="font-size:0.8em; opacity:0.7;">(2 bytes)</span></i></td>
+    </tr>
+    <!-- Offset 4: Vendor ID (VID), variable -->
+    <tr>
+      <td style="border:1px solid #333; padding:6px; font-size:0.85em; opacity:0.7;">4</td>
+      <td colspan="32" style="border:1px solid #333; padding:6px;"><i>Vendor ID (VID)<br><span style="font-size:0.8em; opacity:0.7;">(variable length)</span></i></td>
     </tr>
   </tbody>
 </table>
 
 Vendor ID is a hash of a vendor-specific string, sometimes with vendor/product/version bytes appended.
 
-## nmap Script
+### nmap Script
 ```
 ┌──(root㉿kali)-[/home/kali]
 └─# nmap -sU -p 500 --script ike-version 10.0.0.1
@@ -174,9 +282,9 @@ PORT    STATE SERVICE
 Service Info: OS: Windows 2000; CPE: cpe:/o:microsoft:windows:2000, cpe:/o:microsoft:windows
 ```
 
-## Known Vendor ID
+### Known Vendor ID
 
-### Windows
+#### Windows
 The Microsoft implementation Vendor ID is constructed by appending a 4-byte version number (network byte order) to the 16-byte MD5 hash of the string `"MS NT5 ISAKMPOAKLEY"`. The 4-byte suffix denotes the Windows release. ([reference](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-ikee/74df968a-7125-431d-9c98-4ea929e548dc))
 
 | Input String          | md5 |
@@ -209,7 +317,7 @@ Payload: Vendor ID (13) : MS NT5 ISAKMPOAKLEY
 0010   b5 87 e4 61 00 00 00 02
 ```
 
-### Check Point Firewall
+#### Check Point Firewall
 The Check Point Vendor ID is 40 bytes long. The first 20 bytes are constant across implementations; the second 20 bytes (bytes 21-40) encode the product, version, timestamp, and feature flags as five 4-byte big-endian integers. ([reference](https://www.royhills.co.uk/wiki/index.php/Check_Point_Firewall-1#Vendor_IDs))
 
 | Byte Position | Example Data | Meaning |
@@ -221,19 +329,48 @@ The Check Point Vendor ID is 40 bytes long. The first 20 bytes are constant acro
 | 33-36 | `00 00 00 00` | Reserved |
 | 37-40 | `18 80 00 00` | Features |
 
-| Encoded Version | Timestamp | Version |
-|--------------------|-------------|-----------|
-| 00 02 | zero | 4.1 |
-| 00 03 | zero | 4.1 SP1 |
-| 0F A2 | zero | 4.1 SP2 to SP6 |
-| 13 88 | zero | NG |
-| 13 89 | zero | NG FP1 |
-| 13 8A | zero | NG FP2 |
-| 13 8B | zero | NG FP3 |
-| 13 8C | zero | NG AI R54 |
-| 13 8D | zero | NG AI R55 |
-| 13 8E | zero | NG AI R56 |
-| 13 8D | non-zero | NGX R60 |
+<table style="display:table; width:100%; border-collapse:collapse; background:transparent;">
+  <colgroup>
+    <col style="width:16%"><col style="width:14%"><col style="width:20%">
+    <col style="width:16%"><col style="width:14%"><col style="width:20%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Encoded Version</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Timestamp</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Version</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Encoded Version</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Timestamp</th>
+      <th style="border:1px solid #333; padding:8px 12px; text-align:left; background:rgba(128,128,128,0.1);">Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>00 02</code></td><td style="border:1px solid #333; padding:8px 12px;">zero</td><td style="border:1px solid #333; padding:8px 12px;">4.1</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>13 8B</code></td><td style="border:1px solid #333; padding:8px 12px;">zero</td><td style="border:1px solid #333; padding:8px 12px;">NG FP3</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>00 03</code></td><td style="border:1px solid #333; padding:8px 12px;">zero</td><td style="border:1px solid #333; padding:8px 12px;">4.1 SP1</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>13 8C</code></td><td style="border:1px solid #333; padding:8px 12px;">zero</td><td style="border:1px solid #333; padding:8px 12px;">NG AI R54</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>0F A2</code></td><td style="border:1px solid #333; padding:8px 12px;">zero</td><td style="border:1px solid #333; padding:8px 12px;">4.1 SP2 to SP6</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>13 8D</code></td><td style="border:1px solid #333; padding:8px 12px;">zero</td><td style="border:1px solid #333; padding:8px 12px;">NG AI R55</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>13 88</code></td><td style="border:1px solid #333; padding:8px 12px;">zero</td><td style="border:1px solid #333; padding:8px 12px;">NG</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>13 8E</code></td><td style="border:1px solid #333; padding:8px 12px;">zero</td><td style="border:1px solid #333; padding:8px 12px;">NG AI R56</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>13 89</code></td><td style="border:1px solid #333; padding:8px 12px;">zero</td><td style="border:1px solid #333; padding:8px 12px;">NG FP1</td>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>13 8D</code></td><td style="border:1px solid #333; padding:8px 12px;">non-zero</td><td style="border:1px solid #333; padding:8px 12px;">NGX R60</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:8px 12px;"><code>13 8A</code></td><td style="border:1px solid #333; padding:8px 12px;">zero</td><td style="border:1px solid #333; padding:8px 12px;">NG FP2</td>
+      <td style="border:1px solid #333; padding:8px 12px;"></td><td style="border:1px solid #333; padding:8px 12px;"></td><td style="border:1px solid #333; padding:8px 12px;"></td>
+    </tr>
+  </tbody>
+</table>
 
 ```
 # Wireshark Tree view
@@ -254,7 +391,7 @@ Payload: Vendor ID (13) : CryptoPro/GOST 0.1 / Check Point R65
 0020   68 82 6f 6a 00 00 00 00 18 28 00 00               h.oj.....(..
 ```
 
-### Other Known Vendor IDs
+#### Other Known Vendor IDs
 Vendor ID hashes for common VPN/firewall implementations, useful for device/implementation fingerprinting. Where the source string is known, the hash is `md5(<string>)`.
 
 | Implementation | Vendor ID (hex) | Base64 | Derivation |
@@ -277,7 +414,7 @@ Vendor ID hashes for common VPN/firewall implementations, useful for device/impl
 | Fortinet FortiGate (variant) | `1D 6E 17 8F 6C 2C 0B E2 84 98 54 65 45 0F E9 D4` | `HW4Xj2wsC+KEmFRlRQ/p1A==` | — |
 | Check Point | `F4 ED 19 E0 C1 14 EB 51 6F AA AC 0E E3 7D AF 28 07 B4 38 1F` | `9O0Z4MEU61FvqqwO432vKAe0OB8=` | — |
 
-## Reference
+### Reference
 [Wireshark ISAKMP Dissector Github](https://github.com/wireshark/wireshark/blob/master/epan/dissectors/packet-isakmp.c)<br>
 [RFC2408 - 3.1 ISAKMP Header Format](https://www.ietf.org/rfc/rfc2408.txt)<br>
 [RFC2407 - 4.6.2 Identification Payload Content](https://datatracker.ietf.org/doc/html/rfc2407#section-4.6.2)<br>
