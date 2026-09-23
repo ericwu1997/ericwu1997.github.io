@@ -91,7 +91,7 @@ request.
     </tr>
     <tr>
       <td style="border:1px solid #333; padding:8px 12px;">LOCATION</td>
-      <td style="border:1px solid #333; padding:8px 12px;">URL of the device/service description document, e.g. <code>LOCATION: http://192.168.1.5:1900/desc.xml</code>.</td>
+      <td style="border:1px solid #333; padding:8px 12px;">URL of the device/service description document, served on an arbitrary TCP port (not the UDP 1900 discovery port), e.g. <code>LOCATION: http://192.168.1.5:8080/desc.xml</code>.</td>
     </tr>
     <tr>
       <td style="border:1px solid #333; padding:8px 12px;">SERVER</td>
@@ -121,6 +121,8 @@ services.service_name: SSDP
 ```
 
 ### Sample Request and Response
+*Note: this capture's M-SEARCH request uses bare LF (`\n`) line breaks rather than the CRLF CRLF the tables above describe — some real-world SSDP clients send LF-only framing and devices are commonly tolerant of it. The Response below uses standard CRLF.*
+
 Request
 ```
 0000   4d 2d 53 45 41 52 43 48 20 2a 20 48 54 54 50 2f   M-SEARCH * HTTP/
