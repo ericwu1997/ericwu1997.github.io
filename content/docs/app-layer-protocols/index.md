@@ -17,6 +17,7 @@ tags: [Markdown, Writing]
 | 2000   | [SCCP](./sccp/)       |
 | 3260   | [iSCSI](./iscsi/)     |
 | 5672   | [AMQP](./amqp/)       |
+| 7547   | [CWMP](./cwmp/)       |
 
 ### UDP
 
