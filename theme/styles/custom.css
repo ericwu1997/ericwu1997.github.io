@@ -28,6 +28,8 @@
 }
 
 .vp-doc .proto-index a.proto-item {
+  display: flex;
+  align-items: baseline;
   padding: 2px 0;
   font-weight: 400;
   line-height: 1.6;
@@ -37,6 +39,12 @@
 
 .vp-doc .proto-index a.proto-item:hover {
   color: var(--vp-c-brand-1);
+}
+
+/* Fixed-width name column so the [port] lines up down each column */
+.vp-doc .proto-index .proto-name {
+  flex: 0 0 5.5em;
+  overflow-wrap: anywhere;
 }
 
 .vp-doc .proto-index .proto-meta {
