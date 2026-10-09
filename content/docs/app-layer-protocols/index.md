@@ -14,6 +14,7 @@ tags: [Markdown, Writing]
   <section class="proto-group">
     <div class="proto-group-title">TCP</div>
     <a class="proto-item" href="./sccp/"><span class="proto-meta">[2000]</span> SCCP</a>
+    <a class="proto-item" href="./cola-b/"><span class="proto-meta">[2112]</span> CoLa-B</a>
     <a class="proto-item" href="./iscsi/"><span class="proto-meta">[3260]</span> iSCSI</a>
     <a class="proto-item" href="./amqp/"><span class="proto-meta">[5672]</span> AMQP</a>
     <a class="proto-item" href="./cwmp/"><span class="proto-meta">[7547]</span> CWMP</a>
