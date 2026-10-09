@@ -1,6 +1,6 @@
 ---
 title: CoLa-B
-description: SICK CoLa-B (Command Language Binary)
+description: CoLa-B (Command Language Binary)
 permalink: /docs/app-layer-protocols/cola-b/
 type: doc
 group: APP Layer Protocols
