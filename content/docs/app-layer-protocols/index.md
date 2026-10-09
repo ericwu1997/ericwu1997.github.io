@@ -17,6 +17,7 @@ tags: [Markdown, Writing]
     <a class="proto-item" href="./cola-b/"><span class="proto-meta">[2112]</span> CoLa-B</a>
     <a class="proto-item" href="./iscsi/"><span class="proto-meta">[3260]</span> iSCSI</a>
     <a class="proto-item" href="./amqp/"><span class="proto-meta">[5672]</span> AMQP</a>
+    <a class="proto-item" href="./sharp-pj-cmd/"><span class="proto-meta">[7142]</span> Sharp PJ CMD</a>
     <a class="proto-item" href="./cwmp/"><span class="proto-meta">[7547]</span> CWMP</a>
     <a class="proto-item" href="./dicom/"><span class="proto-meta">[11112]</span> DICOM</a>
   </section>
