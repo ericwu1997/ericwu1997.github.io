@@ -225,7 +225,15 @@ export const siteConfig = defineSiteConfig({
       ],
       navbar: [
         { label: '<span>Blog</span>', href: '/blog/', icon: 'home', activeMatch: '^/(blog|article)/' },
-        { label: 'Docs', href: '/docs/', icon: 'material-symbols:docs-outline', activeMatch: '^/docs/' },
+        {
+          label: 'Docs',
+          icon: 'material-symbols:docs-outline',
+          activeMatch: '^/docs/',
+          items: [
+            { text: 'APP Layer Protocols', link: '/docs/app-layer-protocols/' },
+            { text: 'Broadcast Discovery', link: '/docs/broadcast-discovery/' },
+          ],
+        },
         {
           label: 'More',
           icon: 'more-circle',
