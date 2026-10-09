@@ -218,45 +218,14 @@ export const siteConfig = defineSiteConfig({
           dir: 'docs',
           title: 'Documentation',
           sidebar: [
-            {
-              text: 'Guides',
-              prefix: 'guide',
-              icon: 'icon-park-outline:guide-board',
-              collapsed: false,
-              items: [
-                { text: 'Basics', icon: 'construction', collapsed: false, items: ['getting-started', 'configuration', 'deployment', { text: 'Public API and styling', link: 'api', badge: { text: 'New', type: 'warning' } }] },
-                { text: 'Content features', link: 'content', icon: 'simple-icons:astro' },
-              ],
-            },
             { text: 'APP layer protocols', link: 'docs/app-layer-protocols'},
             { text: 'Broadcast Discovery', link: 'docs/broadcast-discovery'},
-            { text: 'Reference', link: '---', icon: 'more-circle' },
-            { text: 'Astro', link: 'https://astro.build/', icon: 'simple-icons:astro' },
           ],
         }
       ],
       navbar: [
         { label: '<span>Blog</span>', href: '/blog/', icon: 'home', activeMatch: '^/(blog|article)/' },
-        {
-          label: 'Docs',
-          icon: 'material-symbols:docs-outline',
-          activeMatch: '^/docs/',
-          items: [
-            '/docs/',
-            {
-              text: 'Guides',
-              icon: 'icon-park-outline:guide-board',
-              prefix: '/docs/guide/',
-              items: [
-                { text: 'Quick start', link: 'getting-started/', icon: 'rocket' },
-                { text: 'Site configuration', link: 'configuration/', icon: 'construction' },
-                { text: 'Deploy the site', link: 'deployment/', icon: 'material-symbols:cloud-upload-outline' },
-                { text: 'Content features', link: 'content/', icon: 'simple-icons:astro', badge: { text: 'New', type: 'warning' } },
-                { text: 'Astro', link: 'https://astro.build/', icon: 'simple-icons:astro' },
-              ],
-            },
-          ],
-        },
+        { label: 'Docs', href: '/docs/', icon: 'material-symbols:docs-outline', activeMatch: '^/docs/' },
         {
           label: 'More',
           icon: 'more-circle',
