@@ -1,6 +1,6 @@
 ---
 title: CoLa-B
-description: SICK CoLa-B (Command Language Binary)
+description: CoLa-B (Command Language Binary)
 permalink: /docs/app-layer-protocols/cola-b/
 type: doc
 group: APP Layer Protocols
@@ -11,9 +11,10 @@ tags: [Markdown, Writing]
 ---
 
 ### Overview
-SICK CoLa (Command Language) refers to the family of communication protocols developed by SICK AG for interacting with their industrial sensors, such as LiDAR scanners, safety laser scanners, vision systems, and other detection devices. It operates as part of the SOPAS (SICK Open Protocol for Automation Systems) ecosystem, enabling configuration, parameter access (reading/writing), status monitoring, command execution, and data streaming (e.g., scan or measurement data) over TCP/IP connections. Devices commonly use dedicated ports: CoLa-A on 2111 and CoLa-B on 2112, with newer variants like CoLa-2 on 2122 for enhanced features including better security. CoLa supports event-driven communication and is widely integrated with SICK's SOPAS ET configuration software, which includes terminal tools for testing and debugging telegrams.
 
-The main variants are CoLa-A (ASCII/text-based, human-readable for easy manual interaction and debugging) and CoLa-B (binary format for compact, efficient transmission suited to high-performance or data-intensive tasks). Many SICK devices support one, the other, or both, allowing flexibility based on application needs—CoLa-A simplifies development and troubleshooting, while CoLa-B reduces overhead for faster or bandwidth-constrained scenarios. Newer devices increasingly adopt CoLa-2 (an evolved protocol) for improved capabilities, though CoLa-A and CoLa-B remain broadly deployed in industrial automation for their reliability, compatibility, and mature support across sensor families.
+**CoLa-B (Command Language Binary)** is the binary variant of SICK AG's **CoLa** command protocol, part of the **SOPAS** device-communication framework used by SICK industrial sensors such as LiDAR/laser scanners, radar sensors and other detection devices. It runs over **TCP**, typically on **port 2112**. On some devices (e.g. SICK RMS radar sensors) this port defaults to the ASCII variant CoLa-A and can be switched to CoLa-B, while **port 2111** carries CoLa-A. Both are vendor defaults, not IANA assignments: IANA registers 2111 to `dsatp` and 2112 to `idonix-metanet`. CoLa-B follows a **client-server** model: a host (PLC, PC, or the SOPAS ET configuration tool) sends command telegrams to the sensor to read and write variables, invoke methods, and subscribe to events such as scan-data streams.
+
+Every CoLa-B telegram begins with a fixed **4-byte start sequence `02 02 02 02`**, followed by a **4-byte big-endian length** field, the payload, and a **1-byte XOR checksum** over the payload bytes. The payload opens with a 3-byte ASCII command type: `sRN`/`sRI` (read by name/index), `sWN` (write by name), `sMN` (method), `sEN` (event), with matching replies `sRA`, `sWA`, `sAN`/`sMA`, `sEA`. The variable or method is addressed either by name (e.g. `DeviceIdent`) or by a 2-byte index. A **DeviceIdent** read returns length-prefixed ASCII strings for the device name and firmware version (e.g. `ML20` / `1.110`), and related variables expose the serial number and order number. CoLa-B traffic is sent in **cleartext**. Write and method access is gated by a `SetAccessMode` login that sends a user level and a password hash, with no transport encryption. The newer CoLa-2 variant (port 2122) uses a different session-based framing.
 
 ### Protocol Stacks
 ```
