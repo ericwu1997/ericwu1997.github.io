@@ -31,20 +31,260 @@ The main variants are CoLa-A (ASCII/text-based, human-readable for easy manual i
 ### CoLa-B Dataframe
 technical_information_ml20_en_im0059796.pdf#page=8&zoom=100
 
-![](/img/cola-b/figure-1.png)
+<table style="border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;">
+  <thead>
+    <tr>
+      <th style="border: 1px solid #000; padding: 4px 10px; text-align: center;">Request by client<br>(PC)</th>
+      <th style="border: 1px solid #000; padding: 4px 10px; text-align: center;">Response by server<br>(ML20)</th>
+      <th style="border: 1px solid #000; padding: 4px 10px; text-align: center;">Command</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border-left: 1px solid #000; border-right: 1px solid #000; padding: 4px 10px;">sRI{SVIdx}</td>
+      <td style="border-left: 1px solid #000; border-right: 1px solid #000; padding: 4px 10px;">sRA{SVIdx}{variable value}</td>
+      <td style="border-left: 1px solid #000; border-right: 1px solid #000; padding: 4px 10px;">Read variable identified by index <em>SVIdx</em></td>
+    </tr>
+    <tr>
+      <td style="border-left: 1px solid #000; border-right: 1px solid #000; padding: 4px 10px;">sWI{SVIdx}</td>
+      <td style="border-left: 1px solid #000; border-right: 1px solid #000; padding: 4px 10px;">sWA{SVIdx}</td>
+      <td style="border-left: 1px solid #000; border-right: 1px solid #000; padding: 4px 10px;">Write variable identified by index <em>SVIdx</em></td>
+    </tr>
+    <tr>
+      <td style="border-left: 1px solid #000; border-right: 1px solid #000; border-bottom: 1px solid #000; padding: 4px 10px;">sMI{MIdx}{parameters}</td>
+      <td style="border-left: 1px solid #000; border-right: 1px solid #000; border-bottom: 1px solid #000; padding: 4px 10px;">sMA{MIdx}{return values}</td>
+      <td style="border-left: 1px solid #000; border-right: 1px solid #000; border-bottom: 1px solid #000; padding: 4px 10px;">Invoke method identified by index <em>MIdx</em></td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #000; padding: 4px 10px;"></td>
+      <td style="border: 1px solid #000; padding: 4px 10px;">sFA{error code}</td>
+      <td style="border: 1px solid #000; padding: 4px 10px;">Alternatively, the device can respond to every command with an error code.</td>
+    </tr>
+  </tbody>
+</table>
 
 #### Request Frame
-![](/img/cola-b/figure-2.png)
+<table style="display:table; width:100%; text-align:left; table-layout:fixed; border-collapse:collapse; border:1px solid #333;">
+  <colgroup>
+    <col style="width:12%">
+    <col style="width:6.286%"><col style="width:6.286%"><col style="width:6.286%"><col style="width:6.286%">
+    <col style="width:6.286%"><col style="width:6.286%"><col style="width:6.286%"><col style="width:6.286%">
+    <col style="width:6.286%"><col style="width:6.286%"><col style="width:6.286%"><col style="width:6.286%">
+    <col style="width:6.286%"><col style="width:6.284%">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Byte Index</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">1</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">2</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">3</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">4</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">5</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">6</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">7</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">8</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">9</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">10</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">11</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">12</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">13</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">14</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Content<br>(as hex-Value)</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">02</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">02</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">02</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">02</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">00</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">00</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">00</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">05</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">73</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">52</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">49</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">00</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">04</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">6c</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Description</td>
+      <td colspan="4" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">STx<br><i>framing start</i></td>
+      <td colspan="4" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Length = 5 bytes<br><i>Length of CoLa-B data (without checksum byte)</i></td>
+      <td colspan="3" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">„sRI“<br>ASCII-command<br><i>read Variable</i></td>
+      <td colspan="2" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Var.-Idx = 4</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Checksum = 6c</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Layer</td>
+      <td colspan="8" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">CoLa framing start</td>
+      <td colspan="5" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">CoLa-B command<br><i>Valid indices see following chapters.</i></td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">CoLa framing end</td>
+    </tr>
+  </tbody>
+</table>
 
 #### Response Frame
-![](/img/cola-b/figure-3.png)
+<table style="display:table; width:100%; text-align:left; table-layout:fixed; border-collapse:collapse; border:1px solid #333;">
+  <colgroup>
+    <col style="width:12%">
+    <col style="width:5.176%"><col style="width:5.176%"><col style="width:5.176%"><col style="width:5.176%">
+    <col style="width:5.176%"><col style="width:5.176%"><col style="width:5.176%"><col style="width:5.176%">
+    <col style="width:5.176%"><col style="width:5.176%"><col style="width:5.176%"><col style="width:5.176%">
+    <col style="width:5.176%"><col style="width:5.176%"><col style="width:5.176%"><col style="width:5.176%">
+    <col style="width:5.184%">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Byte Index</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">1</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">2</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">3</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">4</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">5</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">6</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">7</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">8</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">9</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">10</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">11</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">12</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">13</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">14</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">15</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">16</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">17</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Content<br>(as hex-Value)</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">02</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">02</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">02</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">02</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">00</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">00</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">00</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">15</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">73</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">52</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">41</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">00</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">04</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">00</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">0e</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">44</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">35</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Description</td>
+      <td colspan="4" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">STx<br><i>Framing Start</i></td>
+      <td colspan="4" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Length = 21 bytes<br><i>Length of CoLa-B data (without checksum byte)</i></td>
+      <td colspan="3" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">„sRA“<br>ASCII-answer<br><i>read acknowledge</i></td>
+      <td colspan="2" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Var.-Idx = 4</td>
+      <td colspan="2" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Flexstring-length = 14</td>
+      <td colspan="2" style="border:1px solid #333; padding:4px 6px; vertical-align:top;"></td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Layer</td>
+      <td colspan="8" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">CoLa framing start</td>
+      <td colspan="5" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">CoLa-B command<br><i>Valid indices see following chapters.</i></td>
+      <td colspan="4" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">CoLa-B value</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<table style="display:table; width:100%; text-align:left; table-layout:fixed; border-collapse:collapse; border:1px solid #333;">
+  <colgroup>
+    <col style="width:12%">
+    <col style="width:5.176%"><col style="width:5.176%"><col style="width:5.176%"><col style="width:5.176%">
+    <col style="width:5.176%"><col style="width:5.176%"><col style="width:5.176%"><col style="width:5.176%">
+    <col style="width:5.176%"><col style="width:5.176%"><col style="width:5.176%"><col style="width:5.176%">
+    <col style="width:25.888%">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Byte Index</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">18</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">19</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">20</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">21</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">22</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">23</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">24</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">25</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">26</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">27</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">28</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">29</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">30</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Content<br>(as hex-Value)</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">2e</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">31</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">33</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">2e</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">30</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">30</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">38</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">2e</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">32</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">37</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">32</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">32</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">0a</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Description</td>
+      <td colspan="12" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Variable content, here: Flexstring, ascii:<br>„D5.13.008.2722“</td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Checksum = 0a</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">Layer</td>
+      <td colspan="12" style="border:1px solid #333; padding:4px 6px; vertical-align:top;">CoLa-B value <i>(continued)</i></td>
+      <td style="border:1px solid #333; padding:4px 6px; vertical-align:top;">CoLa framing end</td>
+    </tr>
+  </tbody>
+</table>
 
 checksum = XOR all bytes 9 to 13
 
 ### CoLa-A Dataframe
 telegram_listing_nav210_en_im0084703.pdf#page=5&zoom=100,97,700
 
-![](/img/cola-b/figure-4.png)
+<table style="display:table; width:100%; text-align:center; table-layout:fixed; border-collapse:collapse; border:1px solid #333;">
+  <colgroup>
+    <col style="width:15.5%"><col style="width:11.5%"><col style="width:15.5%"><col style="width:18%"><col style="width:25.5%"><col style="width:14%">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">Byte index</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">frame start</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">Command Type</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">Command</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">Parameter</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">frame end</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">In ASCII</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">&lt;STX&gt;</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">sMN</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">SetAccessMode</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">3 F4724744</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">&lt;ETX&gt;</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">In Hex</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">02</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">same</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">same</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">same</td>
+      <td style="border:1px solid #333; padding:6px; vertical-align:middle;">03</td>
+    </tr>
+  </tbody>
+</table>
 
 There has to be a space in between the command and the parameters and also in between each parameter.<br>
 In HEX the command start with 02 and ends with 03. The spaces are marked as 20. Single numbers that are converted to ASCII always get a 3 in front.
@@ -67,7 +307,91 @@ below two are the hex and ascii format equivalent
 
 ### Telegram Example
 
-![](/img/cola-b/figure-5.png)
+<table style="display:table; width:100%; text-align:left; table-layout:fixed; border-collapse:collapse; border:1px solid #333;">
+  <colgroup>
+    <col style="width:15.2%"><col style="width:25.1%"><col style="width:9.9%"><col style="width:11.9%"><col style="width:37.9%">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td colspan="5" style="border:1px solid #333; padding:2px 6px;"><b>Read Variable:</b></td>
+    </tr>
+    <tr>
+      <td colspan="5" style="border:1px solid #333; padding:2px 6px 14px; font-family:'Courier New', monospace;">sRI 0</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:2px 6px;"><b>Telegram Part</b></td>
+      <td style="border:1px solid #333; padding:2px 6px;"><b>Telegram</b></td>
+      <td style="border:1px solid #333; padding:2px 6px;"><b>Type</b></td>
+      <td style="border:1px solid #333; padding:2px 6px;"><b>Length [Byte]</b></td>
+      <td style="border:1px solid #333; padding:2px 6px;"><b>Description</b></td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:2px 6px;">Command Type</td>
+      <td style="border:1px solid #333; padding:2px 6px;">sRI</td>
+      <td style="border:1px solid #333; padding:2px 6px;">String</td>
+      <td style="border:1px solid #333; padding:2px 6px;">3</td>
+      <td style="border:1px solid #333; padding:2px 6px;">Read SOPAS Variable by Name</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:2px 6px;">Command</td>
+      <td style="border:1px solid #333; padding:2px 6px;">0</td>
+      <td style="border:1px solid #333; padding:2px 6px;">String</td>
+      <td style="border:1px solid #333; padding:2px 6px;">1</td>
+      <td style="border:1px solid #333; padding:2px 6px;">Unique Identification of device</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<table style="display:table; width:100%; text-align:left; table-layout:fixed; border-collapse:collapse; border:1px solid #333;">
+  <colgroup>
+    <col style="width:15.2%"><col style="width:25.1%"><col style="width:9.9%"><col style="width:11.9%"><col style="width:37.9%">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td colspan="5" style="border:1px solid #333; padding:2px 6px;"><b>Read Variable Response:</b></td>
+    </tr>
+    <tr>
+      <td colspan="5" style="border:1px solid #333; padding:2px 6px 14px; font-family:'Courier New', monospace;">sRA 0 &lt;Name&gt; &lt;Version&gt;</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:2px 6px;"><b>Telegram Part</b></td>
+      <td style="border:1px solid #333; padding:2px 6px;"><b>Telegram</b></td>
+      <td style="border:1px solid #333; padding:2px 6px;"><b>Type</b></td>
+      <td style="border:1px solid #333; padding:2px 6px;"><b>Length [Byte]</b></td>
+      <td style="border:1px solid #333; padding:2px 6px;"><b>Description</b></td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:2px 6px;">Command Type</td>
+      <td style="border:1px solid #333; padding:2px 6px;">sRA</td>
+      <td style="border:1px solid #333; padding:2px 6px;">String</td>
+      <td style="border:1px solid #333; padding:2px 6px;">3</td>
+      <td style="border:1px solid #333; padding:2px 6px;">SOPAS Variable Read Acknowledge</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:2px 6px;">Command</td>
+      <td style="border:1px solid #333; padding:2px 6px;">0</td>
+      <td style="border:1px solid #333; padding:2px 6px;">String</td>
+      <td style="border:1px solid #333; padding:2px 6px;">1</td>
+      <td style="border:1px solid #333; padding:2px 6px;">Unique Identification of device</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:2px 6px;">Variable Data 1</td>
+      <td style="border:1px solid #333; padding:2px 6px;">Name</td>
+      <td style="border:1px solid #333; padding:2px 6px;">FlexString</td>
+      <td style="border:1px solid #333; padding:2px 6px;">4</td>
+      <td style="border:1px solid #333; padding:2px 6px;"></td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #333; padding:2px 6px;">Variable Data 2</td>
+      <td style="border:1px solid #333; padding:2px 6px;">Version</td>
+      <td style="border:1px solid #333; padding:2px 6px;">FlexString</td>
+      <td style="border:1px solid #333; padding:2px 6px;">5</td>
+      <td style="border:1px solid #333; padding:2px 6px;"></td>
+    </tr>
+  </tbody>
+</table>
 
 CoLa-B (DeviceIdent)
 
@@ -120,4 +444,4 @@ while echo -n "0202020200000005735249000068" | xxd -r -p | nc -w 2 10.119.24.84 
 ```
 
 ### Reference
-[SOPAS Communication Interface Description.zip](https://github.com/ericwu1997/ericwu1997.github.io/raw/refs/heads/main/content/docs/app-layer-protocols/cola-b/SOPAS_Communication_Interface_Description.zip)<br>
+[SOPAS Communication Interface Description.zip](https://github.com/ericwu1997/ericwu1997.github.io/raw/refs/heads/main/content/docs/app-layer-protocols/cola-b/SOPAS_Communication_Interface_Description.zip)
